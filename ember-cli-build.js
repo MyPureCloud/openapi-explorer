@@ -2,6 +2,8 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
+var cdnUrl = process.env.CDN_URL || '';
+
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
       autoprefixer: {
