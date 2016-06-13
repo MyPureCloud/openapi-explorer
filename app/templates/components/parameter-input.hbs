@@ -1,0 +1,18 @@
+<div class='row parameter-row {{if parameter.required "required"}}'>
+    <div class="col-md-1">
+        <label >{{parameter.name}}</label>
+        {{#if parameter.required}}
+        (required)
+        {{/if}}
+    </div>
+    <div class="col-md-3">
+        {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
+
+    </div>
+    <div class="col-md-1">
+        {{parameter.in}}
+    </div>
+    <div class="col-md-7">
+        {{parameter.description}}
+    </div>
+</div>

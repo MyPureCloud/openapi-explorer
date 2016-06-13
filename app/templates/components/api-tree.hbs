@@ -1,0 +1,10 @@
+<div id='api-tree'>
+    <!--<input id='api-search' class="form-control"  placeholder="Filter"/>-->
+    <div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
+            {{#each tags as |tag|}}
+                {{tag-apis name=tag.name description=tag.description}}
+            {{/each}}
+        </div>
+    </div>
+</div>

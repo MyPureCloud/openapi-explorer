@@ -1,0 +1,148 @@
+
+<h1>{{operation.summary}}</h1>
+<div class='operation-description'>
+    {{operation.description}}
+</div>
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingRequest">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
+                    Request
+                </a>
+            </h4>
+
+        </div>
+         <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
+            <div class="panel-body">
+                <div>
+                    <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
+                </div>
+                {{#if hasProperties}}
+                <div>
+                    <h3>Properties</h3>
+                    <div class="container">
+
+                        {{#each operation.parameters as |parameter|}}
+                        {{#unless (eq parameter.in 'body')}}
+                        {{parameter-input parameter=parameter}}
+                        {{/unless}}
+
+                        {{/each}}
+                    </div>
+                </div>
+
+                {{/if}}
+
+
+                <div>
+                    <h3>Url</h3>
+
+                    <div id='requestParamsHeader' class='clear-fix' >
+                        <div class='pull-left'>
+                            <label class='http-{{operation.httpMethod}}'>{{operation.httpMethod}}</label>
+                        </div>
+
+                        <div class='pull-left'>
+                            <label>{{computedUrl}}</label><br/>
+                            
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <h3>Headers</h3>
+                    <div class="container">
+                        <div class='row'>
+                            <div class="col-md-2">
+                                <label>Key</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Value</label>
+                            </div>
+                        </div>
+                        {{#each computedHeaders as |header|}}
+                        <div class="row">
+                            <div class="col-md-2">
+                                {{header.key}}
+                            </div>
+                            <div class="col-md-2">
+                                {{header.value}}
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+                </div>
+
+
+
+                {{#if canSendData}}
+                <h3>Body</h3>
+                {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
+               <div id='preview'>
+                 {{value}}
+               </div>
+                {{/if}}
+
+
+
+            </div>
+        </div>
+    </div>
+    {{#if hasResponse}}
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingResponse">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseResponse" aria-expanded="true" aria-controls="collapseResponse">
+                    Response
+                </a>
+            </h4>
+
+        </div>
+        <div id="collapseResponse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingResponse">
+            <div class="panel-body">
+
+                <div>
+                    <div class='response-status response-status-{{response.responseCodeClass}}00'>
+                        {{response.status}} {{response.statusText}}
+                    </div>
+                    <table class='table table-striped table-bordered'>
+                        <tr>
+                            <th>
+                                Key
+                            </th>
+                            <th>
+                                Value
+                            </th>
+                        </tr>
+                        {{#each response.headers as |header|}}
+                        <tr>
+                            <td>
+                                {{header.key}}
+                            </td>
+                            <td>
+                                {{header.value}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+
+                <div>
+                    <pre>
+                        <code>
+{{response.data}}
+                        </code>
+                    </pre>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {{/if}}
+</div>

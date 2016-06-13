@@ -1,0 +1,171 @@
+@sidebar-width: 300px;
+
+body{
+    overflow:hidden;
+}
+
+#mainContent{
+
+    position: fixed;
+    left: @sidebar-width;
+    top: 0px;
+    bottom: 0;
+    right:0;
+    overflow:auto;
+}
+
+#api-tree{
+    position: fixed;
+    left: 0;
+    top: 0px;
+    bottom: 0;
+    width: @sidebar-width;
+
+    .panel-group{
+        overflow: scroll;
+
+        position: fixed;
+        left: 0;
+        top: 50px;
+        bottom: 0;
+        width: @sidebar-width;
+    }
+
+}
+body, html {
+    height: 100%;
+}
+
+#api-tree{
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    padding:5px;
+}
+
+#info-button{
+    position: absolute;
+    right:10px;
+    top:10px;
+    font-size: 24px;
+}
+
+#api-info {
+    background-color:white;
+    max-width:33%;
+    color:black;
+    position:absolute;
+    right:0;
+    z-index:100000;
+    height:50%;
+    box-shadow: -10px 10px 5px -7px #888888;
+    border-radius:0px;
+
+    button{
+        margin-left:10px;
+    }
+
+    label{
+        margin-left:5px;
+    }
+    pre{
+        margin-left:10px;
+        margin-right:10px;
+        max-width:100%;
+    }
+}
+
+.http-operation {
+    width:100%;
+    overflow:auto;
+    margin-bottom:3px;
+
+    .method{
+        text-transform: uppercase;
+        margin-right:5px;
+        font-weight: bold;
+        width:55px;
+    }
+
+    .description{
+        overflow-x: hidden;
+    }
+
+
+}
+
+.http-get{
+    color: #0781aa;
+}
+
+.http-post{
+    color: #77dd22;
+}
+
+.http-patch{
+    color: #ff1dce;
+}
+
+.http-put{
+    color: #ffda17;
+}
+
+.http-delete{
+    color: #ff0000;
+}
+
+
+.method-list{
+    list-style: none;
+    padding-left: 2px;
+}
+
+#requestParamsHeader {
+
+    margin-top:10px;
+    margin-left:10px;
+
+    div{
+        margin-right:10px;
+    }
+
+    label{
+        text-transform: uppercase;
+        font-size:24px;
+    }
+
+    input{
+        width:450px;
+    }
+}
+
+.operation-description{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.ace_editor{
+    height: 400px;
+}
+
+.response-status{
+    font-weight:bold;
+}
+.response-status-200{
+    color: green;
+}
+
+.response-status-300{
+    color: purple;
+}
+
+.response-status-400{
+    color: red;
+}
+
+.response-status-500{
+    color: yellow;
+}
+
+.response-status-000{
+    color: orange;
+}
