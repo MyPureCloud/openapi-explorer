@@ -9,19 +9,15 @@
         <div class="panel-heading" role="tab" id="headingRequest">
             <h4 class="panel-title">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
-                    Request
+                    Properties
                 </a>
             </h4>
 
         </div>
          <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
             <div class="panel-body">
-                <div>
-                    <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
-                </div>
                 {{#if hasProperties}}
                 <div>
-                    <h3>Properties</h3>
                     <div class="container">
 
                         {{#each operation.parameters as |parameter|}}
@@ -35,6 +31,33 @@
 
                 {{/if}}
 
+                {{#if canSendData}}
+                <h3>Body</h3>
+                {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
+               <div id='preview'>
+                 {{value}}
+               </div>
+                {{/if}}
+                <div>
+                    <br />
+                    <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingRequest">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
+                    Request Data
+                </a>
+            </h4>
+
+        </div>
+         <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
+            <div class="panel-body">
 
                 <div>
                     <h3>Url</h3>
@@ -46,13 +69,10 @@
 
                         <div class='pull-left'>
                             <label>{{computedUrl}}</label><br/>
-                            
                         </div>
-
                     </div>
+                    <br />
                 </div>
-
-
                 <div>
                     <h3>Headers</h3>
                     <div class="container">
@@ -80,14 +100,6 @@
                 </div>
 
 
-
-                {{#if canSendData}}
-                <h3>Body</h3>
-                {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
-               <div id='preview'>
-                 {{value}}
-               </div>
-                {{/if}}
 
 
 
