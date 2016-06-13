@@ -45,4 +45,5 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ```
 ember github-pages:commit --message "Initial gh-pages release"
+git push origin gh-pages:gh-pages
 ```

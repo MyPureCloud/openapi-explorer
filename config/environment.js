@@ -43,6 +43,9 @@ module.exports = function(environment) {
     ENV.locationType = 'hash';
     ENV.baseURL = '/openapi-explorer/';
 
+    if (process.env.CDN_URL && !process.env.OLD_JENKINS) {
+        ENV.APP.urlprefix = process.env.CDN_URL;
+    }
   }
 
   return ENV;

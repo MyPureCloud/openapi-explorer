@@ -4,7 +4,21 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+      autoprefixer: {
+          browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+      },
+      replace: {
+          files: ['index.html'],
+          patterns: [{
+              match: 'CDN_URL',
+              replacement: cdnUrl
+          }]
+      },
+      fingerprint: {
+          prepend: cdnUrl,
+          exclude: ['emojify', 'leaflet', 'patches/'],
+          extensions: ['js', 'css']
+      },
   });
 
   // Use `app.import` to add additional libraries to the generated
