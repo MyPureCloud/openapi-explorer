@@ -1,9 +1,9 @@
 <div id='api-tree'>
-    <!--<input id='api-search' class="form-control"  placeholder="Filter"/>-->
+    {{input value=filter id='api-search' class="form-control"  placeholder="Filter"}}
     <div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
             {{#each tags as |tag|}}
-                {{tag-apis name=tag.name description=tag.description}}
+                {{tag-apis name=tag.name description=tag.description filter=filter}}
             {{/each}}
         </div>
     </div>

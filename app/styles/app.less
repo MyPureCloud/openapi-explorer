@@ -78,6 +78,11 @@ body, html {
     width:100%;
     overflow:auto;
     margin-bottom:3px;
+    cursor: pointer;
+
+    &:hover{
+        background:lightgrey;
+    }
 
     .method{
         text-transform: uppercase;
@@ -129,8 +134,11 @@ body, html {
     }
 
     label{
-        text-transform: uppercase;
         font-size:24px;
+    }
+
+    .http-method{
+        text-transform: uppercase;
     }
 
     input{
@@ -168,4 +176,9 @@ body, html {
 
 .response-status-000{
     color: orange;
+}
+
+#get-started{
+    margin-top:50px;
+    margin-left: 20px;
 }

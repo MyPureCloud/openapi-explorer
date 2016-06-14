@@ -12,6 +12,7 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
+    authHeader: process.env.AUTH_HEADER,
 
     APP: {
       // Here you can pass flags/options to your application instance

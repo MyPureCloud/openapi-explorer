@@ -13,9 +13,7 @@ export default Ember.Component.extend({
 
     inputType: Ember.computed('parameter', function() {
         let parameter = this.get("parameter");
-
-        console.log(parameter);
-
+        
         if(["int32","int64","float","double"].indexOf(parameter.format) > -1 ){
             return "number";
         }else if (parameter.type === "boolean"){

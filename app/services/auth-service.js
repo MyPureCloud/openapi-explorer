@@ -1,8 +1,14 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Service.extend(Ember.Evented,{
     authHeader:null,
     init(){
+        if(config.authHeader != null && config.authHeader !== ''){
+            this.set("authHeader", "bearer " + config.authHeader);
+            return;
+        }
+
         let tokenType = null;
         let token = null;
 

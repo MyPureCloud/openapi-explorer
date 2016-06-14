@@ -6,6 +6,25 @@ export default Ember.Service.extend({
     api: {},
     methodsByTag:{},
 
+    filteredMethodsByTag(tag, filter){
+
+        let filteredMethods = [];
+        let methods = this.get("methodsByTag")[tag];
+
+        if(filter == null || filter === ""){
+            return methods;
+        }
+        filter = filter.toLowerCase();
+
+        for(let x=0; x<methods.length; x++){
+            let method = methods[x];
+            if(method.summary.toLowerCase().indexOf(filter) > -1){
+                filteredMethods.push(method);
+            }
+        }
+
+        return filteredMethods;
+    },
     init() {
         let that = this;
         try{

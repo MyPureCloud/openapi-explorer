@@ -63,7 +63,7 @@
                     <h3>Url</h3>
 
                     <div id='requestParamsHeader' class='clear-fix' >
-                        <div class='pull-left'>
+                        <div class='pull-left http-method'>
                             <label class='http-{{operation.httpMethod}}'>{{operation.httpMethod}}</label>
                         </div>
 
@@ -146,11 +146,7 @@
                 </div>
 
                 <div>
-                    <pre>
-                        <code>
-{{response.data}}
-                        </code>
-                    </pre>
+{{ace-editor value=response.data aceInit=aceInit class="editor"}}
                 </div>
 
             </div>

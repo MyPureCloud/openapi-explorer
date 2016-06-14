@@ -3,6 +3,8 @@ var  computed = Ember.computed;
 
 export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
+    filter:null,
+    
     tags: computed('apiService.api', function() {
         if (this.get('apiService').get('api').tags == null){
             return [];

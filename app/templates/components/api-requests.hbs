@@ -1,19 +1,25 @@
 <ul class="nav nav-tabs" role="tablist" id='requestTabs' style="width:100%">
     {{#each requests as |request index|}}
-   <li role="presentation" class="{{request.tabClass}}">
+    <li role="presentation" id="requestTab{{index}}" class="{{if (eq selectedTabIndex index) "active"}}" >
 
-       <a href="#request{{index}}" aria-controls="request" role="tab" data-toggle="tab">{{request.operation.summary}}
+        <a href="#request{{index}}" aria-controls="request" role="tab" data-toggle="tab">{{request.operation.summary}}
 
-       <button type="button" class="close" aria-label="Close" {{action 'closeTab' index}}><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" aria-label="Close" {{action 'closeTab' index}}><span aria-hidden="true">&times;</span></button>
+        </a>
 
-   </a>
+    </li>
+    {{/each}}
+</ul>
 
-</li>
-   {{/each}}
- </ul>
-
-<div class="tab-content">
+<div class="tab-content" id='requestTabsContent'>
     {{#each requests as |request index|}}
-   <div role="tabpanel" class="tab-pane fade {{request.tabClass}}" id="request{{index}}">{{api-request operation=request.operation}}</div>
-   {{/each}}
+    <div role="tabpanel" class="tab-pane {{if (eq selectedTabIndex index) "active"}}" id="request{{index}}">{{api-request operation=request.operation}}</div>
+    {{/each}}
 </div>
+
+{{#if (eq requests.length 0)}}
+<div id='get-started'>
+<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Select a request from the tree to get started
+</div>
+
+{{/if}}
