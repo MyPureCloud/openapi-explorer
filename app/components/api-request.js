@@ -215,26 +215,9 @@ export default Ember.Component.extend({
                 that.set("response", handleResponse(jqXHR));
             });
 
-
-/*
-            var xmlhttp = new XMLHttpRequest();
-
-            xmlhttp.onreadystatechange = function() {
-                console.log(xmlhttp);
-                if (xmlhttp.readyState == 4) {
-                    that.set("hasResponse", true);
-                    that.set("response", handleResponse(xmlhttp));
-                }
-
-            };
-            xmlhttp.open(operation.httpMethod, url, true);
-            xmlhttp.setRequestHeader('Content-Type',"application/json");
-            //xmlhttp.withCredentials = true;
-
-            xmlhttp.send();
-
-            console.log(requestParams);
-            */
+        },
+        share(){
+            this.get("shareService").getSharableLink(this.get("operation"), this.get("requestBody"));
         }
     }
 });

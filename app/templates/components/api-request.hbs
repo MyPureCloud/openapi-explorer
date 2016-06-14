@@ -1,9 +1,11 @@
 
+
+
 <h1>{{operation.summary}}</h1>
+{{request-share operation=operation requestBody=requestBody}}
 <div class='operation-description'>
     {{operation.description}}
 </div>
-
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingRequest">

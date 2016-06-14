@@ -13,6 +13,7 @@ module.exports = function(environment) {
       }
     },
     authHeader: process.env.AUTH_HEADER,
+    shareUrl: process.env.SHARE_URL,
 
     APP: {
       // Here you can pass flags/options to your application instance
