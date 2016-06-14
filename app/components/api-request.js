@@ -36,7 +36,9 @@ export default Ember.Component.extend({
       for(let x=0; x< operation.parameters.length; x++){
           let parameter = operation.parameters[x];
           if(parameter.in === "body"){
-              if(parameter.schema["$ref"]){
+              if(parameter.value){
+                  this.set("requestBody", parameter.value);
+              }else if(parameter.schema["$ref"]){
                   this.set("requestBody", OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false));
               }
           }else if(parameter.in === "header"){
@@ -97,9 +99,7 @@ export default Ember.Component.extend({
                 }else{
                     delete requestHeaders[parameter.name];
                 }
-
             }
-
         }
 
         this.set('requestHeaders', requestHeaders);
@@ -118,6 +118,7 @@ export default Ember.Component.extend({
 
     actions:{
         sendRequest(){
+            this.set("hasResponse", false);
             this.set("hideRequest", false);
             let that= this;
             let apiService = this.get('apiService');
@@ -135,24 +136,33 @@ export default Ember.Component.extend({
                 url += apiService.api.basePath;
             }
 
-            url += operation.uri;
+            url += this.get("computedUrl");
 
             let requestParams = {
                 method: operation.httpMethod,
                 url: url,
                  timeout: 5000,
                 headers:{
-                    'Content-Type':"application/json",
-
 
                 }
             };
 
+            let computedHeaders = this.get("computedHeaders");
+            for(let x=0; x< computedHeaders.length; x++){
+                let header = computedHeaders[x];
+
+                requestParams.headers[header.key] = header.value;
+
+                if(header.key === "Authorization"){
+                    requestParams.headers[header.key] = this.get("authService").authHeader;
+                }
+            }
+/*
             let authHeader = this.get("authService").authHeader;
             if(authHeader){
                 requestParams.headers['Authorization'] = authHeader;
             }
-
+*/
             if(this.get("canSendData")){
                 requestParams.data = this.get("requestBody");
             }
