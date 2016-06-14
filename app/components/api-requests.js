@@ -2,10 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     requestService: Ember.inject.service(),
+    shareService: Ember.inject.service(),
     requests:[],
     selectedTabIndex: 0,
 
     init(){
+
         let that = this;
         this.get('requests');
 
@@ -31,6 +33,9 @@ export default Ember.Component.extend({
 
             that.set('selectedTabIndex', that.requests.length-1);
         });
+
+        this.get("shareService");
+        
     },
     actions:{
         closeTab(index){

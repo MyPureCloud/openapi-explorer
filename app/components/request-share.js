@@ -13,7 +13,6 @@ export default Ember.Component.extend({
         }
     },
     init(){
-        this._super(...arguments);
-        this.get("shareService");
+        this._super(...arguments);        
     }
 });

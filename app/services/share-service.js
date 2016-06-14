@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import config from '../config/environment';
-//  http://localhost:4200/?share=N4IgDghgLgFiBcIDmBTKBVAzigTpkANCALZowD2AJgsmoSAK44CWNA9BGM2wG4BMbBtjz1IOCMQBqEADYMU+eKEioAyswBeKGnwDsoiKgByDYgCNcCAIxFm1RADNy5epnI4oAeRyVLiAIKqAMIgAL5EZlQAnjRhQA===
+    //  http://localhost:4200/api-explorer/?share=N4IgDghgLgFiBcIDmBTKBVAzigTpkANCALZowD2AJgsmoSAK44CWNA9BGM2wG4BMbBtjz1IOCMQBqEADYMU+eKEioAyswBeKGnwDsoiKgByDYgCNcCAIxFm1RADNy5epnI4oAeRyVLiAIKqAMIgAL5EZlQAnjRhQA===
 export default Ember.Service.extend(Ember.Evented,{
     querystringService: Ember.inject.service(),
     apiService: Ember.inject.service(),
