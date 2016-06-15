@@ -29,7 +29,7 @@ export default Ember.Service.extend({
         let that = this;
         try{
             // "https://api.mypurecloud.com/api/v2/docs/swagger"
-            $.getJSON("https://api.inindca.com/api/v2/docs/swagger").done(function(schema){
+            $.getJSON("https://api.mypurecloud.com/api/v2/docs/swagger").done(function(schema){
             //$.getJSON("http://petstore.swagger.io/v2/swagger.json").done(function(schema){
                 let paths = schema.paths;
 
