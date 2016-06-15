@@ -18,7 +18,7 @@ export default Ember.Service.extend({
 
         for(let x=0; x<methods.length; x++){
             let method = methods[x];
-            if(method.summary.toLowerCase().indexOf(filter) > -1){
+            if(tag.toLowerCase().indexOf(filter)> -1 || method.summary.toLowerCase().indexOf(filter) > -1){
                 filteredMethods.push(method);
             }
         }
