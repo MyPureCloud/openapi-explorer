@@ -6,8 +6,13 @@
         {{/if}}
     </div>
     <div class="col-md-3">
-        {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
 
+        {{#if (eq inputType 'checkbox')}}
+        {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
+        {{else}}
+        {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
+        
+        {{/if}}
     </div>
     <div class="col-md-1">
         {{parameter.in}}

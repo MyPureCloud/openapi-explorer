@@ -1,8 +1,6 @@
+<h1>{{operation.uri}}</h1>
 
 
-
-<h1>{{operation.summary}}</h1>
-{{request-share operation=operation requestBody=requestBody}}
 <div class='operation-description'>
     {{operation.description}}
 </div>
@@ -43,6 +41,9 @@
                 <div>
                     <br />
                     <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
+                    <button class='btn btn-primary' data-toggle="modal" data-target="#shareDialog" {{action 'share'}}>
+                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                    </button>
                 </div>
 
             </div>

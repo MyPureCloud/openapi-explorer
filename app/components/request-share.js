@@ -1,18 +1,21 @@
 import Ember from 'ember';
+var  computed = Ember.computed;
 
 export default Ember.Component.extend({
     shareService: Ember.inject.service(),
-    operation: null,
-    requestBody: null,
-    shareLink:null,
-    actions:{
-        share(){
-            let link = this.get("shareService").getSharableLink(this.get("operation"), this.get("requestBody"));
+    shareTypes : Ember.String.w('Link cURL'),
+    selectedShareType: 'Link',
+    sharableLink: computed('shareService.sharableLink', function() {
+        return this.get('shareService').get('sharableLink');
+    }),
 
-            this.set("shareLink", link);
-        }
-    },
-    init(){
-        this._super(...arguments);        
-    }
+    sharableCurl: computed('shareService.sharableCurl', function() {
+        return this.get('shareService').get('sharableCurl');
+    }),
+
+     actions: {
+       selectShareType(type) {
+         this.set('selectedShareType', type);
+       }
+     }
 });

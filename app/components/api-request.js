@@ -7,6 +7,7 @@ export default Ember.Component.extend({
     canSendData: true,
     apiService: Ember.inject.service('apiService'),
     authService: Ember.inject.service(),
+    shareService: Ember.inject.service(),
     requestHeaders: {},
     hasResponse: false,
     hideRequest: false,
@@ -227,7 +228,7 @@ export default Ember.Component.extend({
 
         },
         share(){
-            this.get("shareService").getSharableLink(this.get("operation"), this.get("requestBody"));
+            this.get("shareService").setSharableOperation(this.get("operation"), this.get("requestBody"), this.get("computedHeaders"), this.get("computedUrl"));
         }
     }
 });

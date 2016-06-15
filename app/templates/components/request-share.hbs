@@ -1,9 +1,55 @@
-<h3>
-<a {{action 'share'}}>
-    <i class="fa fa-share-alt" aria-hidden="true"></i>
-</a>
 
-</h3>
-{{#if shareLink}}
-{{input value=shareLink}}
+
+<div class="modal fade" id='shareDialog' tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Share Request </h4>
+            </div>
+
+            <div>
+                <div class="input-group">
+                     <label >Select share method:</label>
+                     <select onchange={{action "selectShareType" value="target.value"}}>
+                        {{#each shareTypes as |shareType|}}
+                            <option value='{{shareType}}'>
+                                {{shareType}}
+                            </option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="modal-body">
+{{#if (eq selectedShareType "Link")}}
+                <div class="input-group">
+                    {{input value=sharableLink class="form-control" id='sharableLink'}}
+
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
+                </span>
+
+
+            </div>
 {{/if}}
+{{#if (eq selectedShareType "cURL")}}
+            <div>
+                Sharing via cURL will let the recipient run the request from the command line or import into Postman.
+                <pre>
+                    <code>
+                        {{sharableCurl}}
+                    </code>
+                </pre>
+
+            </div>
+            {{/if}}
+        </div>
+
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
