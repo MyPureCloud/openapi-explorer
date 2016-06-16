@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     }),
     description: null,
     filter: null,
+    documentation: null,
     groupMethods(tagName, filteredMethods){
         var groupMethods = {
             methods: [],
@@ -73,6 +74,7 @@ export default Ember.Component.extend({
 
       let tagName = this.get('name');
       let apis = this.get('apiService').filteredMethodsByTag(tagName, this.get("filter"));
+  
       this.set('hasMethods', apis.length > 0);
     // this.set('methods', apis);
       this.get("name");
