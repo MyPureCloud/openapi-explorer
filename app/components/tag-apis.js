@@ -26,6 +26,7 @@ export default Ember.Component.extend({
             //this part is pretty specific to our API, might not work for all
             // our path starts with /api/v1/<tag> which we remove
             // we also remove any url params.
+            // There is a good chance this is a noop for most use cases
             path = path.replace(/\/api\/v\d\/?/, '');
             path = path.replace(tagName + '/', '');
             path = path.replace(/\/\{\w+\}/g, '');
