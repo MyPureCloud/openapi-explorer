@@ -34,22 +34,25 @@ export default Ember.Component.extend({
           requestHeaders['Authorization'] = '<HIDDEN>';
       }
 
-      for(let x=0; x< operation.parameters.length; x++){
-          let parameter = operation.parameters[x];
-          if(parameter.in === "body"){
-              if(parameter.value){
-                  this.set("requestBody", parameter.value);
-              }else if(parameter.schema["$ref"]){
-                  this.set("requestBody", OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false));
+      if(operation.parameters){
+          for(let x=0; x< operation.parameters.length; x++){
+              let parameter = operation.parameters[x];
+              if(parameter.in === "body"){
+                  if(parameter.value){
+                      this.set("requestBody", parameter.value);
+                  }else if(parameter.schema["$ref"]){
+                      this.set("requestBody", OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false));
+                  }
+              }else if(parameter.in === "header"){
+                  requestHeaders[parameter.name] = parameter.value;
               }
-          }else if(parameter.in === "header"){
-              requestHeaders[parameter.name] = parameter.value;
-          }
 
-          if(parameter.in !== "body"){
-              this.set("hasProperties", true);
+              if(parameter.in !== "body"){
+                  this.set("hasProperties", true);
+              }
           }
       }
+
 
       this.set("requestHeaders", requestHeaders);
       this.set('canSendData', operation.httpMethod === "post" || operation.httpMethod === "put" || operation.httpMethod === "patch" );
@@ -60,27 +63,30 @@ export default Ember.Component.extend({
         let operation = this.get('operation');
         let result = operation.uri;
 
-        for(let x=0; x< operation.parameters.length; x++){
-            let parameter = operation.parameters[x];
+        if(operation.parameters){
+            for(let x=0; x< operation.parameters.length; x++){
+                let parameter = operation.parameters[x];
 
-            if(parameter.in === "path" && parameter.value && parameter.value !== '' ){
-                result = result.replace(`{${parameter.name}}`, parameter.value);
-            }
-
-            if(parameter.in === "query" &&
-                parameter.value !== parameter.default &&
-                (parameter.value !== "" && !parameter.required)){
-
-                if(result.indexOf('?') === -1){
-                    result += "?";
-                }else{
-                    result += "&";
+                if(parameter.in === "path" && parameter.value && parameter.value !== '' ){
+                    result = result.replace(`{${parameter.name}}`, parameter.value);
                 }
 
-                result += `${parameter.name}=${parameter.value}`;
+                if(parameter.in === "query" &&
+                    parameter.value !== parameter.default &&
+                    (parameter.value !== "" && !parameter.required)){
+
+                    if(result.indexOf('?') === -1){
+                        result += "?";
+                    }else{
+                        result += "&";
+                    }
+
+                    result += `${parameter.name}=${parameter.value}`;
+                }
+                //result += parameter.name+ "= " + parameter.value + ", "
             }
-            //result += parameter.name+ "= " + parameter.value + ", "
         }
+
 
         return result;
     }),
@@ -89,16 +95,18 @@ export default Ember.Component.extend({
         let requestHeaders = this.get('requestHeaders');
         let operation = this.get('operation');
 
-        for(let x=0; x< operation.parameters.length; x++){
-            let parameter = operation.parameters[x];
+        if(operation.parameters){
+            for(let x=0; x< operation.parameters.length; x++){
+                let parameter = operation.parameters[x];
 
-            if(parameter.in === "header" ){
-                if(parameter.value !== parameter.default &&
-                    (parameter.value !== "" && !parameter.required)){
+                if(parameter.in === "header" ){
+                    if(parameter.value !== parameter.default &&
+                        (parameter.value !== "" && !parameter.required)){
 
-                    requestHeaders[parameter.name] = parameter.value;
-                }else{
-                    delete requestHeaders[parameter.name];
+                        requestHeaders[parameter.name] = parameter.value;
+                    }else{
+                        delete requestHeaders[parameter.name];
+                    }
                 }
             }
         }
@@ -125,7 +133,10 @@ export default Ember.Component.extend({
             let apiService = this.get('apiService');
             let operation = this.get('operation');
 
-            let url = apiService.api.schemes[0] + ":";
+            let url = "http:";
+            if(apiService.api.schemes){
+                url = apiService.api.schemes[0] + ":";
+            }
 
             if(apiService.api.host.indexOf("//") !== 0){
                 url += "//";
