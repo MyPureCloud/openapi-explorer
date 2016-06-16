@@ -14,7 +14,7 @@
             </h4>
 
         </div>
-         <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
+        <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
             <div class="panel-body">
                 {{#if hasProperties}}
                 <div>
@@ -33,10 +33,28 @@
 
                 {{#if canSendData}}
                 <h3>Body</h3>
-                {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
-               <div id='preview'>
-                 {{value}}
-               </div>
+                <div class='container-fluid' >
+                    <div class='row' class='body-row'>
+                        <div class='col-md-6'>
+                            {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
+
+                        </div>
+                        <div class='col-md-6 model-definition-container'>
+                            {{#each requestBodyDefinition as |model|}}
+                            <h5>{{model.name}}</h5>
+                            {{#each model.definitions as |definition|}}
+                            <dl class="dl-horizontal model-definition">
+                                <dt>{{definition.name}}</dt>
+                                <dd>(<em>{{definition.type}}{{definition.required}}{{definition.readonlyString}}</em>): {{definition.description}}</dd>
+                            </dl>
+                            {{/each}}
+                            {{/each}}
+                        </div>
+                    </div>
+
+                </div>
+
+
                 {{/if}}
                 <div>
                     <br />
@@ -59,7 +77,7 @@
             </h4>
 
         </div>
-         <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
+        <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
             <div class="panel-body">
 
                 <div>
@@ -126,7 +144,7 @@
                     <div class='response-status response-status-{{response.responseCodeClass}}00'>
                         {{response.status}} {{response.statusText}}
                     </div>
-                        <h3>Headers</h3>
+                    <h3>Headers</h3>
                     <div class="container-fluid">
                         <div class='row'>
                             <div class="col-md-2">
@@ -150,9 +168,9 @@
                     </div>
 
                 </div>
-    <h3>Body</h3>
+                <h3>Body</h3>
                 <div>
-{{ace-editor value=response.data aceInit=aceInit class="editor"}}
+                    {{ace-editor value=response.data aceInit=aceInit class="editor"}}
                 </div>
 
             </div>

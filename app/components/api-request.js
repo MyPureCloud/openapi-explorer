@@ -42,6 +42,7 @@ export default Ember.Component.extend({
                       this.set("requestBody", parameter.value);
                   }else if(parameter.schema["$ref"]){
                       this.set("requestBody", OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false));
+                       this.set("requestBodyDefinition", OpenApiModelExample.getModelDescription(parameter.schema["$ref"], this.get("apiService").api, false));
                   }
               }else if(parameter.in === "header"){
                   requestHeaders[parameter.name] = parameter.value;
