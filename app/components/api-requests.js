@@ -31,7 +31,7 @@ export default Ember.Component.extend({
             };
 
             that.requests.pushObject(requestParams);
-            this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(that.get('requests')));
+            that.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(that.get('requests')));
 
             that.set('selectedTabIndex', that.requests.length-1);
         });
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
         closeTab(index){
             this.requests.removeAt(index);
 
-            this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(that.get('requests')));
+            this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
             this.set('selectedTabIndex', this.requests.length-1);
         }
     }

@@ -1,7 +1,9 @@
 /* global $ */
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Service.extend({
+    querystringService: Ember.inject.service(),
     openApiDefinition: null,
     api: {},
     methodsByTag:{},
@@ -27,9 +29,16 @@ export default Ember.Service.extend({
     },
     init() {
         let that = this;
+        let openApiUrl = config.defaultOpenApiUrl;
+
+        let customUrl = this.get("querystringService").getParameter(window.location.search, "openApiUrl");
+        if(customUrl){
+            openApiUrl = customUrl;
+        }
+
         try{
             // "https://api.mypurecloud.com/api/v2/docs/swagger"
-            $.getJSON("https://api.mypurecloud.com/api/v2/docs/swagger").done(function(schema){
+            $.getJSON(openApiUrl).done(function(schema){
             //$.getJSON("http://petstore.swagger.io/v2/swagger.json").done(function(schema){
                 let paths = schema.paths;
 
