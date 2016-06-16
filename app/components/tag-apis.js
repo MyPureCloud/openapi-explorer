@@ -1,6 +1,5 @@
 import Ember from 'ember';
 var  computed = Ember.computed;
-const basePath = /\/api\/v\d\/\w+\/?/;
 
 export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
@@ -14,7 +13,7 @@ export default Ember.Component.extend({
         var groupMethods = {
             methods: [],
             folders: []
-        }
+        };
 
         let folders = {};
 
@@ -33,7 +32,7 @@ export default Ember.Component.extend({
 
             let paths = path.split('/');
 
-            if(paths.length == 1){
+            if(paths.length === 1){
                 groupMethods.methods.push(method);
             }else{
                 let folder = paths[1];

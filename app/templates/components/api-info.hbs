@@ -3,13 +3,16 @@
 <div id='api-info' >
 
     <button type="button" class="close pull-left" aria-label="Close" {{action "toggle"}}><span aria-hidden="true">&times;</span></button>
-    <h2>{{info.title}}</h2>
-    {{info.description}}
+    <div id='api-info-content'>
+        <h2>{{info.title}}</h2>
+        {{info.description}}
 
-    {{#if externalDocs}}
-    <h3>Documentation</h3>
-    <a href={{externalDocs.url}}>{{externalDocs.description}}</a>
-    {{/if}}
+        {{#if externalDocs}}
+        <h3>Documentation</h3>
+        <a href={{externalDocs.url}}>{{externalDocs.description}}</a>
+        {{/if}}
+
+    </div>
 
 </div>
 

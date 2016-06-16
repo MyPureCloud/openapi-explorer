@@ -5,16 +5,19 @@
             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{safeName}}" aria-expanded="true" aria-controls="collapse{{safeName}}">
             {{name}}
             </a>
+
         </h4>
             {{description}}
     </div>
     <div id="collapse{{safeName}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{safeName}}">
         <div class="panel-body">
-
+            {{#if documentation}}
+            <a href={{documentation}} target='_blank'>Documentation</a>
+            {{/if}}
             <ul class='method-list'>
                 {{#each methods.folders as |folder|}}
                     {{tag-subfolder folder=folder}}
-                    
+
                 {{/each}}
                 {{#each methods.methods as |method|}}
                 <li class='http-operation' >
