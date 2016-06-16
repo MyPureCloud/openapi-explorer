@@ -1,4 +1,6 @@
-@sidebar-width: 300px;
+@import "constants.less";
+@import "api_tree.less";
+@import "request.less";
 
 body{
     overflow:hidden;
@@ -14,32 +16,8 @@ body{
     overflow:auto;
 }
 
-#api-tree{
-    position: fixed;
-    left: 0;
-    top: 0px;
-    bottom: 0;
-    width: @sidebar-width;
-
-    .panel-group{
-        overflow: scroll;
-
-        position: fixed;
-        left: 0;
-        top: 50px;
-        bottom: 0;
-        width: @sidebar-width;
-    }
-
-}
 body, html {
     height: 100%;
-}
-
-#api-tree{
-    border: solid 1px lightgray;
-    border-radius: 5px;
-    padding:5px;
 }
 
 #info-button{
@@ -74,109 +52,6 @@ body, html {
     }
 }
 
-.http-operation {
-    width:100%;
-    overflow:auto;
-    margin-bottom:3px;
-    cursor: pointer;
-
-    &:hover{
-        background:lightgrey;
-    }
-
-    .method{
-        text-transform: uppercase;
-        margin-right:5px;
-        font-weight: bold;
-        width:55px;
-    }
-
-    .description{
-        overflow-x: hidden;
-    }
-
-
-}
-
-.http-get{
-    color: #0781aa;
-}
-
-.http-post{
-    color: #77dd22;
-}
-
-.http-patch{
-    color: #ff1dce;
-}
-
-.http-put{
-    color: #ffda17;
-}
-
-.http-delete{
-    color: #ff0000;
-}
-
-
-.method-list{
-    list-style: none;
-    padding-left: 2px;
-}
-
-#requestParamsHeader {
-
-    margin-top:10px;
-    margin-left:10px;
-
-    div{
-        margin-right:10px;
-    }
-
-    label{
-        font-size:24px;
-    }
-
-    .http-method{
-        text-transform: uppercase;
-    }
-
-    input{
-        width:450px;
-    }
-}
-
-.operation-description{
-    margin-top:10px;
-    margin-bottom: 10px;
-}
-
-.ace_editor{
-    height: 400px;
-}
-
-.response-status{
-    font-weight:bold;
-}
-.response-status-200{
-    color: green;
-}
-
-.response-status-300{
-    color: purple;
-}
-
-.response-status-400{
-    color: red;
-}
-
-.response-status-500{
-    color: yellow;
-}
-
-.response-status-000{
-    color: orange;
-}
 
 #get-started{
     margin-top:50px;
@@ -190,4 +65,8 @@ body, html {
 
 #api-loading{
     margin:20px;
+}
+
+.parameter-row{
+    margin-bottom:5px;
 }

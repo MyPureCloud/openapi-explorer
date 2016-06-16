@@ -18,7 +18,7 @@
             <div class="panel-body">
                 {{#if hasProperties}}
                 <div>
-                    <div class="container">
+                    <div class="container-fluid">
 
                         {{#each operation.parameters as |parameter|}}
                         {{#unless (eq parameter.in 'body')}}
@@ -42,7 +42,7 @@
                     <br />
                     <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
                     <button class='btn btn-primary' data-toggle="modal" data-target="#shareDialog" {{action 'share'}}>
-                        <i class="fa fa-share-alt" aria-hidden="true"></i>
+                        <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
                     </button>
                 </div>
 
@@ -78,7 +78,7 @@
                 </div>
                 <div>
                     <h3>Headers</h3>
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class='row'>
                             <div class="col-md-2">
                                 <label>Key</label>
@@ -126,28 +126,31 @@
                     <div class='response-status response-status-{{response.responseCodeClass}}00'>
                         {{response.status}} {{response.statusText}}
                     </div>
-                    <table class='table table-striped table-bordered'>
-                        <tr>
-                            <th>
-                                Key
-                            </th>
-                            <th>
-                                Value
-                            </th>
-                        </tr>
+                        <h3>Headers</h3>
+                    <div class="container-fluid">
+                        <div class='row'>
+                            <div class="col-md-2">
+                                <label>Key</label>
+                            </div>
+                            <div class="col-md-10">
+                                <label>Value</label>
+                            </div>
+                        </div>
                         {{#each response.headers as |header|}}
-                        <tr>
-                            <td>
+                        <div class="row">
+                            <div class="col-md-2">
                                 {{header.key}}
-                            </td>
-                            <td>
+                            </div>
+                            <div class="col-md-10">
                                 {{header.value}}
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                         {{/each}}
-                    </table>
-                </div>
 
+                    </div>
+
+                </div>
+    <h3>Body</h3>
                 <div>
 {{ace-editor value=response.data aceInit=aceInit class="editor"}}
                 </div>

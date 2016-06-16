@@ -1,0 +1,102 @@
+
+#api-tree{
+    position: fixed;
+    left: 0;
+    top: 0px;
+    bottom: 0;
+    width: @sidebar-width;
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    padding:5px;
+
+    .panel-group{
+        overflow: scroll;
+
+        position: fixed;
+        left: 0;
+        top: 50px;
+        bottom: 0;
+        width: @sidebar-width;
+    }
+
+}
+
+
+
+.http-get{
+    color: #0781aa;
+}
+
+.http-post{
+    color: #77dd22;
+}
+
+.http-patch{
+    color: #ff1dce;
+}
+
+.http-put{
+    color: #ffda17;
+}
+
+.http-delete{
+    color: #ff0000;
+}
+
+
+.http-operation {
+    width:100%;
+    overflow:auto;
+    margin-bottom:3px;
+    cursor: pointer;
+
+    &:hover{
+        background:@tree-item-hover-color;
+    }
+
+    .method{
+        text-transform: uppercase;
+        margin-right:5px;
+        font-weight: bold;
+        width:55px;
+    }
+
+    .description{
+        overflow-x: hidden;
+    }
+
+
+}
+
+.method-list{
+    list-style: none;
+    padding-left: 2px;
+}
+
+.request-folder{
+    cursor: pointer;
+    i{
+        margin-right:10px;
+        cursor: pointer;
+    }
+
+    label{
+        text-transform: capitalize;
+        cursor: pointer;
+
+        &:hover{
+            background:@tree-item-hover-color;
+        }
+    }
+
+    ul{
+        padding-left: 20px;
+    }
+
+    .folder-closed{
+        display:none;
+    }
+
+
+
+}

@@ -12,8 +12,15 @@
         <div class="panel-body">
 
             <ul class='method-list'>
-                {{#each methods as |method|}}
+                {{#each methods.folders as |folder|}}
+                    {{tag-subfolder folder=folder}}
+                    
+                {{/each}}
+                {{#each methods.methods as |method|}}
+                <li class='http-operation' >
                     {{method-description method=method}}
+                </li>
+
                 {{/each}}
             </ul>
 

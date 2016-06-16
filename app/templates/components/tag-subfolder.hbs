@@ -1,0 +1,12 @@
+<li {{action 'toggleOpen'}}>
+    <div class='request-folder'>
+        <label><i class='fa {{if isOpen "fa-folder-open" "fa-folder"}}' aria-hidden="true"></i>{{folder.key}}</label>
+        <ul class='method-list tag-folder {{if isOpen "" "folder-closed"}}'>
+            {{#each folder.value as |method|}}
+            <li class='http-operation' >
+                {{method-description method=method}}
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</li>

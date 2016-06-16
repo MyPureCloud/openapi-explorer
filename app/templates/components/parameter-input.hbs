@@ -11,7 +11,7 @@
         {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
         {{else}}
         {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
-        
+
         {{/if}}
     </div>
     <div class="col-md-1">
@@ -19,5 +19,9 @@
     </div>
     <div class="col-md-7">
         {{parameter.description}}
+        {{#if parameter.items.enum}}
+        <br />
+        <b>Valid values:</b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}
+        {{/if}}
     </div>
 </div>
