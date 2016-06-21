@@ -238,6 +238,12 @@ export default Ember.Component.extend({
                 that.set("response", handleResponse(jqXHR));
             });
 
+            window.parent.postMessage(JSON.stringify({
+                    action: 'anaytics',
+                    httpMethod: this.get('operation').httpMethod,
+                    url: this.get('operation').uri
+                }), "*");
+
         },
         share(){
             this.get("shareService").setSharableOperation(this.get("operation"), this.get("requestBody"), this.get("computedHeaders"), this.get("computedUrl"));
