@@ -10,46 +10,47 @@
 
             <div>
                 <div class="input-group">
-                     <label >Select share method:</label>
-                     <select onchange={{action "selectShareType" value="target.value"}}>
+                    <label >Select share method:</label>
+                    <select onchange={{action "selectShareType" value="target.value"}}>
                         {{#each shareTypes as |shareType|}}
-                            <option value='{{shareType}}'>
-                                {{shareType}}
-                            </option>
+                        <option value='{{shareType}}'>
+                            {{shareType}}
+                        </option>
                         {{/each}}
                     </select>
                 </div>
             </div>
             <div class="modal-body">
-{{#if (eq selectedShareType "Link")}}
+                {{#if (eq selectedShareType "Link")}}
+                Use this link to share the current request with parameters.
                 <div class="input-group">
                     {{input value=sharableLink class="form-control" id='sharableLink'}}
 
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
-                </span>
+                    </span>
 
 
+                </div>
+                {{/if}}
+                {{#if (eq selectedShareType "cURL")}}
+                <div>
+                    Sharing via cURL will let the recipient run the request from the command line or import into Postman.
+                    <pre>
+                        <code>
+                            {{sharableCurl}}
+                        </code>
+                    </pre>
+
+                </div>
+                {{/if}}
             </div>
-{{/if}}
-{{#if (eq selectedShareType "cURL")}}
-            <div>
-                Sharing via cURL will let the recipient run the request from the command line or import into Postman.
-                <pre>
-                    <code>
-                        {{sharableCurl}}
-                    </code>
-                </pre>
 
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
-            {{/if}}
-        </div>
-
-
-
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal-dialog -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
