@@ -13,6 +13,10 @@ export default Ember.Service.extend(Ember.Evented,{
     requestBody: null,
     sharableLink: null,
     includeAuthHeader: false,
+    apiChanged: Ember.observer('apiService.api', function() {
+        console.log("api changed do share");
+        this.doShare();
+    }),
     setSharableLink(operation, requestBody){
         let share = {
             path: operation.operationId,
@@ -28,15 +32,9 @@ export default Ember.Service.extend(Ember.Evented,{
 
         share.paramValues['body'] = requestBody;
 
-        console.log(share);
-
         let operationString = JSON.stringify(share);
         $('#clipboard').val(operationString);
-        console.log("uncompressed Length " + operationString.length);
         var compressed = LZString.compressToBase64(operationString);
-
-        console.log("compressed Length " + compressed.length);
-        console.log(compressed);
 
         let shareUrl = `${window.location.protocol}//${window.location.host}/?`;
 
@@ -79,14 +77,15 @@ export default Ember.Service.extend(Ember.Evented,{
         curl += `"${computedUrl}"`;
         this.set("sharableCurl", curl);
     },
-    init(){
-        new Clipboard('.btn');
-
+    doShare(){
         let apiService = this.get("apiService");
         let swagger = apiService.api;
 
-        this.get('requestOperation');
-        this.get('includeAuthHeader');
+        if(swagger == null || swagger.paths == null){
+            console.log("paths is null");
+            return;
+        }
+        debugger;
 
         let share = this.get("querystringService").getParameter(window.location.search, "share");
 
@@ -113,5 +112,13 @@ export default Ember.Service.extend(Ember.Evented,{
                 console.error(ex);
             }
         }
+    },
+    init(){
+        new Clipboard('.btn');
+
+        this.get('requestOperation');
+        this.get('includeAuthHeader');
+
+        this.doShare();
     }
 });
