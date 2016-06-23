@@ -82,10 +82,8 @@ export default Ember.Service.extend(Ember.Evented,{
         let swagger = apiService.api;
 
         if(swagger == null || swagger.paths == null){
-            console.log("paths is null");
             return;
         }
-        debugger;
 
         let share = this.get("querystringService").getParameter(window.location.search, "share");
 

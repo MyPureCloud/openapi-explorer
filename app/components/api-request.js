@@ -196,6 +196,10 @@ export default Ember.Component.extend({
 
                 }
 
+                headerMap.sort(function compare(a, b) {
+                            return a.key.localeCompare(b.key);
+                        });
+
                 return headerMap;
             }
 
