@@ -40,7 +40,7 @@ export default Ember.Service.extend(Ember.Evented,{
         let queryStringSharedUrl = this.get("querystringService").getParameter(window.location.search, "shareUrl");
 
         if(queryStringSharedUrl){
-            shareUrl = queryStringSharedUrl;
+            shareUrl = decodeURIComponent(queryStringSharedUrl);
         }
 
         let sharableLink = `${shareUrl}share=${compressed}`;
