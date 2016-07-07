@@ -2,7 +2,6 @@
 /* global LZString*/
 /* global Clipboard*/
 import Ember from 'ember';
-import config from '../config/environment';
 
     //  http://localhost:4200/api-explorer/?share=N4IgDghgLgFiBcIDmBTKBVAzigTpkANCALZowD2AJgsmoSAK44CWNA9BGM2wG4BMbBtjz1IOCMQBqEADYMU+eKEioAyswBeKGnwDsoiKgByDYgCNcCAIxFm1RADNy5epnI4oAeRyVLiAIKqAMIgAL5EZlQAnjRhQA===
 export default Ember.Service.extend(Ember.Evented,{
@@ -38,8 +37,10 @@ export default Ember.Service.extend(Ember.Evented,{
 
         let shareUrl = `${window.location.protocol}//${window.location.host}/?`;
 
-        if(config.shareUrl){
-            shareUrl = config.shareUrl;
+        let queryStringSharedUrl = this.get("querystringService").getParameter(window.location.search, "shareUrl");
+
+        if(queryStringSharedUrl){
+            shareUrl = queryStringSharedUrl;
         }
 
         let sharableLink = `${shareUrl}share=${compressed}`;

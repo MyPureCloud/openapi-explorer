@@ -13,7 +13,6 @@ module.exports = function(environment) {
       }
     },
     authHeader: process.env.AUTH_HEADER,
-    shareUrl: process.env.SHARE_URL,
     defaultOpenApiUrl: process.env.DEFAULT_OPENAPI_URL || "https://api.mypurecloud.com/api/v2/docs/swagger",
 
     APP: {
