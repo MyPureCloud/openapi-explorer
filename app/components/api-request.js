@@ -128,31 +128,35 @@ export default Ember.Component.extend({
 
         return result;
     }),
+    _getUrlBase: function(){
+        let apiService = this.get('apiService');
+        let operation = this.get('operation');
 
+        let url = "http:";
+        if(apiService.api.schemes){
+            url = apiService.api.schemes[0] + ":";
+        }
+
+        if(apiService.api.host.indexOf("//") !== 0){
+            url += "//";
+        }
+
+        url += apiService.api.host;
+
+        if(apiService.api.basePath){
+            url += apiService.api.basePath;
+        }
+
+
+        return url;
+    },
     actions:{
         sendRequest(){
             this.set("hasResponse", false);
             this.set("hideRequest", false);
             let that= this;
-            let apiService = this.get('apiService');
-            let operation = this.get('operation');
 
-            let url = "http:";
-            if(apiService.api.schemes){
-                url = apiService.api.schemes[0] + ":";
-            }
-
-            if(apiService.api.host.indexOf("//") !== 0){
-                url += "//";
-            }
-
-            url += apiService.api.host;
-
-            if(apiService.api.basePath){
-                url += apiService.api.basePath;
-            }
-
-            url += this.get("computedUrl");
+            let url = this._getUrlBase() + this.get("computedUrl");
 
             let requestParams = {
                 method: operation.httpMethod,
@@ -253,7 +257,7 @@ export default Ember.Component.extend({
 
         },
         share(){
-            this.get("shareService").setSharableOperation(this.get("operation"), this.get("requestBody"), this.get("computedHeaders"), this.get("computedUrl"));
+            this.get("shareService").setSharableOperation(this.get("operation"), this.get("requestBody"), this.get("computedHeaders"), this.get("computedUrl"), this._getUrlBase());
         }
     }
 });

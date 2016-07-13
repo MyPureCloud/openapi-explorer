@@ -46,13 +46,13 @@ export default Ember.Service.extend(Ember.Evented,{
         let sharableLink = `${shareUrl}share=${compressed}`;
         this.set("sharableLink", sharableLink);
     },
-    setSharableOperation(operation, requestBody,computedHeaders, computedUrl){
+    setSharableOperation(operation, requestBody,computedHeaders, computedUrl, urlBase){
 
         this.set("requestBody", requestBody);
         this.set("requestOperation", operation);
 
         this.setSharableLink(operation,requestBody);
-        this.setSharableCurl(operation,requestBody,  computedHeaders, computedUrl);
+        this.setSharableCurl(operation,requestBody,  computedHeaders, urlBase + computedUrl);
 
     },
     setSharableCurl(operation, requestBody, computedHeaders, computedUrl){
