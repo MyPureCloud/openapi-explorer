@@ -130,7 +130,6 @@ export default Ember.Component.extend({
     }),
     _getUrlBase: function(){
         let apiService = this.get('apiService');
-        let operation = this.get('operation');
 
         let url = "http:";
         if(apiService.api.schemes){
@@ -155,6 +154,8 @@ export default Ember.Component.extend({
             this.set("hasResponse", false);
             this.set("hideRequest", false);
             let that= this;
+
+            let operation = this.get('operation');
 
             let url = this._getUrlBase() + this.get("computedUrl");
 
