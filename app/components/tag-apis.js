@@ -10,6 +10,7 @@ export default Ember.Component.extend({
     description: null,
     filter: null,
     documentation: null,
+    
     groupMethods(tagName, filteredMethods){
         var groupMethods = {
             methods: [],

@@ -1,10 +1,28 @@
+/* global $ */
 import Ember from 'ember';
 var  computed = Ember.computed;
 
 export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
     filter:null,
-    
+    querystringService: Ember.inject.service(),
+    init(){
+        this._super(...arguments);
+
+        let filter = this.get("querystringService").getParameter(window.location.search, "filter");
+        if(filter){
+            this.set("filter", filter);
+        }
+
+    },
+    didInsertElement(){
+        this._super(...arguments);
+        if(this.get('filter')){
+            $('.panel-title a').removeClass("collapsed");
+            $(".panel-collapse").addClass("in");
+        }
+
+    },
     tags: computed('apiService.api', function() {
         if (this.get('apiService').get('api').tags == null){
             return [];
