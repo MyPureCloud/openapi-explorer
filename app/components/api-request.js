@@ -77,7 +77,7 @@ export default Ember.Component.extend({
 
                 if(parameter.in === "query" &&
                     parameter.value !== parameter.default &&
-                    (parameter.value !== "" && !parameter.required)){
+                    parameter.value !== ""){
 
                     if(result.indexOf('?') === -1){
                         result += "?";
