@@ -18,16 +18,39 @@
         width: 290px;
         padding-bottom: 20px;
 
+        > .ember-view + .ember-view .panel-default {
+            border-top: none;
+        }
+
+        .panel {
+            border-radius: 0;
+        }
+
         .panel-heading {
-            color: #8b8b8b;
-            font-weight: 300;
+            padding: 0;
         }
 
         .panel-title {
             font-family: @font-family-secondary;
             color: @text-color;
-            margin-bottom: 2px;
             font-size: 16px;
+            position: relative;
+
+            a {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+            }
+
+            .desc {
+                display: block;
+                border-radius: 0;
+                color: #8b8b8b;
+                font-weight: 300;
+                font-family: @font-family-sans-serif;
+                font-size: 13px;
+                margin-top: 3px;
+            }
         }
     }
 }
@@ -79,6 +102,7 @@
 .method-list{
     list-style: none;
     padding-left: 2px;
+    margin-bottom: 0;
 }
 
 .request-folder{
