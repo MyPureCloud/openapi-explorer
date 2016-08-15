@@ -1,4 +1,10 @@
-@import "constants.less";
+@import 'icons.less';
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+@import "../../bower_components/bootstrap/less/bootstrap.less";
+
+@import "variables.less";
+
 @import "api_tree.less";
 @import "request.less";
 @import "api-info.less";
@@ -8,13 +14,13 @@ body{
 }
 
 #mainContent{
-
     position: fixed;
     left: @sidebar-width;
     top: 0px;
-    bottom: @banner-height;
-    right:0;
-    overflow:auto;
+    height: calc(~"100%");
+    overflow: auto;
+    width: calc(100% ~"-" @sidebar-width);
+    padding-top: 20px;
 }
 
 body, html {
@@ -29,6 +35,10 @@ body, html {
 .tab-content{
     padding-left:15px;
     padding-right:15px;
+
+    .operation-uri {
+        font-weight: 300;
+    }
 }
 
 #api-loading{
