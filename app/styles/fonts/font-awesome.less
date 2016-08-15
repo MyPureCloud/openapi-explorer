@@ -1,0 +1,316 @@
+// This file aims to only include the fonts needed.
+
+// The second aim is to provide a stable css class for the icon that
+// has semantic meaning for the usage.  This allows the icon variable in use to
+// change without touching all the templates.
+
+// See -> '../../bower_components/font-awesome/less/font-awesome';
+@import '../../bower_components/font-awesome/less/variables';
+
+@fa-css-prefix:       pc;
+
+@import '../../bower_components/font-awesome/less/mixins';
+@import '../../bower_components/font-awesome/less/path';
+@import '../../bower_components/font-awesome/less/core';
+@import '../../bower_components/font-awesome/less/larger';
+@import '../../bower_components/font-awesome/less/fixed-width';
+@import '../../bower_components/font-awesome/less/list';
+@import '../../bower_components/font-awesome/less/bordered-pulled';
+@import '../../bower_components/font-awesome/less/animated';
+@import '../../bower_components/font-awesome/less/rotated-flipped';
+@import '../../bower_components/font-awesome/less/stacked';
+// TODO - Do we include all the font icon classes or not?
+// @import '../../bower_components/font-awesome/less/icons';
+
+.@{fa-css-prefix}-loading:before { content: @icomoon-comet; }
+
+// General
+.@{fa-css-prefix}-email:before { content: @icomoon-envelope; }
+.@{fa-css-prefix}-home:before { content: @icomoon-home; }
+.@{fa-css-prefix}-links:before { content: @fa-var-link; }
+.@{fa-css-prefix}-location:before { content: @fa-var-crosshairs; }
+.@{fa-css-prefix}-location-marker:before { content: @icomoon-marker; }
+.@{fa-css-prefix}-bars:before { content: @fa-var-bars; }
+.@{fa-css-prefix}-add:before { content: @icomoon-plus; }
+.@{fa-css-prefix}-logo-inin:before { content: @icomoon-logo-inin; }
+.@{fa-css-prefix}-ban:before { content: @fa-var-ban; }
+.@{fa-css-prefix}-lock:before { content: @fa-var-lock; }
+.@{fa-css-prefix}-eye:before { content: @fa-var-eye; }
+.@{fa-css-prefix}-show-more:before { content: @icomoon-chevron-circle-down; }
+.@{fa-css-prefix}-show-less:before { content: @icomoon-chevron-circle-up; }
+.@{fa-css-prefix}-social-expression:before { content: @fa-var-hashtag; }
+.@{fa-css-prefix}-calendar:before { content: @fa-var-calendar; }
+.@{fa-css-prefix}-download:before { content: @fa-var-download; }
+.@{fa-css-prefix}-search-plus:before { content: @fa-var-search-plus; }
+
+
+// Menu Entries
+.@{fa-css-prefix}-personicon:before { content: @icomoon-pc-user; }
+.@{fa-css-prefix}-card-view:before { content: @fa-var-sitemap; }
+.@{fa-css-prefix}-contacts:before { content: @icomoon-contact; }
+.@{fa-css-prefix}-groups:before { content: @icomoon-pc-group; }
+.@{fa-css-prefix}-chat:before { content: @icomoon-chat; }
+.@{fa-css-prefix}-chat-alpha:before { content: @icomoon-chat-alpha; }
+.@{fa-css-prefix}-search:before { content: @icomoon-magnifying-glass; }
+.@{fa-css-prefix}-content:before { content: @fa-var-file-text; }
+.@{fa-css-prefix}-tasks:before { content: @fa-var-check-square-o; }
+.@{fa-css-prefix}-admin:before { content: @icomoon-cog; }
+.@{fa-css-prefix}-apps:before { content: @fa-var-cubes; }
+.@{fa-css-prefix}-logout:before { content: @fa-var-sign-out; }
+.@{fa-css-prefix}-inbox:before { content: @icomoon-inbox; }
+.@{fa-css-prefix}-inbox-alpha:before { content: @icomoon-inbox-alpha; }
+.@{fa-css-prefix}-interactions:before { content: @icomoon-interactions; }
+.@{fa-css-prefix}-interactions-alpha:before { content: @icomoon-interactions-alpha; }
+.@{fa-css-prefix}-directory:before { content: @icomoon-directory; }
+.@{fa-css-prefix}-help:before { content: @icomoon-question; }
+.@{fa-css-prefix}-more:before { content: @fa-var-ellipsis-h; }
+.@{fa-css-prefix}-more-v:before { content: @fa-var-ellipsis-v; }
+.@{fa-css-prefix}-feedback:before { content: @icomoon-feedback; }
+.@{fa-css-prefix}-picture:before { content: @fa-var-picture-o; }
+.@{fa-css-prefix}-bell:before { content: @icomoon-bell; }
+.@{fa-css-prefix}-assist:before { content: @icomoon-assist; }
+.@{fa-css-prefix}-assist-off:before { content: @icomoon-assist-off; }
+.@{fa-css-prefix}-person-circle:before { content: @icomoon-person-circle; }
+.@{fa-css-prefix}-performance:before { content: @fa-var-rocket; }
+.@{fa-css-prefix}-reports:before { content: @fa-var-bar-chart; }
+
+// Panel Icons
+.@{fa-css-prefix}-close:before { content: @fa-var-times-circle; }
+.@{fa-css-prefix}-maximize:before { content: @fa-var-plus-circle; }
+.@{fa-css-prefix}-minimize:before { content: @fa-var-minus-circle; }
+.@{fa-css-prefix}-compress:before { content: @fa-var-caret-square-o-left; }
+.@{fa-css-prefix}-close-circle:before { content: @fa-var-times-circle-o; }
+.@{fa-css-prefix}-history:before { content: @icomoon-history; }
+.@{fa-css-prefix}-call-history:before { content: @icomoon-call-history; }
+.@{fa-css-prefix}-call-forward:before { content: @icomoon-call-forward; }
+.@{fa-css-prefix}-call-forward-alpha:before { content: @icomoon-call-forward-alpha; }
+.@{fa-css-prefix}-dialpad:before { content: @icomoon-dialpad; }
+.@{fa-css-prefix}-call-inbox:before { content: @icomoon-voicemail; }
+.@{fa-css-prefix}-station-picker:before { content: @icomoon-phone-picker; }
+.@{fa-css-prefix}-voicemails:before { content: @icomoon-voicemail; }
+.@{fa-css-prefix}-faxes:before { content: @icomoon-fax; }
+.@{fa-css-prefix}-recordings:before { content: @icomoon-record; }
+.@{fa-css-prefix}-notifications:before { content: @icomoon-envelope; }
+.@{fa-css-prefix}-screen-full:before { content: @icomoon-screen-full; }
+.@{fa-css-prefix}-screen-small:before { content: @icomoon-screen-small; }
+.@{fa-css-prefix}-clipboard:before { content: @fa-var-clipboard; }
+.@{fa-css-prefix}-ban:before { content: @fa-var-ban; }
+.@{fa-css-prefix}-flag:before { content: @fa-var-flag; }
+.@{fa-css-prefix}-flag-checkered:before { content: @fa-var-flag-checkered; }
+.@{fa-css-prefix}-share:before { content: @icomoon-share; }
+.@{fa-css-prefix}-list-alt:before { content: @fa-var-list-alt; }
+.@{fa-css-prefix}-remove-item:before { content: @fa-var-times; }
+.@{fa-css-prefix}-attach-item:before { content: @fa-var-paperclip; }
+
+// Help
+.@{fa-css-prefix}-resource-center:before { content: @fa-var-book; }
+.@{fa-css-prefix}-walkthroughs:before { content: @fa-var-bus; }
+.@{fa-css-prefix}-online-education:before { content: @fa-var-graduation-cap; }
+.@{fa-css-prefix}-share-help:before { content: @fa-var-share; }
+.@{fa-css-prefix}-back:before { content: @fa-var-arrow-left; }
+.@{fa-css-prefix}-faq:before { content: @fa-var-comments-o; }
+.@{fa-css-prefix}-article:before { content: @fa-var-file; }
+.@{fa-css-prefix}-glossary:before { content: @fa-var-th-list; }
+.@{fa-css-prefix}-video-camera:before { content: @fa-var-video-camera; }
+.@{fa-css-prefix}-post:before { content: @fa-var-newspaper-o; }
+.@{fa-css-prefix}-releasenote:before { content: @fa-var-bullhorn; }
+.@{fa-css-prefix}-page:before { content: @fa-var-file-text; }
+
+// Call History Icons
+.@{fa-css-prefix}-outbound-call:before { content: @icomoon-outbound-call; }
+.@{fa-css-prefix}-missed-call:before { content: @icomoon-missed-call; }
+.@{fa-css-prefix}-warning:before { content: @fa-var-exclamation-triangle; }
+
+// Search Icons
+.@{fa-css-prefix}-circle:before { content: @fa-var-circle; }
+.@{fa-css-prefix}-keyword:before { content: @fa-var-key; }
+.@{fa-css-prefix}-search-all:before { content: @fa-var-globe; }
+
+// Content icons
+.@{fa-css-prefix}-delete:before { content: @fa-var-times-circle; }
+.@{fa-css-prefix}-delete-row:before { content: @fa-var-times; }
+.@{fa-css-prefix}-callback:before { content: @icomoon-callback; }
+.@{fa-css-prefix}-gear:before { content: @icomoon-cog; }
+.@{fa-css-prefix}-reload:before { content: @fa-var-refresh; }
+.@{fa-css-prefix}-mark-read:before { content: @fa-var-eye-slash; }
+.@{fa-css-prefix}-mark-unread:before { content: @fa-var-eye; }
+.@{fa-css-prefix}-move-file:before { content: @icomoon-move-file; }
+
+// Profile icons
+.@{fa-css-prefix}-grid-mode:before { content: @fa-var-th-large; }
+.@{fa-css-prefix}-stacked-mode:before { content: @fa-var-list-ul; }
+.@{fa-css-prefix}-official-group:before { content: @fa-var-cogs; }
+.@{fa-css-prefix}-social-group:before { content: @fa-var-users; }
+.@{fa-css-prefix}-add-person:before { content: @fa-var-plus-circle; }
+.@{fa-css-prefix}-image-view:before { content: @fa-var-image; }
+.@{fa-css-prefix}-tree-view:before { content: @fa-var-sort-amount-asc; }
+.@{fa-css-prefix}-linkedin:before { content: @fa-var-linkedin-square; }
+.@{fa-css-prefix}-is-favorite:before { content: @icomoon-favorite; }
+.@{fa-css-prefix}-is-favorite-alpha:before { content: @icomoon-favorite-alpha; }
+.@{fa-css-prefix}-is-favorite-full:before { content: @icomoon-favorite-full; }
+.@{fa-css-prefix}-not-favorite:before { content: @icomoon-favorite-alpha; }
+.@{fa-css-prefix}-quote-left:before { content: @icomoon-quote-left; }
+.@{fa-css-prefix}-quote-right:before { content: @icomoon-quote-right; }
+.@{fa-css-prefix}-info-circle:before { content: @fa-var-info-circle; }
+.@{fa-css-prefix}-check-circle:before { content: @fa-var-check-circle; }
+.@{fa-css-prefix}-check:before { content: @fa-var-check; }
+.@{fa-css-prefix}-instruction-text:before { content: @fa-var-question-circle; }
+.@{fa-css-prefix}-edit-profile:before { content: @fa-var-eye; }
+.@{fa-css-prefix}-camera:before { content: @fa-var-camera; }
+.@{fa-css-prefix}-remove-section:before { content: @fa-var-minus-circle; }
+.@{fa-css-prefix}-remove-value:before { content: @fa-var-times-circle; }
+.@{fa-css-prefix}-education-field:before { content: @fa-var-university; }
+.@{fa-css-prefix}-instruction-text:before { content: @icomoon-question; }
+.@{fa-css-prefix}-floor-plan:before { content: @icomoon-layers; }
+.@{fa-css-prefix}-organization:before { content: @icomoon-organization; }
+
+// Call Control icons
+.@{fa-css-prefix}-mute:before { content: @icomoon-mic-off; }
+.@{fa-css-prefix}-hold:before { content: @fa-var-pause; }
+.@{fa-css-prefix}-record:before { content: @icomoon-record; }
+.@{fa-css-prefix}-hangup:before { content: @icomoon-hangup; }
+.@{fa-css-prefix}-call-duration:before { content: @fa-var-clock-o; }
+.@{fa-css-prefix}-add-participant:before { content: @fa-var-caret-down; }
+.@{fa-css-prefix}-conference:before { content: @fa-var-users; }
+.@{fa-css-prefix}-callback:before { content: @icomoon-callback; }
+.@{fa-css-prefix}-merge:before { content: @fa-var-exchange; }
+.@{fa-css-prefix}-add-call:before { content: @icomoon-plus; }
+.@{fa-css-prefix}-end-consult:before { content: @fa-var-times; }
+.@{fa-css-prefix}-call-disconnected:before { content: @fa-var-times; }
+.@{fa-css-prefix}-phone:before { content: @icomoon-phone; }
+.@{fa-css-prefix}-phone-alpha:before { content: @icomoon-phone-alpha; }
+.@{fa-css-prefix}-phone-off:before { content: @icomoon-phone-off; }
+.@{fa-css-prefix}-phone-off-alpha:before { content: @icomoon-phone-off-alpha; }
+.@{fa-css-prefix}-end-session:before { content: @fa-var-times; }
+
+// Arrows
+.@{fa-css-prefix}-caret-up:before { content: @fa-var-caret-up; }
+.@{fa-css-prefix}-caret-down:before { content: @fa-var-caret-down; }
+.@{fa-css-prefix}-caret-right:before { content: @fa-var-caret-right; }
+.@{fa-css-prefix}-arrow-right:before { content: @fa-var-arrow-right; }
+.@{fa-css-prefix}-arrow-left:before { content: @fa-var-arrow-left; }
+.@{fa-css-prefix}-arrow-up:before { content: @fa-var-arrow-up; }
+.@{fa-css-prefix}-arrow-down:before { content: @fa-var-arrow-down; }
+.@{fa-css-prefix}-chevron-up:before { content: @fa-var-chevron-up;}
+.@{fa-css-prefix}-chevron-down:before { content: @fa-var-chevron-down;}
+.@{fa-css-prefix}-long-arrow-up:before { content: @fa-var-long-arrow-up; }
+.@{fa-css-prefix}-angle-right:before { content: @fa-var-angle-right; }
+.@{fa-css-prefix}-angle-left:before { content: @fa-var-angle-left; }
+
+// Chat
+.@{fa-css-prefix}-angle-double-left:before { content: @fa-var-angle-double-left; }
+.@{fa-css-prefix}-angle-double-right:before { content: @fa-var-angle-double-right; }
+.@{fa-css-prefix}-attachment:before { content: @icomoon-paperclip; }
+.@{fa-css-prefix}-add-chat-user:before { content: @icomoon-add-user; }
+.@{fa-css-prefix}-create-room:before { content: @icomoon-plus; }
+.@{fa-css-prefix}-invite-user:before { content: @icomoon-plus-circle; }
+.@{fa-css-prefix}-emoji:before { content: @fa-var-smile-o; }
+.@{fa-css-prefix}-new-message:before { content: @fa-var-certificate; }
+.@{fa-css-prefix}-video:before { content: @icomoon-video; }
+.@{fa-css-prefix}-video-alpha:before { content: @icomoon-video-alpha; }
+.@{fa-css-prefix}-video-off:before { content: @icomoon-video-off; }
+.@{fa-css-prefix}-video-off-alpha:before { content: @icomoon-video-off-alpha; }
+.@{fa-css-prefix}-popout:before { content: @fa-var-external-link; }
+.@{fa-css-prefix}-trouble-shoot:before { content: @fa-var-wrench; }
+.@{fa-css-prefix}-microphone:before { content: @icomoon-mic; }
+.@{fa-css-prefix}-microphone-off:before { content: @icomoon-mic-off; }
+.@{fa-css-prefix}-screenshare:before { content: @icomoon-screenshare; }
+.@{fa-css-prefix}-signal:before { content: @fa-var-signal; }
+.@{fa-css-prefix}-disconnected:before { content: @fa-var-chain-broken; }
+.@{fa-css-prefix}-expand-panel:before { content: @icomoon-chevron-circle-expand-double; }
+.@{fa-css-prefix}-collapse-panel:before { content: @icomoon-chevron-circle-collapse-double; }
+.@{fa-css-prefix}-dismiss-panel:before { content: @icomoon-chevron-circle-left; }
+.@{fa-css-prefix}-no-activity:before { content: @fa-var-clock-o; }
+.@{fa-css-prefix}-speakers:before { content: @fa-var-volume-up; }
+.@{fa-css-prefix}-chat-off:before { content: @icomoon-chat-off; }
+.@{fa-css-prefix}-chat-off-alpha:before { content: @icomoon-chat-off-alpha; }
+.@{fa-css-prefix}-mail-reply:before { content: @fa-var-mail-reply; }
+.@{fa-css-prefix}-bandwidth:before { content: @fa-var-dashboard; }
+.@{fa-css-prefix}-throughput:before { content: @fa-var-long-arrow-right; }
+.@{fa-css-prefix}-flask:before { content: @fa-var-flask; }
+.@{fa-css-prefix}-bug:before { content: @fa-var-bug; }
+.@{fa-css-prefix}-copy:before { content: @fa-var-copy; }
+.@{fa-css-prefix}-chat-all:before { content: @fa-var-globe; }
+
+//Response Management
+.@{fa-css-prefix}-close-library:before { content: @fa-var-times; }
+.@{fa-css-prefix}-close-response:before { content: @fa-var-times; }
+
+// Chat composing
+.@{fa-css-prefix}-compose-message:before { content: @fa-var-pencil-square-o; }
+.@{fa-css-prefix}-compose-h1:before { content: @fa-var-header; }
+.@{fa-css-prefix}-compose-h2:before { content: @fa-var-header; }
+.@{fa-css-prefix}-compose-h3:before { content: @fa-var-header; }
+.@{fa-css-prefix}-compose-bold:before { content: @fa-var-bold; }
+.@{fa-css-prefix}-compose-italic:before { content: @fa-var-italic; }
+.@{fa-css-prefix}-compose-underline:before { content: @fa-var-underline; }
+.@{fa-css-prefix}-compose-ordered-list:before { content: @fa-var-list-ol; }
+.@{fa-css-prefix}-compose-unordered-list:before { content: @fa-var-list-ul; }
+.@{fa-css-prefix}-compose-link:before { content: @fa-var-link; }
+.@{fa-css-prefix}-compose-image:before { content: @fa-var-picture-o; }
+
+// Preferences
+.@{fa-css-prefix}-play-btn:before { content: @fa-var-play-circle-o;}
+
+
+// Socialize
+.@{fa-css-prefix}-socialize-mark-as-noise:before { content: @fa-var-thumbs-down; }
+.@{fa-css-prefix}-socialize-sentiment-positive:before { content: @fa-var-smile-o; }
+.@{fa-css-prefix}-socialize-sentiment-negative:before { content: @fa-var-frown-o; }
+.@{fa-css-prefix}-socialize-sentiment-neutral:before { content: @fa-var-circle-o; }
+.@{fa-css-prefix}-socialize-twitter-logo:before { content: @fa-var-twitter; }
+.@{fa-css-prefix}-socialize-twitter-reply:before { content: @fa-var-reply; }
+.@{fa-css-prefix}-socialize-twitter-retweet:before { content: @fa-var-retweet; }
+.@{fa-css-prefix}-socialize-user-at:before { content: @fa-var-at; }
+
+
+// Third-party Apps
+.@{fa-css-prefix}-external-apps-unknown:before { content: @fa-var-cube;}
+
+//Workflow designer
+.@{fa-css-prefix}-lock:before { content: @fa-var-lock;}
+.@{fa-css-prefix}-unlock:before { content: @fa-var-unlock;}
+.@{fa-css-prefix}-start:before { content: @fa-var-play;}
+.@{fa-css-prefix}-stop:before { content: @fa-var-stop;}
+.@{fa-css-prefix}-play:before { content: @fa-var-play;}
+.@{fa-css-prefix}-add-step:before { content: @icomoon-plus;}
+.@{fa-css-prefix}-workflow-step:before { content: @fa-var-tasks;}
+.@{fa-css-prefix}-edit:before { content: @fa-var-pencil;}
+.@{fa-css-prefix}-publish:before { content: @fa-var-book;}
+.@{fa-css-prefix}-chevron-left:before { content: @fa-var-chevron-left;}
+.@{fa-css-prefix}-chevron-right:before { content: @fa-var-chevron-right;}
+.@{fa-css-prefix}-edit:before { content: @fa-var-pencil-square-o;}
+.@{fa-css-prefix}-trash:before { content: @fa-var-trash;}
+.@{fa-css-prefix}-check-box:before { content: @fa-var-check-square;}
+.@{fa-css-prefix}-radio-button:before { content: @fa-var-dot-circle-o;}
+.@{fa-css-prefix}-select:before { content: @fa-var-list;}
+.@{fa-css-prefix}-step-error:before { content: @fa-var-exclamation-triangle; }
+.@{fa-css-prefix}-control-error:before { content: @fa-var-exclamation; }
+.@{fa-css-prefix}-option-context:before { content: @fa-var-ellipsis-v; }
+.@{fa-css-prefix}-add-option:before { content: @fa-var-plus-circle; }
+
+// ACD interactions
+.@{fa-css-prefix}-schedule-callback:before { content: @fa-var-calendar-plus-o; }
+.@{fa-css-prefix}-calendar:before { content: @fa-var-calendar-o; }
+.@{fa-css-prefix}-globe:before { content: @fa-var-globe; }
+.@{fa-css-prefix}-time:before { content: @fa-var-clock-o; }
+.@{fa-css-prefix}-wrap-up-codes:before { content: @icomoon-clipboard-checkmark; }
+.@{fa-css-prefix}-interaction-notes-present:before { content: @icomoon-plus; }
+
+.@{fa-css-prefix}-interaction-session-share:before { content: @icomoon-screenshare; }
+.@{fa-css-prefix}-interaction-screen-share:before { content: @icomoon-screenshare; }
+.@{fa-css-prefix}-interaction-video:before { content: @icomoon-video; }
+.@{fa-css-prefix}-interaction-video-off:before { content: @icomoon-video-off; }
+.@{fa-css-prefix}-interaction-co-browse:before { content: @icomoon-screenshare; }
+.@{fa-css-prefix}-interaction-end-session-share:before { content: @fa-var-times; }
+.@{fa-css-prefix}-interaction-clipboard:before { content: @fa-var-clipboard; }
+.@{fa-css-prefix}-interaction-reload:before { content: @fa-var-refresh; }
+
+.@{fa-css-prefix}-profile-twitter:before {content: @fa-var-twitter; }
+.@{fa-css-prefix}-profile-facebook:before {content: @fa-var-facebook-f; }
+.@{fa-css-prefix}-profile-linkedin:before {content: @fa-var-linkedin; }
+.@{fa-css-prefix}-profile-google-plus:before {content: @fa-var-google-plus; }
+
+// Engage
+.@{fa-css-prefix}-circle-o:before { content: @fa-var-circle-o; }
+.@{fa-css-prefix}-refresh-data:before { content: @fa-var-repeat; }

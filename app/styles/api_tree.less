@@ -2,27 +2,35 @@
 #api-tree{
     position: fixed;
     left: 0;
-    top: 0px;
-    bottom: 0;
+    top: 0;
+    height: calc(~"100%");
     width: @sidebar-width;
-    border: solid 1px lightgray;
     border-radius: 5px;
-    padding:5px;
+    padding: 20px 5px 5px;
 
     .panel-group{
         overflow-x:hidden;
         overflow-y: auto;
 
+        top: 65px;
         position: fixed;
-        left: 0;
-        top: 50px;
-        bottom: @banner-height;
-        width: @sidebar-width;
+        height: calc(~"100% - 65px");
+        width: 290px;
+        padding-bottom: 20px;
+
+        .panel-heading {
+            color: #8b8b8b;
+            font-weight: 300;
+        }
+
+        .panel-title {
+            font-family: @font-family-secondary;
+            color: @text-color;
+            margin-bottom: 2px;
+            font-size: 16px;
+        }
     }
-
 }
-
-
 
 .http-get{
     color: #0781aa;
@@ -43,7 +51,6 @@
 .http-delete{
     color: #ff0000;
 }
-
 
 .http-operation {
     width:100%;
@@ -97,8 +104,4 @@
     .folder-closed{
         display:none;
     }
-}
-
-.panel-title{
-    text-transform: capitalize;
 }
