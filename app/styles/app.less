@@ -27,12 +27,7 @@ body, html {
     height: 100%;
 }
 
-#get-started{
-    margin-top:50px;
-    margin-left: 20px;
-}
-
-.tab-content{
+.tab-content {
     padding-left:15px;
     padding-right:15px;
 
@@ -41,10 +36,43 @@ body, html {
     }
 }
 
-#api-loading{
+#api-loading {
     margin:20px;
 }
 
-.parameter-row{
+.parameter-row {
     margin-bottom:5px;
+}
+
+.empty-state {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    position: fixed;
+    left: @sidebar-width;
+    width: calc(100% ~"-" @sidebar-width);
+    justify-content: center;
+
+    > *  {
+        margin: 0 auto;
+    }
+
+    i {
+        font-size: 48px;
+        margin-bottom: 8px;
+        color: #aeaeae;
+    }
+
+    label {
+        color: #8b8b8b;
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    p {
+        font-weight: 300;
+        color: #aeaeae;
+        text-align: center;
+    }
 }

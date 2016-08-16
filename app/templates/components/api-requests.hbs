@@ -19,8 +19,10 @@
 </div>
 
 {{#if (eq requests.length 0)}}
-<div id='get-started'>
-<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Select a request from the tree to get started
+<div class='empty-state'>
+    <i class="fa fa-bolt" aria-hidden="true"></i> 
+    <label>No request selected</label>
+    <p>Select a request from the list on the left</p>
 </div>
 
 {{/if}}
