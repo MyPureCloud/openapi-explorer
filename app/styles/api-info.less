@@ -1,36 +1,58 @@
 
-#info-button{
+.info-button {
+    cursor: pointer;
+    color: #aeaeae;
     position: absolute;
-    right:10px;
-    top:10px;
-    font-size: 24px;
+    right: 12px;
+    top: 31px;
+    font-size: 20px;
 }
 
-#api-info {
-
-    background-color:white;
-    max-width:33%;
-    color:black;
+.api-info {
+    border: solid 1px #ddd;
+    background-color: #f6f6f6;
+    max-width: 33%;
+    color: black;
     position:absolute;
-    right:0;
-    z-index:100000;
-    height:50%;
-    box-shadow: -10px 10px 5px -7px #888888;
+    right: 0;
+    top: 61px;
+    z-index: 100000;
     border-radius:0px;
 
-    #api-info-content{
-        padding:10px;
-    }
-    button{
-        margin-left:10px;
+    .api-info-content {
+        padding: 20px;
     }
 
-    label{
-        margin-left:5px;
+    h2, h3 {
+        font-weight: 300;
+        font-size: 22px;
     }
-    pre{
-        margin-left:10px;
-        margin-right:10px;
-        max-width:100%;
+
+    h2 {
+        margin-top: 0;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    p {
+        color: #7b7b7b;
+    }
+
+    .close {
+        position: absolute;
+        right: 15px;
+        top: 12px;
+    }
+
+    label {
+        margin-left: 5px;
+    }
+
+    pre {
+        margin-left: 10px;
+        margin-right: 10px;
+        max-width: 100%;
     }
 }

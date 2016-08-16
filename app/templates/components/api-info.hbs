@@ -1,11 +1,11 @@
-<span class="glyphicon glyphicon-info-sign " id='info-button' aria-hidden="true" {{action 'toggle'}}></span>
+<span class="info-button pc-moon pc-help" aria-hidden="true" {{action 'toggle'}}></span>
 {{#if showApiDetails}}
-<div id='api-info' >
+<div class='api-info'>
 
-    <button type="button" class="close pull-left" aria-label="Close" {{action "toggle"}}><span aria-hidden="true">&times;</span></button>
-    <div id='api-info-content'>
+    <button type="button" class="close" aria-label="Close" {{action "toggle"}}><span aria-hidden="true">&times;</span></button>
+    <div class='api-info-content'>
         <h2>{{info.title}}</h2>
-        {{info.description}}
+        <p>{{info.description}}</p>
 
         {{#if externalDocs}}
         <h3>Documentation</h3>

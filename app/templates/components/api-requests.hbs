@@ -1,9 +1,8 @@
-<ul class="nav nav-tabs" role="tablist" id='requestTabs' style="width:100%">
+<ul class="nav nav-tabs nav-tabs-flex" role="tablist" id='requestTabs'>
     {{#each requests as |request index|}}
-    <li role="presentation" id="requestTab{{index}}" class="{{if (eq selectedTabIndex index) "active"}}" >
+    <li role="presentation" id="requestTab{{index}}" class="{{if (eq selectedTabIndex index) "active"}}" title="{{request.operation.summary}}">
 
         <a href="#request{{index}}" aria-controls="request" role="tab" data-toggle="tab">{{request.operation.summary}}
-
             <button type="button" class="close" aria-label="Close" {{action 'closeTab' index}}><span aria-hidden="true">&times;</span></button>
         </a>
 
