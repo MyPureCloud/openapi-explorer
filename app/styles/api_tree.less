@@ -1,5 +1,4 @@
-
-#api-tree{
+#api-tree {
     position: fixed;
     left: 0;
     top: 0;
@@ -8,7 +7,7 @@
     border-radius: 5px;
     padding: 20px 5px 5px;
 
-    .panel-group{
+    .panel-group {
         overflow-x:hidden;
         overflow-y: auto;
 
@@ -16,89 +15,184 @@
         position: fixed;
         height: calc(~"100% - 65px");
         width: 290px;
-        padding-bottom: 20px;
+
+        > .ember-view + .ember-view .panel-default {
+            border-top: none;
+        }
+
+        .panel {
+            border-radius: 0;
+        }
 
         .panel-heading {
-            color: #8b8b8b;
-            font-weight: 300;
+            padding: 0;
         }
 
         .panel-title {
             font-family: @font-family-secondary;
             color: @text-color;
-            margin-bottom: 2px;
             font-size: 16px;
+            position: relative;
+            transition: .25s;
+
+            &:hover {
+                transition: .25s;
+
+                .link-docs {
+                    opacity: 1;
+                    transition: .25s;
+                }
+            }
+
+            .link-api {
+                display: block;
+                padding: 10px 15px;
+                text-decoration: none;
+            }
+
+            .link-docs {
+                color: #8b8b8b;
+                font-size: 10px;
+                opacity: 0;
+                position: absolute;
+                right: 14px;
+                top: 15px;
+                text-transform: uppercase;
+                transition: .25s;
+            }
+
+            .desc {
+                display: block;
+                border-radius: 0;
+                color: #8b8b8b;
+                font-weight: 300;
+                font-family: @font-family-sans-serif;
+                font-size: 13px;
+                margin-top: 3px;
+            }
+        }
+
+        .panel-body {
+            padding: 15px 0;
+
+            > .method-list li {
+                .request-folder label {
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 }
 
-.http-get{
-    color: #0781aa;
+.http-get {
+    color: @http-get-text-color;
 }
 
-.http-post{
-    color: #77dd22;
+.http-post {
+    color: @http-post-text-color;
 }
 
-.http-patch{
-    color: #ff1dce;
+.http-patch {
+    color: @http-patch-text-color;
 }
 
-.http-put{
-    color: #ffda17;
+.http-put {
+    color: @http-put-text-color;
 }
 
-.http-delete{
-    color: #ff0000;
+.http-delete {
+    color: @http-delete-text-color;
 }
 
 .http-operation {
-    width:100%;
-    overflow:auto;
-    margin-bottom:3px;
     cursor: pointer;
+    border-radius: 2px;
+    margin-bottom: 3px;
+    transition: .25s;
+    overflow: auto;
+    padding: 1px 15px;
+    width: 100%;
 
-    &:hover{
-        background:@tree-item-hover-color;
+    &:hover {
+        background: @tree-item-hover-color;
+        transition: .25s;
     }
 
-    .method{
+    .method {
         text-transform: uppercase;
-        margin-right:5px;
-        font-weight: bold;
-        width:55px;
+        margin-right: 8px;
+        font-family: @font-family-secondary;
+        font-size: 13px;
+        font-weight: 500;
+        text-align: right;
+        width: 55px;
     }
 
-    .description{
+    .description {
+        color: #7b7b7b;
+        font-size: 13px;
+        font-weight: 300;
         overflow-x: hidden;
     }
-
-
 }
 
-.method-list{
+.method-list {
     list-style: none;
-    padding-left: 2px;
-}
+    padding-left: 0;
+    margin-bottom: 0;
 
-.request-folder{
-    cursor: pointer;
-    i{
-        margin-right:10px;
-        cursor: pointer;
-    }
+    > .ember-view {
+        margin-bottom: 5px;
 
-    label{
-        text-transform: capitalize;
-        cursor: pointer;
-
-        &:hover{
-            background:@tree-item-hover-color;
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 
-    ul{
-        padding-left: 20px;
+    > .ember-view + .http-operation {
+        display: inline-block;
+        margin-top: 16px;
+        overflow: visible;
+        position: relative;
+
+        &:before {
+            background: #ddd;
+            content: '';
+            display: block;
+            height: 1px;
+            margin-top: -14px;
+            position: absolute;
+            width: calc(~"100% - 30px");
+        }
+    }
+}
+
+
+.request-folder {
+    cursor: pointer;
+
+    i {
+        cursor: pointer;
+    }
+
+    label {
+        border-radius: 2px;
+        cursor: pointer;
+        display: block;
+        font-weight: 300;
+        padding: 0 15px;
+        text-transform: capitalize;
+        transition: .25s;
+
+        &:hover{
+            background: @tree-item-hover-color;
+            transition: .25s;
+        }
+    }
+
+    .method-list {
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 
     .folder-closed{
