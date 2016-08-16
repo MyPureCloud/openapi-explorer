@@ -5,6 +5,8 @@
 
 @import "variables.less";
 
+@import "navs.less";
+
 @import "api_tree.less";
 @import "request.less";
 @import "api-info.less";
@@ -21,18 +23,38 @@ body{
     overflow: auto;
     width: calc(100% ~"-" @sidebar-width);
     padding-top: 20px;
+
+    .nav-tabs {
+        margin-left: 15px;
+        margin-bottom: 0;
+        width: calc(100% ~"-" 60px);
+
+        &.nav-tabs-flex {
+            > li {
+                min-width: 60px;
+
+                a {
+                    text-align: left;
+                    padding-right: 24px;
+                    position: relative;
+                    .text-overflow;
+
+                    .close {
+                        position: absolute;
+                        right: 12px;
+                        top: 8px;
+                    }
+                }
+            }
+        }
+    }
 }
 
 body, html {
     height: 100%;
 }
 
-#get-started{
-    margin-top:50px;
-    margin-left: 20px;
-}
-
-.tab-content{
+.tab-content {
     padding-left:15px;
     padding-right:15px;
 
@@ -41,10 +63,45 @@ body, html {
     }
 }
 
-#api-loading{
+#api-loading {
     margin:20px;
 }
 
-.parameter-row{
+.parameter-row {
     margin-bottom:5px;
+}
+
+.empty-state {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    margin-top: 40px;
+    position: fixed;
+    left: @sidebar-width;
+    width: calc(100% ~"-" @sidebar-width);
+    justify-content: center;
+
+    > *  {
+        margin: 0 auto;
+    }
+
+    i {
+        font-size: 48px;
+        margin-top: -80px;
+        margin-bottom: 8px;
+        color: #aeaeae;
+    }
+
+    label {
+        color: #8b8b8b;
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    p {
+        font-weight: 300;
+        color: #aeaeae;
+        text-align: center;
+    }
 }
