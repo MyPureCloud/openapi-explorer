@@ -5,17 +5,22 @@
 
 @import "variables.less";
 
+// Vendor - CSS
+@import (less) '../../bower_components/animate.css/animate.min.css';
+
 @import "navs.less";
 
 @import "api_tree.less";
 @import "request.less";
 @import "api-info.less";
 
-body{
+body {
+    .animated;
+    .fadeIn;
     overflow:hidden;
 }
 
-#mainContent{
+#mainContent {
     position: fixed;
     left: @sidebar-width;
     top: 0px;
@@ -55,11 +60,18 @@ body, html {
 }
 
 .tab-content {
+    .fadeIn;
     padding-left:15px;
     padding-right:15px;
 
     .operation-uri {
         font-weight: 300;
+    }
+
+    .tab-pane.active {
+        .animated;
+        .fadeIn;
+        animation-duration: .3s;
     }
 }
 
@@ -72,6 +84,8 @@ body, html {
 }
 
 .empty-state {
+    .animated;
+    .bounceIn;
     display: flex;
     flex-flow: column;
     height: 100%;
