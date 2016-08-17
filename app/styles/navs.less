@@ -8,11 +8,12 @@
   > li {
     // Actual tabs (as links)
     margin-left: -1px;
+    overflow: hidden;
 
     > a {
-      background: none;
+      background: #f6f6f6;
       margin-right: 0;
-      border-color: transparent transparent @nav-tabs-border-color transparent;
+      border-color: @nav-tabs-border-color;
       border-radius: 0;
       color: #777;
 
@@ -24,7 +25,11 @@
 
     // Active state, and its :hover to override normal :hover
     &.active {
+
       &:before {
+        .animated;
+        .zoomIn;
+        animation-duration: .2s;
         background: @tab-active-color;
         content: '';
         display: block;
