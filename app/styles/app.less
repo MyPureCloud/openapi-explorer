@@ -9,6 +9,7 @@
 @import (less) '../../bower_components/animate.css/animate.min.css';
 
 @import "navs.less";
+@import "loading-indicator.less";
 
 @import "api_tree.less";
 @import "request.less";
@@ -60,23 +61,57 @@ body, html {
 }
 
 .tab-content {
-    .fadeIn;
     padding-left:15px;
     padding-right:15px;
 
-    .operation-uri {
-        font-weight: 300;
-    }
+    .tab-pane {
+        header {
+            padding: 0 8px;
 
-    .tab-pane.active {
-        .animated;
-        .fadeIn;
-        animation-duration: .3s;
+            .lead {
+                width: 85%;
+            }
+        }
+
+        h1 {
+            margin-top: 15px;
+            margin-bottom: 8px;
+        }
+
+        &.active {
+            .animated;
+            .fadeIn;
+            animation-duration: .3s;
+        }
     }
 }
 
-#api-loading {
-    margin:20px;
+.lead {
+    color: @pc-dusty-gray;
+    font-size: 17px;
+}
+
+.api-loading {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: calc(~"100%");
+    width: 100%;
+    text-align: center;
+
+    .load-indicator {
+        flex-flow: column;
+        justify-content: center;
+    }
+
+    p {
+        color: @pc-boulder;
+        font-weight: 300;
+        font-size: 18px;
+        margin-top: 12px;
+    }
 }
 
 .parameter-row {
