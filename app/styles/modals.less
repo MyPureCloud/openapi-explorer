@@ -1,0 +1,61 @@
+.modal-dialog-panel {
+  margin: 0;
+  width: calc(~"100%");
+
+  .modal-body-sans-footer {
+    padding-bottom: 30px;
+  }
+
+  .modal-content {
+    border-right: none;
+    border-left: none;
+  }
+
+  .modal-header {
+    padding-left: 30px;
+    padding-bottom: 0;
+    border-bottom: none;
+
+    .modal-title {
+      color: @pc-boulder;
+      font-family: @font-family-secondary;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+  }
+
+  .modal-body {
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .help-block {
+      margin-left: 12px;
+    }
+  }
+}
+
+.modal {
+  &.modal-offset-sidebar {
+    left: @sidebar-width;
+    right: 0;
+  }
+
+  &.modal-position-bottom {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+.modal-dialog-flat {
+  border-radius: 0;
+
+  .modal-content {
+    border-color: #ddd;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.modal-backdrop {
+  .hide;
+}
