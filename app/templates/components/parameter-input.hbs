@@ -1,27 +1,26 @@
 <div class='row parameter-row {{if parameter.required "required"}}'>
-    <div class="col-md-1">
-        <label >{{parameter.name}}</label>
-        {{#if parameter.required}}
-        (required)
-        {{/if}}
-    </div>
-    <div class="col-md-3">
-
-        {{#if (eq inputType 'checkbox')}}
-        {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
-        {{else}}
-        {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
-
-        {{/if}}
-    </div>
-    <div class="col-md-1">
-        {{parameter.in}}
-    </div>
-    <div class="col-md-7">
-        {{parameter.description}}
-        {{#if parameter.items.enum}}
-        <br />
-        <b>Valid values:</b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}
-        {{/if}}
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-2">{{parameter.name}}</label>
+            <div class="col-sm-2">
+                {{#if (eq inputType 'checkbox')}}
+                {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
+                {{else}}
+                {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
+                {{/if}}
+                {{#if parameter.required}}
+                <span class="help-block text-uppercase small">Required</span>
+                {{/if}}
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control read-only" value="{{parameter.in}}" readonly>
+            </div>
+            <div class="col-sm-5">
+                <input class="form-control read-only" value="{{parameter.description}}" readonly>
+                {{#if parameter.items.enum}}
+                <b>Valid values:</b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}
+                {{/if}}
+            </div>
+        </div>
     </div>
 </div>

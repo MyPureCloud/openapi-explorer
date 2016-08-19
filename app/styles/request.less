@@ -11,62 +11,73 @@
 }
 
 #requestParamsHeader {
-
-    margin-top:10px;
-    margin-left:10px;
-
-    div{
-        margin-right:10px;
-    }
-
-    label{
-        font-size:24px;
+    label {
+        font-size: 22px;
+        font-family: @font-family-secondary;
+        font-weight: 300;
     }
 
     .http-method{
         text-transform: uppercase;
+        margin-right: 10px;
     }
 
-    input{
-        width:450px;
+    input {
+        width: 450px;
     }
 }
 
 .ace_editor{
     height: 400px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
-.response-status{
-    font-weight:bold;
+.response-status {
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 8px;
 }
-.response-status-200{
+
+.response-status-200 {
     color: green;
 }
 
-.response-status-300{
+.response-status-300 {
     color: purple;
 }
 
-.response-status-400{
+.response-status-400 {
     color: #FB6100;
 }
 
-.response-status-500{
+.response-status-500 {
     color: red;
 }
 
-.response-status-000{
+.response-status-000 {
     color: orange;
 }
 
-.model-definition-container{
-    overflow-y:scroll;
-    height:400px;
+.model-definition-container {
+    overflow-y: scroll;
+    height: 400px;
     border: 1px solid lightgrey;
-    border-radius: 5px;
+    padding: 10px;
+
+    dl {
+        font-size: 13px;
+    }
+
+    dt {
+        font-weight: normal;
+        color: #9f9f9f;
+    }
+
+    dd {
+        color: @pc-boulder;
+    }
 }
+
 .model-definition{
     margin-bottom:3px;
 }
@@ -77,4 +88,24 @@
 
 pre,code {
    white-space: pre-line;
+}
+
+.panel-body .row {
+    h3,
+    h3:first-child {
+        .text-right;
+
+        &.header-url {
+            margin-top: 9px;
+        }
+
+        &.header-headers {
+            margin-top: 2px;
+        }
+    }
+
+    .label-list {
+        color: @pc-boulder;
+        font-weight: 500;
+    }
 }

@@ -7,7 +7,7 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingRequest">
-            <h4 class="panel-title">
+            <h4 class="panel-title panel-title-condensed">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
                     Properties
                 </a>
@@ -33,146 +33,137 @@
 
                 {{#if canSendData}}
                 <h3>Body</h3>
-                <div class='container-fluid' >
-                    <div class='row' class='body-row'>
-                        <div class='col-md-6'>
-                            {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
-
-                        </div>
-                        <div class='col-md-6 model-definition-container'>
-                            {{#each requestBodyDefinition as |model|}}
-                            <h5>{{model.name}}</h5>
-                            {{#each model.definitions as |definition|}}
-                            <dl class="dl-horizontal model-definition">
-                                <dt>{{definition.name}}</dt>
-                                <dd>(<em>{{definition.type}}{{definition.required}}{{definition.readonlyString}}</em>): {{definition.description}}</dd>
-                            </dl>
-                            {{/each}}
-                            {{/each}}
-                        </div>
+                <div class="properties-flex">
+                    {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
+                    <div class='model-definition-container'>
+                        {{#each requestBodyDefinition as |model|}}
+                        <h5>{{model.name}}</h5>
+                        {{#each model.definitions as |definition|}}
+                        <dl class="dl-horizontal model-definition">
+                            <dt>{{definition.name}}</dt>
+                            <dd>(<em>{{definition.type}}{{definition.required}}{{definition.readonlyString}}</em>): {{definition.description}}</dd>
+                        </dl>
+                        {{/each}}
+                        {{/each}}
                     </div>
-
                 </div>
 
 
                 {{/if}}
-                <div>
-                    <br />
-                    <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
-                    <button class='btn btn-primary' data-toggle="modal" data-target="#shareDialog" {{action 'share'}}>
-                        <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
-                    </button>
+                <div class='container-fluid'>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-2 col-button-offset">
+                            <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
+                            <button class='btn btn-default' data-toggle="modal" data-target="#shareDialog" {{action 'share'}}>
+                                <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
 
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingRequest">
-            <h4 class="panel-title">
+            <h4 class="panel-title panel-title-condensed">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
                     Request Data
                 </a>
             </h4>
-
         </div>
         <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
             <div class="panel-body">
-
-                <div>
-                    <h3>Url</h3>
-
-                    <div id='requestParamsHeader' class='clear-fix' >
-                        <div class='pull-left http-method'>
-                            <label class='http-{{operation.httpMethod}}'>{{operation.httpMethod}}</label>
+                <div class="container-fluid">
+                    <div class="row row-request-data">
+                        <div class="col-md-2">
+                            <h3 class="header-url">Url</h3>
                         </div>
-
-                        <div class='pull-left'>
-                            <label>{{computedUrl}}</label><br/>
+                        <div id='requestParamsHeader' class="col-md-10">
+                            <div class='http-method pull-left'>
+                                <label class='http-{{operation.httpMethod}}'>{{operation.httpMethod}}</label>
+                            </div>
+                            <label class="pull-left">{{computedUrl}}</label>
                         </div>
                     </div>
-                    <br />
-                </div>
-                <div>
-                    <h3>Headers</h3>
-                    <div class="container-fluid">
-                        <div class='row'>
-                            <div class="col-md-2">
-                                <label>Key</label>
-                            </div>
-                            <div class="col-md-2">
-                                <label>Value</label>
-                            </div>
+                    <div class="row row-request-data">
+                        <div class="col-md-2">
+                            <h3 class="header-headers">Headers</h3>
                         </div>
-                        {{#each computedHeaders as |header|}}
-                        <div class="row">
-                            <div class="col-md-2">
-                                {{header.key}}
+                        <div class="col-md-10">
+                            <div class='row'>
+                                <div class="col-md-3">
+                                    <label class="label-list">Key</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <label class="label-list">Value</label>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                {{header.value}}
+                            {{#each computedHeaders as |header|}}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{header.key}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{header.value}}
+                                </div>
                             </div>
+                            {{/each}}
                         </div>
-                        {{/each}}
-
                     </div>
-
                 </div>
-
-
-
-
-
             </div>
         </div>
     </div>
     {{#if hasResponse}}
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingResponse">
-            <h4 class="panel-title">
+            <h4 class="panel-title panel-title-condensed">
                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseResponse" aria-expanded="true" aria-controls="collapseResponse">
                     Response
                 </a>
             </h4>
-
         </div>
         <div id="collapseResponse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingResponse">
             <div class="panel-body">
-
-                <div>
-                    <div class='response-status response-status-{{response.responseCodeClass}}00'>
-                        {{response.status}} {{response.statusText}}
-                    </div>
-                    <h3>Headers</h3>
-                    <div class="container-fluid">
-                        <div class='row'>
-                            <div class="col-md-2">
-                                <label>Key</label>
-                            </div>
-                            <div class="col-md-10">
-                                <label>Value</label>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class='response-status response-status-{{response.responseCodeClass}}00'>
+                                {{response.status}} {{response.statusText}}
                             </div>
                         </div>
-                        {{#each response.headers as |header|}}
-                        <div class="row">
-                            <div class="col-md-2">
-                                {{header.key}}
-                            </div>
-                            <div class="col-md-10">
-                                {{header.value}}
-                            </div>
-                        </div>
-                        {{/each}}
-
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h3 class="header-headers">Headers</h3>
+                        </div>
+                        <div class="col-md-10">
+                            <div class='row'>
+                                <div class="col-md-3">
+                                    <label class="label-list">Key</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <label class="label-list">Value</label>
+                                </div>
+                            </div>
+                            {{#each response.headers as |header|}}
+                            <div class="row">
+                                <div class="col-md-3">
+                                    {{header.key}}
+                                </div>
+                                <div class="col-md-9">
+                                    {{header.value}}
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
                 </div>
                 <h3>Body</h3>
                 <div>
                     {{ace-editor value=response.data aceInit=aceInit class="editor"}}
                 </div>
-
             </div>
         </div>
     </div>

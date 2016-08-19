@@ -1,0 +1,131 @@
+.panel-group {
+    .panel {
+        border-radius: 0;
+
+        & + .panel {
+            margin-top: 20px;
+        }
+    }
+
+    .panel-heading {
+        border-radius: 0;
+        padding: 0;
+        transition: .25s;
+
+        &:hover {
+            background: #efefef;
+            transition: .25s;
+        }
+    }
+
+    .panel-title {
+        font-family: @font-family-secondary;
+        color: @text-color;
+        font-size: 16px;
+        position: relative;
+        transition: .25s;
+
+        &:hover {
+            transition: .25s;
+
+            .link-docs {
+                opacity: 1;
+                transition: .25s;
+            }
+        }
+
+        &.panel-title-condensed {
+            a {
+                font-size: 12px;
+                text-transform: uppercase;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        }
+
+        a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+        }
+
+        .desc {
+            display: block;
+            border-radius: 0;
+            color: #8b8b8b;
+            font-weight: 300;
+            font-family: @font-family-sans-serif;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+    }
+
+    .panel-body {
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 300;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        h3 {
+            color: @pc-boulder;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        h5 {
+            margin-bottom: 8px;
+            font-family: @font-family-secondary;
+            font-weight: 400;
+        }
+
+        .read-only {
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
+
+        .col-button-offset {
+            padding-left: 5px;
+        }
+
+        .form-horizontal {
+            .form-group {
+                .help-block {
+                    margin-bottom: 0;
+
+                    &.small {
+                        font-size: 11px;
+                        padding-left: 4px;
+                    }
+                }
+
+                .control-label {
+                    font-weight: 500;
+                }
+
+                .form-control[type="checkbox"] {
+                    box-shadow: none;
+                    margin-top: 0;
+                }
+            }
+        }
+
+        .properties-flex {
+            display: flex;
+            margin-bottom: 15px;
+
+            > * {
+                flex: 1 1 50%;
+                border-color: #ddd;
+                border-radius: 0;
+
+                & + * {
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+}
