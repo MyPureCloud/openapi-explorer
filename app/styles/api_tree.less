@@ -1,31 +1,53 @@
 #api-tree {
+    background: #f8f8f8;
+    border-right: solid 1px #ddd;
     position: fixed;
     left: 0;
     top: 0;
     height: calc(~"100%");
     width: @sidebar-width;
-    border-radius: 5px;
-    padding: 20px 5px 5px;
+    padding: 0 0 5px;
+
+    form {
+        padding: 20px 15px 0;
+
+        .form-control {
+            margin-bottom: 0;
+        }
+    }
 
     .panel-group {
-        overflow-x:hidden;
+        border-top: solid 1px #ddd;
+        border-bottom: solid 1px #ddd;
+        overflow-x: hidden;
         overflow-y: auto;
 
-        top: 65px;
+        top: 74px;
         position: fixed;
-        height: calc(~"100% - 65px");
-        width: 290px;
+        height: calc(~"100% - 95px");
+        width: 299px;
 
         > .ember-view + .ember-view .panel-default {
             border-top: none;
         }
 
         .panel {
-            border-radius: 0;
+            border-right: none;
+
+            &.panel-default:first-child {
+                border-top: none;
+            }
         }
 
         .panel-heading {
+            border-radius: 0;
             padding: 0;
+            transition: .25s;
+
+            &:hover {
+                background: #efefef;
+                transition: .25s;
+            }
         }
 
         .panel-title {
@@ -44,16 +66,11 @@
                 }
             }
 
-            .link-api {
-                display: block;
-                padding: 10px 15px;
-                text-decoration: none;
-            }
-
             .link-docs {
                 color: #8b8b8b;
                 font-size: 10px;
                 opacity: 0;
+                padding: 0;
                 position: absolute;
                 right: 14px;
                 top: 15px;

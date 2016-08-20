@@ -32,6 +32,37 @@
 
 @spinner-color: @pc-curious-blue;
 
+// basic spacing
+@spacing-xl: 60px;
+@spacing-lg: 40px;
+@spacing-std: 30px;
+@spacing-sm: 20px;
+@spacing-xs: 10px;
+
+// border radius
+@radius-lg: 8px;
+@radius-std: 6px;
+@radius-sm: 4px;
+@radius-xs: 2px;
+
+// z-indexes
+@z-datagrid-header: 100;
+@z-pager: 990;
+@z-dropdown: 1000;
+@z-popover: 1010;
+@z-tooltip: 1030;
+@z-modal-background: 1040;
+@z-modal: 1050;
+
+// form columns
+@form-column-max-width: 500px;
+@form-column-min-width: 250px;
+
+// transition/animation speeds
+@animation-speed-fast: 100ms;
+@animation-speed-medium: 200ms;
+@animation-speed-slow: 300ms;
+
 //
 // Variables
 // --------------------------------------------------
@@ -178,13 +209,20 @@
 
 // @btn-font-weight:                normal;
 
-// @btn-default-color:              #333;
-// @btn-default-bg:                 #fff;
-// @btn-default-border:             #ccc;
+@btn-default-color:                #333;
+@btn-default-bg-top:               #f7f7f7;
+@btn-default-bg-bottom:            #e5e5e5;
+@btn-default-border:               #b8b8b8;
 
-// @btn-primary-color:              #fff;
-// @btn-primary-bg:                 @brand-primary;
-// @btn-primary-border:             darken(@btn-primary-bg, 5%);
+@btn-primary-color:              #fff;
+@btn-primary-bg-top:             #61b8d4;
+@btn-primary-bg-bottom:          #4a9cb6;
+@btn-primary-border:             #4b9eb9;
+
+@btn-disabled-color:             #7d7d7d;
+@btn-disabled-bg-top:             #d8d8d8;
+@btn-disabled-bg-bottom:          #c3c3c3;
+@btn-disabled-border:             @btn-default-border;
 
 // @btn-success-color:              #fff;
 // @btn-success-bg:                 @brand-success;
