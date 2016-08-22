@@ -5,7 +5,12 @@
       </div>
     </form>
     <div>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
+        <div class='no-results'>
+            <label>
+                No results for defined filter
+            </label>
+        </div>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
             {{#each tags as |tag|}}
                 {{tag-apis name=tag.name description=tag.description filter=filter documentation=tag.externalDocs.url}}
             {{/each}}
