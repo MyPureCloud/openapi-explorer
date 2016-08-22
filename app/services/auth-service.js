@@ -3,19 +3,20 @@ import config from '../config/environment';
 
 export default Ember.Service.extend(Ember.Evented,{
     authHeader:null,
-    init(){
+    parseHash(hash){
+
         if(config.authHeader != null && config.authHeader !== ''){
-            this.set("authHeader", "bearer " + config.authHeader);
-            return;
+            return "bearer " + config.authHeader;
         }
 
         let tokenType = null;
         let token = null;
 
-        if(window.location.hash)
+        if(hash)
 		{
 	        //Parse out the hash values of the URL to get the token
-	        var hash_array = location.hash.substring(1).split('&');
+	        var hash_array = hash.substring(1).split('&');
+
 	        var hash_key_val = new Array(hash_array.length);
 	        for (var i = 0; i < hash_array.length; i++) {
 	            hash_key_val[i] = hash_array[i].split('=');
@@ -23,12 +24,7 @@ export default Ember.Service.extend(Ember.Evented,{
 
 	        hash_key_val.forEach(function (pair) {
 	            if (pair[0] === "access_token") {
-
-	                // Store token
 	                token = pair[1];
-
-	                // Clear hash from URL
-	                //location.hash = '';
 	            }
 
                 if (pair[0] === "token_type") {
@@ -37,9 +33,12 @@ export default Ember.Service.extend(Ember.Evented,{
 	            }
 	        });
 
-            if(tokenType != null & token!= null){
-                this.set("authHeader", tokenType + " " + token);
+            if(tokenType != null && token!= null){
+                return tokenType + " " + token;
             }
         }
+    },
+    init(){
+        this.set("authHeader", this.parseHash(window.location.hash));
     }
 });

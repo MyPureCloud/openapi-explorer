@@ -24,9 +24,11 @@ export default Ember.Service.extend(Ember.Evented,{
             paramValues: {}
         };
 
-        for(let x=0; x< operation.parameters.length; x++){
-            let param = operation.parameters[x];
-            share.paramValues[param.name] = param.value;
+        if(operation.parameters){
+            for(let x=0; x< operation.parameters.length; x++){
+                let param = operation.parameters[x];
+                share.paramValues[param.name] = param.value;
+            }
         }
 
         share.paramValues['body'] = requestBody;
@@ -78,42 +80,48 @@ export default Ember.Service.extend(Ember.Evented,{
         curl += `"${computedUrl}"`;
         this.set("sharableCurl", curl);
     },
-    doShare(){
-        let apiService = this.get("apiService");
-        let swagger = apiService.api;
+    parseShare(queryStringValue){
+        try{
+            let apiService = this.get("apiService");
+            let swagger = apiService.api;
 
-        if(swagger == null || swagger.paths == null){
-            return;
+            if(swagger == null || swagger.paths == null){
+                return null;
+            }
+            let sharedOperation = JSON.parse(LZString.decompressFromBase64(queryStringValue));
+
+            let operation = swagger.paths[sharedOperation.uri][sharedOperation.method];
+
+            for(let x=0; x< operation.parameters.length; x++){
+                let param = operation.parameters[x];
+                if(sharedOperation.paramValues[param.name]){
+                    param.value = sharedOperation.paramValues[param.name];
+                }
+            }
+
+            operation.operationId = sharedOperation.path;
+            operation.httpMethod = sharedOperation.method;
+
+            return operation;
+
+        }catch(ex){
+            console.error("ERROR getting shared operation ");
+            console.error(ex);
+            return null;
         }
+    },
+    doShare(){
 
         let share = this.get("querystringService").getParameter(window.location.search, "share");
 
         if(share){
-            try{
-                let sharedOperation = JSON.parse(LZString.decompressFromBase64(share));
-
-                let operation = JSON.parse(JSON.stringify(swagger.paths[sharedOperation.uri][sharedOperation.method]));
-
-                for(let x=0; x< operation.parameters.length; x++){
-                    let param = operation.parameters[x];
-                    if(sharedOperation.paramValues[param.name]){
-                        param.value = sharedOperation.paramValues[param.name];
-                    }
-                }
-
-                operation.operationId = sharedOperation.path;
-                operation.httpMethod = sharedOperation.method;
-
-                this.get("requestService").newRequest(operation);
-
-            }catch(ex){
-                console.error("ERROR getting shared operation ");
-                console.error(ex);
-            }
+            this.get("requestService").newRequest(this.parseShare(share));
         }
     },
     init(){
-        new Clipboard('.btn');
+        try{
+            new Clipboard('.btn');
+        }catch(e){}
 
         this.get('requestOperation');
         this.get('includeAuthHeader');

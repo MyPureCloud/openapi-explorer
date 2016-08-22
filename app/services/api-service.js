@@ -4,7 +4,6 @@ import config from '../config/environment';
 
 export default Ember.Service.extend({
     querystringService: Ember.inject.service(),
-    openApiDefinition: null,
     api: {},
     methodsByTag:{},
 
@@ -27,6 +26,33 @@ export default Ember.Service.extend({
 
         return filteredMethods;
     },
+    processSchema(schema, self){
+
+
+    //$.getJSON("http://petstore.swagger.io/v2/swagger.json").done(function(schema){
+        let paths = schema.paths;
+
+        let apis = {};
+
+        for(var uri in paths){
+            for (var httpMethod in paths[uri]){
+                for(var x =0; x<  paths[uri][httpMethod].tags.length; x++){
+                    let tag = paths[uri][httpMethod].tags[x];
+                    if(apis[tag] == null){
+                        apis[tag] = [];
+                    }
+                    let method = paths[uri][httpMethod];
+                    method.httpMethod = httpMethod;
+                    method.uri = uri;
+                    apis[tag].push(method);
+                }
+            }
+        }
+
+        self.set('methodsByTag', apis);
+
+        self.set('api', schema);
+    },
     init() {
         let that = this;
         let openApiUrl = config.defaultOpenApiUrl;
@@ -39,29 +65,11 @@ export default Ember.Service.extend({
         try{
             // "https://api.mypurecloud.com/api/v2/docs/swagger"
             $.getJSON(openApiUrl).done(function(schema){
-            //$.getJSON("http://petstore.swagger.io/v2/swagger.json").done(function(schema){
-                let paths = schema.paths;
-
-                let apis = {};
-
-                for(var uri in paths){
-                    for (var httpMethod in paths[uri]){
-                        for(var x =0; x<  paths[uri][httpMethod].tags.length; x++){
-                            let tag = paths[uri][httpMethod].tags[x];
-                            if(apis[tag] == null){
-                                apis[tag] = [];
-                            }
-                            let method = paths[uri][httpMethod];
-                            method.httpMethod = httpMethod;
-                            method.uri = uri;
-                            apis[tag].push(method);
-                        }
-                    }
+                if ( (that.get('isDestroyed') || that.get('isDestroying')) ) {
+                    return;
                 }
 
-                that.set('methodsByTag', apis);
-
-                that.set('api', schema);
+                that.processSchema(schema, that);
             }).error(function(){
                 console.error("error getting swagger");
             });
