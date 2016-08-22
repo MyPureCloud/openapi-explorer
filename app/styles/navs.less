@@ -47,6 +47,7 @@
         z-index: 2;
       }
 
+
       > a {
         &,
         &:hover,
@@ -54,6 +55,17 @@
           border-color: @nav-tabs-border-color @nav-tabs-border-color transparent @nav-tabs-border-color;
           color: @text-color;
           outline: none;
+        }
+      }
+
+      &:only-child {
+        > a {
+          &,
+          &:hover,
+          &:focus {
+            border-color: transparent;
+            padding-left: 8px;
+          }
         }
       }
     }

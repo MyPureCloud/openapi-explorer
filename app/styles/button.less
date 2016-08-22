@@ -1,0 +1,184 @@
+@animation-speed-button: @animation-speed-slow;
+
+//***************
+// Button Styles
+//***************
+.btn {
+    border-radius: @radius-sm;
+    overflow: hidden; //for working animations
+    position: relative;
+
+    &:active,
+    &.active {
+        outline: 0;
+        background-image: none;
+        .box-shadow(none);
+    }
+
+    //                            //
+    // Loading indicator features //
+    //                            //
+    .loading-transition() {
+        .transition(
+            opacity @animation-speed-button ease;
+        );
+    }
+
+    > .load-indicator {
+        left: 50%;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        .loader-size(20px);
+        .loading-transition();
+    }
+
+    > .btn-label {
+        display: inline-block;
+        .loading-transition();
+    }
+
+
+    &.is-working > .load-indicator {
+        opacity: 1;
+    }
+
+    &.is-working > .btn-label {
+        opacity: 0;
+    }
+
+    .loader-size(@size) {
+        height: @size;
+        width: @size;
+        margin-top: -@size/2;
+        margin-left: -@size/2;
+    }
+
+    &.btn-lg {
+        border-radius: @radius-std;
+
+        .load-indicator {
+            .loader-size(26px);
+        }
+    }
+
+    &.btn-sm {
+        border-radius: 3px;
+
+        .load-indicator {
+            .loader-size(18px);
+        }
+    }
+
+    &.btn-xs {
+        border-radius: 3px;
+
+        .load-indicator {
+            .loader-size(16px);
+        }
+    }
+
+    &.btn-primary .load-indicator div
+    {
+        .animation-name(load-indicator-light);
+    }
+}
+
+.caret {
+    .btn-default & {
+        border-top-color: @btn-default-color;
+    }
+    .btn-primary & {
+        border-top-color: @btn-primary-color;
+    }
+}
+
+.dropup {
+    .btn-default {
+        .caret {
+            border-bottom-color: @btn-default-color;
+        }
+    }
+
+    .btn-interacting {
+        .caret {
+            border-bottom-color: #fff;
+        }
+    }
+}
+
+.pc-button(@color, @bg-top-color, @bg-bottom-color, @border-color) {
+    border-color: @border-color;
+    .box-shadow('inset 0 18px 10px rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075)');
+    color: @color;
+    text-shadow:none;
+
+    #gradient > .vertical(@start-color: @bg-top-color; @end-color: @bg-bottom-color);
+
+    &:focus,
+    &:hover {
+        color: @color;
+    }
+
+    .open .dropdown-toggle&,
+    &:active,
+    &.active {
+        background-color: darken(@bg-top-color, 10%);
+        border-color: darken(@bg-top-color, 12%);
+    }
+}
+
+.btn-primary {
+    background-color: transparent;
+    .pc-button(@btn-primary-color, @btn-primary-bg-top, @btn-primary-bg-bottom, @btn-primary-border);
+}
+
+
+.btn-default,
+//we shouldn't use these anymore, but they are here for backward compatibility (02/14):
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger
+{
+    .pc-button(@btn-default-color, @btn-default-bg-top, @btn-default-bg-bottom, @btn-default-border);
+}
+
+.btn-link {
+    color: @btn-primary-bg-bottom;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-flat {
+    background-color: transparent;
+    color: @btn-default-color;
+}
+
+.btn-darken {
+    background-color: rgba(0,0,0, 0.1);
+    color: #FFF;
+
+    .caret {
+        color: #FFF;
+    }
+}
+
+.btn.disabled,
+.btn[disabled] {
+    opacity: 0.5;
+}
+
+.btn-link.disabled,
+.btn-link[disabled],
+.btn-flat.disabled,
+.btn-flat[disabled] {
+    .pc-button(@btn-disabled-color, transparent, transparent, transparent);
+}
+
+.split-button {
+    .btn-primary + .btn-caret,
+    .btn-default + .btn-caret {
+        .pc-button(@btn-default-color, darken(@btn-default-bg-top, 7%), darken(@btn-default-bg-bottom, 7%), @btn-default-border);
+    }
+}
