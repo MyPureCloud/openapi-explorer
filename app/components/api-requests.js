@@ -7,23 +7,25 @@ export default Ember.Component.extend({
     requests:[],
     selectedTabIndex: 0,
 
-    loadRequest(){
-        let request = this.get("requestService").get("lastNewRequest");
+    loadRequest(self){
+        console.log("selectedTab " + self.get('selectedTabIndex'));
+        let request = self.get("requestService").get("lastNewRequest");
 
         let requestParams = {
             operation : request,
             tabClass: " "
         };
 
-        this.requests.pushObject(requestParams);
-        this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
+        self.requests.pushObject(requestParams);
+        self.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(self.get('requests')));
 
-        this.set('selectedTabIndex', this.requests.length-1);
+        self.set('selectedTabIndex', self.requests.length-1);
+            console.log("new selectedTab " + self.get('selectedTabIndex'));
     },
 
     init(){
 
-        let that = this;
+        let self = this;
         this.get('requests');
 
         let savedRequests = this.get("storageService").localStorageGet('apiexplorer.requests');
@@ -36,11 +38,11 @@ export default Ember.Component.extend({
 
         this._super(...arguments);
         this.get("requestService").on('newRequest', function(){
-            that.loadRequest().bind(that);
+            self.loadRequest(self);
         });
 
         if(this.get("requestService").get("lastNewRequest") != null){
-            this.loadRequest();
+            this.loadRequest(this);
         }
 
         this.get("shareService");
@@ -52,6 +54,9 @@ export default Ember.Component.extend({
 
             this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
             this.set('selectedTabIndex', this.requests.length-1);
+        },
+        selectTab(index){
+            this.set('selectedTabIndex', index);
         }
     }
 });
