@@ -1,54 +1,51 @@
 
 
-<div class="modal fade" id='shareDialog' tabindex="-1" role="dialog">
-    <div class="modal-dialog">
+<div class="modal modal-offset-sidebar modal-position-bottom" id='shareDialog' tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-flat modal-dialog-panel">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Share Request </h4>
+                <h4 class="modal-title">Share Request</h4>
             </div>
+            <div class="modal-body modal-body-sans-footer">
+                <div class="row">
+                    <div class="col-md-2">
+                        <select class="form-control" onchange={{action "selectShareType" value="target.value"}}>
+                            {{#each shareTypes as |shareType|}}
+                            <option value='{{shareType}}'>
+                                {{shareType}}
+                            </option>
+                            {{/each}}
+                        </select>
+                    </div>
+                        {{#if (eq selectedShareType "Link")}}
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                {{input value=sharableLink class="form-control" id='sharableLink'}}
 
-            <div>
-                <div class="input-group">
-                    <label >Select share method:</label>
-                    <select onchange={{action "selectShareType" value="target.value"}}>
-                        {{#each shareTypes as |shareType|}}
-                        <option value='{{shareType}}'>
-                            {{shareType}}
-                        </option>
-                        {{/each}}
-                    </select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
+                                </span>
+                            </div>
+                            <span class="help-block">Use this link to share the current request with parameters.</span>
+                        </div>
+                        {{/if}}
+                        {{#if (eq selectedShareType "cURL")}}
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <pre>
+                                        <code>{{sharableCurl}}
+                                        </code>
+                                    </pre>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="lead">Sharing via cURL will let the recipient run the request from the command line or import into Postman.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/if}}
                 </div>
-            </div>
-            <div class="modal-body">
-                {{#if (eq selectedShareType "Link")}}
-                Use this link to share the current request with parameters.
-                <div class="input-group">
-                    {{input value=sharableLink class="form-control" id='sharableLink'}}
-
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
-                    </span>
-
-
-                </div>
-                {{/if}}
-                {{#if (eq selectedShareType "cURL")}}
-                <div>
-                    Sharing via cURL will let the recipient run the request from the command line or import into Postman.
-                    <pre>
-                        <code>{{sharableCurl}}
-                        </code>
-                    </pre>
-
-                </div>
-                {{/if}}
-            </div>
-
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
