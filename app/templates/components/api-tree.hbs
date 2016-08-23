@@ -5,10 +5,11 @@
       </div>
     </form>
     <div>
-        <div class='no-results'>
-            <label>
-                No results for defined filter
-            </label>
+        <div class="no-results">
+          <div class='empty-state empty-state-sidebar'>
+              <i class="pc-moon pc-search" aria-hidden="true"></i>
+              <label>No filter results</label>
+          </div>
         </div>
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
             {{#each tags as |tag|}}
