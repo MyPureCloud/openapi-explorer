@@ -3,19 +3,23 @@
       <div class="form-group">
         {{input value=filter id='api-search' class="form-control"  placeholder="Filter"}}
       </div>
+
     </form>
     <div>
+        {{#if (eq hasMethods true)}}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
+            {{#each tags as |tag|}}
+                {{tag-apis name=tag.name description=tag.description filter=filter documentation=tag.externalDocs.url}}
+            {{/each}}
+        </div>
+        {{else}}
         <div class="no-results">
           <div class='empty-state empty-state-sidebar'>
               <i class="pc-moon pc-search" aria-hidden="true"></i>
               <label>No filter results</label>
           </div>
         </div>
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" >
-            {{#each tags as |tag|}}
-                {{tag-apis name=tag.name description=tag.description filter=filter documentation=tag.externalDocs.url}}
-            {{/each}}
-        </div>
+        {{/if}}
     </div>
 </div>
 {{#api-info}}{{/api-info}}

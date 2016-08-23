@@ -10,7 +10,7 @@ export default Ember.Component.extend({
     description: null,
     filter: null,
     documentation: null,
-    
+
     groupMethods(tagName, filteredMethods){
         var groupMethods = {
             methods: [],
@@ -57,18 +57,20 @@ export default Ember.Component.extend({
         return groupMethods;
     },
     methods: computed('filter', function() {
-         let tagName = this.get('name');
+        let tagName = this.get('name');
         let apis = this.get('apiService').filteredMethodsByTag(tagName, this.get("filter"));
+
         apis = this.groupMethods(tagName, apis);
         return apis;
     }),
 
     hasMethods: computed('filter', function() {
-         let tagName = this.get('name');
+        let tagName = this.get('name');
         let apis = this.get('apiService').filteredMethodsByTag(tagName, this.get("filter"));
-        return apis.length >0;
-    }),
+        let hasMethods =  apis.length >0;
 
+        return hasMethods;
+    }),
     didReceiveAttrs() {
       this._super(...arguments);
 
@@ -76,7 +78,6 @@ export default Ember.Component.extend({
       let apis = this.get('apiService').filteredMethodsByTag(tagName, this.get("filter"));
 
       this.set('hasMethods', apis.length > 0);
-    // this.set('methods', apis);
       this.get("name");
 
   }

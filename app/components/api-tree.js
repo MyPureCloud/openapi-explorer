@@ -30,7 +30,6 @@ export default Ember.Component.extend({
 
         let definedTags = this.get('apiService').get('api').tags;
         let actualTags = Object.keys(this.get('apiService').get('methodsByTag'));
-
         let tags = [];
 
         for(let x= 0; x< definedTags.length; x++){
@@ -42,4 +41,8 @@ export default Ember.Component.extend({
 
         return tags;
     }),
+    hasMethods: computed('filter', function() {
+        return !this.get('apiService').areAllMethodsFilteredOut(this.get("filter"));
+
+    })
 });
