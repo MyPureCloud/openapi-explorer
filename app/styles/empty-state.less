@@ -1,0 +1,42 @@
+.empty-state {
+    .animated;
+    .bounceIn;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    margin-top: 40px;
+    margin-left: 0;
+    position: fixed;
+    left: @sidebar-width;
+    width: calc(100% ~"-" @sidebar-width);
+    justify-content: center;
+
+    &.empty-state-sidebar {
+        left: 0;
+        margin-top: 0;
+        width: @sidebar-width;
+    }
+
+    > *  {
+        margin: 0 auto;
+    }
+
+    i {
+        font-size: 48px;
+        margin-top: -80px;
+        color: #aeaeae;
+    }
+
+    label {
+        color: #8b8b8b;
+        font-size: 24px;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    p {
+        font-weight: 300;
+        color: #aeaeae;
+        text-align: center;
+    }
+}
