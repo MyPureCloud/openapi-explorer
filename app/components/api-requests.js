@@ -8,7 +8,6 @@ export default Ember.Component.extend({
     selectedTabIndex: 0,
 
     loadRequest(self){
-        console.log("selectedTab " + self.get('selectedTabIndex'));
         let request = self.get("requestService").get("lastNewRequest");
 
         let requestParams = {
@@ -20,7 +19,7 @@ export default Ember.Component.extend({
         self.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(self.get('requests')));
 
         self.set('selectedTabIndex', self.requests.length-1);
-            console.log("new selectedTab " + self.get('selectedTabIndex'));
+        console.log("new selectedTab " + self.get('selectedTabIndex'));
     },
 
     init(){
@@ -49,6 +48,11 @@ export default Ember.Component.extend({
 
     },
     actions:{
+        saveRequests(){
+            console.log("saving requests");
+            this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
+
+        },
         closeTab(index){
             this.requests.removeAt(index);
 

@@ -14,7 +14,6 @@ export default Ember.Component.extend({
     hasProperties: false,
     response: {},
     operation: {},
-    requestBody: "",
     aceInit: function(editor) {
         editor.setHighlightActiveLine(false);
         editor.setShowPrintMargin(false);
@@ -38,10 +37,12 @@ export default Ember.Component.extend({
           for(let x=0; x< operation.parameters.length; x++){
               let parameter = operation.parameters[x];
               if(parameter.in === "body"){
-                  if(parameter.value){
-                      this.set("requestBody", parameter.value);
-                  }else if(parameter.schema["$ref"]){
-                      this.set("requestBody", OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false));
+                  if(operation.requestBody === null || operation.requestBody.length === 0){
+                      if(parameter.value){
+                          operation.requestBody = parameter.value;
+                      }else if(parameter.schema["$ref"]){
+                          operation.requestBody = OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false);
+                      }
                   }
 
                   if(parameter.schema["$ref"]){
@@ -149,6 +150,9 @@ export default Ember.Component.extend({
 
         return url;
     },
+    _persistParams(){
+
+    },
     actions:{
         sendRequest(){
             this.set("hasResponse", false);
@@ -185,7 +189,8 @@ export default Ember.Component.extend({
             }
 */
             if(this.get("canSendData")){
-                requestParams.data = this.get("requestBody");
+                let operation = this.get('operation');
+                requestParams.data = operation.requestBody;
             }
 
             function parseHeaders(headerString){
@@ -256,9 +261,12 @@ export default Ember.Component.extend({
                     url: this.get('operation').uri
                 }), "*");
 
+            this.get('parentView').send('saveRequests', this.origContext);
+
         },
         share(){
-            this.get("shareService").setSharableOperation(this.get("operation"), this.get("requestBody"), this.get("computedHeaders"), this.get("computedUrl"), this._getUrlBase());
+            let operation = this.get('operation');
+            this.get("shareService").setSharableOperation(this.get("operation"), operation.requestBody, this.get("computedHeaders"), this.get("computedUrl"), this._getUrlBase());
         }
     }
 });

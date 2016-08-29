@@ -12,7 +12,7 @@
 
 <div class="tab-content" id='requestTabsContent'>
     {{#each requests as |request index|}}
-    <div role="tabpanel" class="tab-pane {{if (eq selectedTabIndex index) "active"}}" id="request{{index}}">{{api-request operation=request.operation}}</div>
+    <div role="tabpanel" class="tab-pane {{if (eq selectedTabIndex index) "active"}}" id="request{{index}}">{{api-request operation=request.operation uid=request.uid}}</div>
     {{/each}}
 </div>
 

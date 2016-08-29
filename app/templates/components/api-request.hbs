@@ -34,7 +34,7 @@
                 {{#if canSendData}}
                 <h3>Body</h3>
                 <div class="properties-flex">
-                    {{ace-editor value=requestBody aceInit=aceInit class="editor"}}
+                    {{ace-editor value=operation.requestBody aceInit=aceInit class="editor"}}
                     <div class='model-definition-container'>
                         {{#each requestBodyDefinition as |model|}}
                         <h5>{{model.name}}</h5>
