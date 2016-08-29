@@ -37,7 +37,7 @@ export default Ember.Component.extend({
           for(let x=0; x< operation.parameters.length; x++){
               let parameter = operation.parameters[x];
               if(parameter.in === "body"){
-                  if(operation.requestBody === null || operation.requestBody.length === 0){
+                  if(typeof operation.requestBody === "undefined" || operation.requestBody === null || operation.requestBody.length === 0){
                       if(parameter.value){
                           operation.requestBody = parameter.value;
                       }else if(parameter.schema["$ref"]){
