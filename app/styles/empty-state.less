@@ -4,12 +4,13 @@
     display: flex;
     flex-flow: column;
     height: 100%;
+    left: @sidebar-width;
+    justify-content: center;
     margin-top: 40px;
     margin-left: 0;
     position: fixed;
-    left: @sidebar-width;
+    text-align: center;
     width: calc(100% ~"-" @sidebar-width);
-    justify-content: center;
 
     &.empty-state-sidebar {
         left: 0;
