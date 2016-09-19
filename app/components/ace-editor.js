@@ -3,9 +3,21 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     didInsertElement: function() {
         if(window && window.ace && window.ace.edit){
+            let currentValue = this.get('value');
+
+            if(typeof currentValue === "undefined" || currentValue === null){
+                this.set('value', "{}");
+                currentValue ="{}";
+            }
+
+
+
             this.editor = window.ace.edit(this.get('element'));
             this.get('aceInit')(this.editor);
-            this.editor.getSession().setValue(this.get('value'));
+
+            if(typeof currentValue !== "object"){
+                this.editor.getSession().setValue(currentValue);
+            }
 
             this.editor.getSession().setFoldStyle("markbegin"); // markbegin is the default
 
