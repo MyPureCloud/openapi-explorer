@@ -200,7 +200,7 @@ export default Ember.Component.extend({
 
                 for(var x=0; x<headers.length; x++){
                     let split = headers[x].split(':');
-                    if(split[0]){
+                    if(split[0] && split[1]){
                         headerMap.push({
                             key: split[0].trim(),
                             value: split[1].trim()
