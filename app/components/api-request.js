@@ -240,6 +240,7 @@ export default Ember.Component.extend({
 
                 if(xhResponse.status === 0){
                     response.statusText = "HTTP request was blocked by CORS.  Inspect the browser network tab for more information.";
+                    response.data = "{}";
                 }
 
                 return response;

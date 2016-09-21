@@ -13,7 +13,7 @@ module.exports = function(environment) {
       }
     },
     authHeader: process.env.AUTH_HEADER,
-    defaultOpenApiUrl: process.env.DEFAULT_OPENAPI_URL || "https://api.mypurecloud.com/api/v2/docs/swagger",
+    defaultOpenApiUrl: process.env.DEFAULT_OPENAPI_URL || "https://api.inindca.com/api/v2/docs/swagger",
 
     APP: {
       // Here you can pass flags/options to your application instance
