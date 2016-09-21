@@ -10,6 +10,7 @@
             <div class="modal-body modal-body-sans-footer">
                 <div class="row">
                     <div class="col-md-2">
+
                         <select class="form-control" onchange={{action "selectShareType" value="target.value"}}>
                             {{#each shareTypes as |shareType|}}
                             <option value='{{shareType}}'>
@@ -23,7 +24,7 @@
                             <div class="input-group">
                                 {{input value=sharableLink class="form-control" id='sharableLink'}}
 
-                                <span class="input-group-btn">
+                                <span class="input-group-btn" >
                                     <button class="btn btn-primary" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
                                 </span>
                             </div>
@@ -34,10 +35,14 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-9">
+                                    <span class="input-group-btn" id='copy-curl'>
+                                        <button class="btn btn-primary btn-sm" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableCurl">Copy</button>
+                                    </span>
                                     <pre>
-                                        <code>{{sharableCurl}}
+                                        <code id="sharableCurl">{{sharableCurl}}
                                         </code>
                                     </pre>
+                                    {{input type="checkbox" name="includeAuthHeader" checked=includeAuthHeader}} Include Authorization Header
                                 </div>
                                 <div class="col-md-3">
                                     <p class="lead">Sharing via cURL will let the recipient run the request from the command line or import into Postman.</p>

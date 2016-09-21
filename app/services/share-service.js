@@ -3,6 +3,8 @@
 /* global Clipboard*/
 import Ember from 'ember';
 
+const INSERT_TOKEN_TEXT = 'bearer <INSERT AUTH TOKEN>';
+
     //  http://localhost:4200/api-explorer/?share=N4IgDghgLgFiBcIDmBTKBVAzigTpkANCALZowD2AJgsmoSAK44CWNA9BGM2wG4BMbBtjz1IOCMQBqEADYMU+eKEioAyswBeKGnwDsoiKgByDYgCNcCAIxFm1RADNy5epnI4oAeRyVLiAIKqAMIgAL5EZlQAnjRhQA===
 export default Ember.Service.extend(Ember.Evented,{
     querystringService: Ember.inject.service(),
@@ -11,7 +13,7 @@ export default Ember.Service.extend(Ember.Evented,{
     requestOperation: null,
     requestBody: null,
     sharableLink: null,
-    includeAuthHeader: false,
+    authService: Ember.inject.service(),
     apiChanged: Ember.observer('apiService.api', function() {
         console.log("api changed do share");
         this.doShare();
@@ -58,15 +60,17 @@ export default Ember.Service.extend(Ember.Evented,{
 
     },
     setSharableCurl(operation, requestBody, computedHeaders, computedUrl){
+        let bearerToken = 'XXXNOTSET';
 
-        let includeAuthHeader = this.get('includeAuthHeader');
+        let curl = `curl -X ${operation.httpMethod.toUpperCase()} `;
 
-        let curl = `curl -X ${operation.httpMethod} `;
+        let authService = this.get("authService");
 
         for(let x=0; x< computedHeaders.length; x++){
             let param = computedHeaders[x];
-            if(param.key === "Authorization" && !includeAuthHeader){
-                curl += `-H "${param.key}: INSERT AUTH HEADER" `;
+            if(param.key === "Authorization"){
+                bearerToken = param.value;
+                curl += `-H "${param.key}: ${INSERT_TOKEN_TEXT}" `;
             }else{
                 curl += `-H "${param.key}: ${param.value}" `;
             }
@@ -79,6 +83,8 @@ export default Ember.Service.extend(Ember.Evented,{
 
         curl += `"${computedUrl}"`;
         this.set("sharableCurl", curl);
+
+        this.set("sharableCurlWithAuth", curl.replace(INSERT_TOKEN_TEXT, authService.authHeader));
     },
     parseShare(queryStringValue){
         try{
