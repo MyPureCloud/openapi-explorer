@@ -84,7 +84,10 @@ export default Ember.Service.extend(Ember.Evented,{
         curl += `"${computedUrl}"`;
         this.set("sharableCurl", curl);
 
-        this.set("sharableCurlWithAuth", curl.replace(INSERT_TOKEN_TEXT, authService.authHeader));
+        if(authService && authService.authHeader){
+            curl = curl.replace(INSERT_TOKEN_TEXT, authService.authHeader);
+        }
+        this.set("sharableCurlWithAuth", curl);
     },
     parseShare(queryStringValue){
         try{
