@@ -1,51 +1,22 @@
 # OpenAPI Explorer
+The OpenAPI explorer is a different take on Swagger UI and is a way to view a [OpenAPI/Swagger](http://swagger.io/) definition and execute API calls
 
-![Explorer](https://raw.githubusercontent.com/MyPureCloud/openapi-explorer/master/OpenApiExplorer.png)
+## Specifying a Swagger Definition in the url
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+The Open API explorer accepts a couple URL parameters for configuration
 
-## Prerequisites
+| Param | Location | Description | Example |
+| ===== | ======== | =========== | ======= |
+| openApiUrl | query string | The Url to the open api definition file | https://api.mypurecloud.com/api/v2/docs/swagger |
+| token_type | url hash | oauth token type to use with authenticated requests | bearer |
+| access_token | url hash | oauth access token |  |
 
-You will need the following things properly installed on your computer.
+token_type and access_token are in the url hash to support oauth redirects.
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+Assuming that the OpenAPI explorer is hosted at https://developer.mypurecloud.com/openapi-explorer/, an example would be:
 
-## Installation
+https://developer.mypurecloud.com/openapi-explorer/?openApiUrl=https://api.mypurecloud.com/api/v2/docs/swagger#token_type=bearer&access_token=Uf7UTEjT9SknXhdUz
 
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
+## Restrictions
 
-## Running / Development
-
-* `ember server`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-## Deploy to Github pages
-
-```
-ember github-pages:commit --message "Initial gh-pages release"
-git push origin gh-pages:gh-pages
-```
+* Currently only supports OAuth2 bearer tokens
