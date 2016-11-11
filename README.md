@@ -6,7 +6,7 @@ The OpenAPI explorer is a different take on Swagger UI and is a way to view a [O
 The Open API explorer accepts a couple URL parameters for configuration
 
 | Param | Location | Description | Example |
-| ===== | ======== | =========== | ======= |
+| ----- | -------- | ----------- | ------- |
 | openApiUrl | query string | The Url to the open api definition file | https://api.mypurecloud.com/api/v2/docs/swagger |
 | token_type | url hash | oauth token type to use with authenticated requests | bearer |
 | access_token | url hash | oauth access token |  |
