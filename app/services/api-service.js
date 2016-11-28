@@ -28,14 +28,20 @@ export default Ember.Service.extend({
     },
 
     areAllMethodsFilteredOut(filter){
+        if(filter == null || filter === ""){
+            return false;
+        }
+        
         let methodsMap = this.get("methodsByTag");
 
         for(let key in methodsMap){
-            let methods = methodsMap[key];
 
-            if(filter == null || filter === ""){
+            if(key.toLowerCase().indexOf(filter.toLowerCase()) > -1){
                 return false;
             }
+
+            let methods = methodsMap[key];
+
             filter = filter.toLowerCase();
 
             for(let x=0; x<methods.length; x++){
