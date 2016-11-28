@@ -16,7 +16,7 @@
                 <input class="form-control read-only" value="{{parameter.in}}" readonly>
             </div>
             <div class="col-sm-5">
-                <input class="form-control read-only" value="{{parameter.description}}" readonly>
+                {{parameter.description}}
                 {{#if parameter.items.enum}}
                 <b>Valid values:</b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}
                 {{/if}}
