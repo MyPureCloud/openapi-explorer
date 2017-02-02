@@ -1,4 +1,6 @@
+<div>
 <ul class="nav nav-tabs nav-tabs-flex" role="tablist" id='requestTabs'>
+
     {{#each requests as |request index|}}
     <li role="presentation" id="requestTab{{index}}" class="{{if (eq selectedTabIndex index) "active"}}" data-toggle="tooltip" title="{{request.operation.summary}}">
 
@@ -7,8 +9,16 @@
         </a>
 
     </li>
+
     {{/each}}
+
 </ul>
+{{#unless (eq requests.length 0)}}
+<a href="#" class='close-tabs-button' title='Close all tabs'>
+    <button type="button" class="close" aria-label="Close" {{action 'closeAllTabs' index}}><span aria-hidden="true">&times;</span></button>
+</a>
+{{/unless}}
+</div>
 
 <div class="tab-content" id='requestTabsContent'>
     {{#each requests as |request index|}}

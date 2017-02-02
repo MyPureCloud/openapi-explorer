@@ -37,6 +37,22 @@ export default Ember.Component.extend({
 
         this._super(...arguments);
         this.get("requestService").on('newRequest', function(){
+            let request = self.get("requestService").get("lastNewRequest");
+            let foundExisting = false;
+            self.requests.forEach((item, index)=>{
+                if(item.operation.operationId === request.operationId){
+                    self.set('selectedTabIndex', index);
+                    foundExisting = true;
+                }
+            });
+
+            if(!foundExisting){
+                self.loadRequest(self);
+            }
+
+        });
+
+        this.get("requestService").on('forceNewRequest', function(){
             self.loadRequest(self);
         });
 
@@ -61,6 +77,12 @@ export default Ember.Component.extend({
         },
         selectTab(index){
             this.set('selectedTabIndex', index);
+        },
+        closeAllTabs(){
+            this.requests.clear();
+
+            this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
+            this.set('selectedTabIndex', 0);
         }
     }
 });

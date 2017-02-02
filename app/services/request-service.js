@@ -5,5 +5,9 @@ export default Ember.Service.extend(Ember.Evented,{
     newRequest(operation){
         this.set('lastNewRequest', operation);
         this.trigger('newRequest');
+    },
+    forceNewRequest(operation){
+        this.set('lastNewRequest', operation);
+        this.trigger('forceNewRequest');
     }
 });

@@ -5,15 +5,21 @@ export default Ember.Component.extend({
 
     didReceiveAttrs() {
         this._super(...arguments);
-        let parameter = this.get("parameter");
-        if(parameter.value == null){
-            parameter.value = parameter.default;
+
+        try{
+            let parameter = this.get("parameter");
+            if(parameter.value == null){
+                this.set("parameter.value", parameter.default);
+            }
+        }catch(ex){
+            console.error(ex);
         }
+
     },
 
     inputType: Ember.computed('parameter', function() {
         let parameter = this.get("parameter");
-        
+
         if(["int32","int64","float","double"].indexOf(parameter.format) > -1 ){
             return "number";
         }else if (parameter.type === "boolean"){
