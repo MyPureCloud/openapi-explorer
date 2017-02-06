@@ -4,6 +4,7 @@
         {{method.httpMethod}}
     </div>
     <div class='description'>
-        {{method.summary}}
+        {{method.summary}}{{#if method.deprecated}}<span class="label label-warning">Deprecated</span>{{/if}}
     </div>
+
 </div>
