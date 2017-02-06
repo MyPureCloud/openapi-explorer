@@ -6,7 +6,8 @@ export default Ember.Component.extend({
     storageService: Ember.inject.service(),
     requests:[],
     selectedTabIndex: 0,
-
+    affected: [],
+    sizes: [],
     loadRequest(self){
         let request = self.get("requestService").get("lastNewRequest");
 
@@ -83,6 +84,23 @@ export default Ember.Component.extend({
 
             this.get("storageService").localStorageSet('apiexplorer.requests', JSON.stringify(this.get('requests')));
             this.set('selectedTabIndex', 0);
+        }
+    },
+    mouseEnter() {
+        let tabBar = document.querySelector('.nav.nav-tabs');
+        let tabs = tabBar.querySelectorAll('[id*="requestTab"]');
+        for (let len = tabs.length, i = 0; i < len; ++i) {
+            let tab = tabs[i];
+            if (this.affected.indexOf(tab) === -1) {
+                this.affected.push(tab);
+                this.sizes.push(tab.style.maxWidth);
+                tab.style.maxWidth = tab.offsetWidth + 'px';
+            }
+        }
+    },
+    mouseLeave() {
+        while (this.affected.length) {
+            this.affected.pop().style.maxWidth = this.sizes.pop();
         }
     }
 });
