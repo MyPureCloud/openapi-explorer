@@ -8,7 +8,6 @@ export default Ember.Service.extend({
     methodsByTag:{},
 
     filteredMethodsByTag(tag, filter){
-
         let filteredMethods = [];
         let methods = this.get("methodsByTag")[tag];
 
@@ -19,7 +18,10 @@ export default Ember.Service.extend({
 
         for(let x=0; x<methods.length; x++){
             let method = methods[x];
-            if(tag.toLowerCase().indexOf(filter)> -1 || method.summary.toLowerCase().indexOf(filter) > -1){
+            if(tag.toLowerCase().indexOf(filter)> -1 ||
+
+                    method.summary.toLowerCase().indexOf(filter) > -1 ||
+                    method.uri.toLowerCase().indexOf(filter) > -1){
                 filteredMethods.push(method);
             }
         }
@@ -31,7 +33,7 @@ export default Ember.Service.extend({
         if(filter == null || filter === ""){
             return false;
         }
-        
+
         let methodsMap = this.get("methodsByTag");
 
         for(let key in methodsMap){
@@ -46,7 +48,8 @@ export default Ember.Service.extend({
 
             for(let x=0; x<methods.length; x++){
                 let method = methods[x];
-                if(method.summary.toLowerCase().indexOf(filter) > -1){
+                if(method.summary.toLowerCase().indexOf(filter) > -1||
+                    method.uri.toLowerCase().indexOf(filter) > -1){
                     return false;
                 }
             }
