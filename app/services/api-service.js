@@ -60,8 +60,16 @@ export default Ember.Service.extend({
 
     processSchema(schema, self){
 
+        let host = this.get("querystringService").getParameter(window.location.search, "host");
+        if(host){
+            schema.host = host;
+        }
 
-    //$.getJSON("http://petstore.swagger.io/v2/swagger.json").done(function(schema){
+        let scheme = this.get("querystringService").getParameter(window.location.search, "scheme");
+        if(scheme){
+            schema.schemes = [scheme];
+        }
+
         let paths = schema.paths;
 
         let apis = {};
@@ -94,21 +102,34 @@ export default Ember.Service.extend({
             openApiUrl = customUrl;
         }
 
-        try{
-            // "https://api.mypurecloud.com/api/v2/docs/swagger"
-            $.getJSON(openApiUrl).done(function(schema){
-                if ( (that.get('isDestroyed') || that.get('isDestroying')) ) {
-                    return;
-                }
+        function getSwagger(){
+            try{
+                // "https://api.mypurecloud.com/api/v2/docs/swagger"
+                $.getJSON(openApiUrl).done(function(schema){
+                    if ( (that.get('isDestroyed') || that.get('isDestroying')) ) {
+                        return;
+                    }
 
-                that.processSchema(schema, that);
-            }).error(function(){
-                console.error("error getting swagger");
-            });
+                    that.processSchema(schema, that);
+                }).error(function(err){
+                    if(err.status === 202){
+                        Ember.run.later((function() {
+                          //server doesn't have swagger yet, retry in 2s
+                          getSwagger();
+                        }), 2000);
+                    }else{
+                        console.error("error getting swagger");
+                    }
+
+                });
+            }
+            catch(error){
+                console.error("ERROR"  + error);
+            }
         }
-        catch(error){
-            console.error("ERROR"  + error);
-        }
+
+        getSwagger();
+
 
     }
 

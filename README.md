@@ -8,6 +8,8 @@ The Open API explorer accepts a couple URL parameters for configuration
 | Param | Location | Description | Example |
 | ----- | -------- | ----------- | ------- |
 | openApiUrl | query string | The Url to the open api definition file | https://api.mypurecloud.com/api/v2/docs/swagger |
+| host | query string | Overrides the _host_ value in the swagger file  | localhost:8080 |
+| schema | query string | Overrides the _schema_ value in the swagger file  | http |
 | token_type | url hash | oauth token type to use with authenticated requests | bearer |
 | access_token | url hash | oauth access token |  |
 
