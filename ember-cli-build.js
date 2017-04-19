@@ -3,6 +3,7 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var cdnUrl = process.env.CDN_URL || '';
+console.log("CDN URL: " + cdnUrl);
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -17,6 +18,7 @@ module.exports = function(defaults) {
           }]
       },
       fingerprint: {
+          customHash: null,
           prepend: cdnUrl,
           exclude: ['emojify', 'leaflet', 'patches/'],
           extensions: ['js', 'css']

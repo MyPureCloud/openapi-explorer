@@ -44,7 +44,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.locationType = 'hash';
     ENV.baseURL = '/openapi-explorer/';
-
+    
     if (process.env.CDN_URL) {
         ENV.APP.urlprefix = process.env.CDN_URL;
     }
