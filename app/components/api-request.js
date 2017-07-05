@@ -1,6 +1,7 @@
 /* global $ */
 import Ember from 'ember';
 import OpenApiModelExample from "npm:openapi-model-example";
+import config from '../config/environment';
 var  computed = Ember.computed;
 
 export default Ember.Component.extend({
@@ -14,6 +15,12 @@ export default Ember.Component.extend({
     hasProperties: false,
     response: {},
     operation: {},
+    permissions: computed('operation', function(){
+        let keyName = config.permissionsKeyName;
+        let operation = this.get("operation");
+
+        return operation[keyName];
+    }),
     aceInit: function(editor) {
         editor.setHighlightActiveLine(false);
         editor.setShowPrintMargin(false);

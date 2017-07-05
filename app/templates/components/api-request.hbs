@@ -3,6 +3,19 @@
     <p class='lead'>
         {{operation.description}}
     </p>
+    {{#if permissions}}
+    <label>Permissions</label><br/>
+    
+    {{permissions.type}} of
+    <ul>
+    {{#each permissions.permissions as |permission|}}
+    <li>
+        {{permission}}
+    </li>
+    {{/each}}
+    </ul>
+
+    {{/if}}
 </header>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
     <div class="panel panel-default">

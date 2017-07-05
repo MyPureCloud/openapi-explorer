@@ -22,3 +22,9 @@ https://developer.mypurecloud.com/openapi-explorer/?openApiUrl=https://api.mypur
 ## Restrictions
 
 * Currently only supports OAuth2 bearer tokens
+
+## Environment Variable Configuration
+
+Env Var | Description
+========|============
+PERMISSIONS_KEY_NAME | property on method to get permission information, permission model looks like { "type": "ANY|ALL", "permissions": [list of permission names]}

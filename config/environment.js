@@ -14,6 +14,7 @@ module.exports = function(environment) {
     },
     authHeader: process.env.AUTH_HEADER,
     defaultOpenApiUrl: process.env.DEFAULT_OPENAPI_URL || "https://api.inindca.com/api/v2/docs/swagger",
+    permissionsKeyName: process.env.PERMISSIONS_KEY_NAME || "x-inin-requires-permissions",
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -44,7 +45,7 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.locationType = 'hash';
     ENV.baseURL = '/openapi-explorer/';
-    
+
     if (process.env.CDN_URL) {
         ENV.APP.urlprefix = process.env.CDN_URL;
     }
