@@ -1,5 +1,5 @@
 {{#if hasMethods}}
-<div class="panel panel-default">
+<div class="panel panel-default" id='panel{{safeName}}'>
     <div class="panel-heading" role="tab" id="heading{{safeName}}">
         <h4 class="panel-title">
             <a class="link-api" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{safeName}}" aria-expanded="true" aria-controls="collapse{{safeName}}">
@@ -15,7 +15,7 @@
             {{/if}}
             <ul class='method-list'>
                 {{#each methods.folders as |folder|}}
-                    {{tag-subfolder folder=folder}}
+                    {{tag-subfolder folder=folder parentCategory=safeName}}
 
                 {{/each}}
                 {{#each methods.methods as |method|}}

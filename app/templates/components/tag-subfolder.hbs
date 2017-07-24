@@ -1,5 +1,5 @@
 <li {{action 'toggleOpen'}}>
-    <div class='request-folder'>
+    <div class='request-folder' id='folder{{parentCategory}}{{folder.key}}' >
         <label><i class='fa fa-fw {{if isOpen "fa-caret-down" "fa-caret-right"}}' aria-hidden="true"></i>{{folder.key}}</label>
         <ul class='method-list tag-folder {{if isOpen "" "folder-closed"}}'>
             {{#each folder.value as |method|}}
