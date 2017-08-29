@@ -18,7 +18,10 @@
             <div class="col-sm-5">
                 {{parameter.description}}
                 {{#if parameter.items.enum}}
-                <b>Valid values:</b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}
+                <b>Valid values: </b> {{#each parameter.items.enum as |prop|}}{{prop}}, {{/each}}{{#each parameter.enum as |prop|}}{{prop}}, {{/each}}
+                {{/if}}
+                {{#if parameter.enum}}
+                <b>Valid values: </b>{{#each parameter.enum as |prop|}}{{prop}}, {{/each}}
                 {{/if}}
             </div>
         </div>
