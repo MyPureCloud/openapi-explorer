@@ -39,6 +39,10 @@ export default Ember.Component.extend({
             }
         }
 
+        tags.sort((a,b)=>{
+            return a.name.localeCompare(b.name);
+        });
+
         return tags;
     }),
     hasMethods: computed('filter', function() {
