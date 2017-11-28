@@ -49,6 +49,10 @@ export default Ember.Component.extend({
                           operation.requestBody = parameter.value;
                       }else if(parameter.schema["$ref"]){
                           operation.requestBody = OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false);
+
+
+                      }else if(parameter.schema.type === "array"){
+                          operation.requestBody = '['+ OpenApiModelExample.getModelExample(parameter.schema.items["$ref"], this.get("apiService").api, false) +']';
                       }
                   }
 
