@@ -97,7 +97,7 @@ export default Ember.Component.extend({
                         result += "&";
                     }
 
-                    result += `${parameter.name}=${parameter.value}`;
+                    result += `${parameter.name}=${encodeURIComponent(parameter.value)}`;
                 }
                 //result += parameter.name+ "= " + parameter.value + ", "
             }
