@@ -25,6 +25,6 @@ https://developer.mypurecloud.com/openapi-explorer/?openApiUrl=https://api.mypur
 
 ## Environment Variable Configuration
 
-Env Var | Description
-========|============
-PERMISSIONS_KEY_NAME | property on method to get permission information, permission model looks like { "type": "ANY|ALL", "permissions": [list of permission names]}
+| Env Var | Description |
+| ------- | ----------- |
+| PERMISSIONS_KEY_NAME | property on method to get permission information, permission model looks like ``` { "type": "ANY/ALL", "permissions": [list of permission names]} ``` |
