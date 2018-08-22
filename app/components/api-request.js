@@ -52,7 +52,12 @@ export default Ember.Component.extend({
 
 
                       }else if(parameter.schema.type === "array"){
-                          operation.requestBody = '['+ OpenApiModelExample.getModelExample(parameter.schema.items["$ref"], this.get("apiService").api, false) +']';
+                        // Override when type is array of string
+                        if (parameter.schema.items && parameter.schema.items.type === 'string') {
+                            operation.requestBody = '[""]';
+                        } else {
+                            operation.requestBody = '['+ OpenApiModelExample.getModelExample(parameter.schema.items['$ref'], this.get('apiService').api, false) +']';
+                        }
                       }
                   }
 
