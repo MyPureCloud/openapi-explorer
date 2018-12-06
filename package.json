@@ -14,7 +14,9 @@
     "build": "ember build",
     "lint:hbs": "ember-template-lint .",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "pretest": "npm run install-chromium",
+    "install-chromium": "node node_modules/ember-chromium/download-chrome.js"
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -50,6 +52,7 @@
     "openapi-model-example": "git://github.com/KevinGlinski/openapi-model-example.git"
   },
   "dependencies": {
+    "ember-chromium": "^3.0.1",
     "ember-cli-update": "^0.27.3"
   }
 }
