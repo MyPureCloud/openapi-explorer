@@ -1,9 +1,9 @@
 
-<div class='clearfix' {{action 'selectMethod' bubbles=false}} id='{{method.operationId}}'  >
-    <div class='method http-{{method.httpMethod}} pull-left'>
+<div class="clearfix" {{action "selectMethod" bubbles=false}} id={{method.operationId}}  >
+    <div class="method http-{{method.httpMethod}} pull-left">
         {{method.httpMethod}}
     </div>
-    <div class='description'>
+    <div class="description">
         {{method.summary}}{{#if method.deprecated}}<span class="label label-warning">Deprecated</span>{{/if}}
     </div>
 

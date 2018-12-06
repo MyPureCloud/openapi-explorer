@@ -1,11 +1,12 @@
 <div>
-<ul class="nav nav-tabs nav-tabs-flex" role="tablist" id='requestTabs'>
+<ul class="nav nav-tabs nav-tabs-flex" role="tablist" id="requestTabs">
 
     {{#each requests as |request index|}}
-    <li role="presentation" id="requestTab{{index}}" class="{{if (eq selectedTabIndex index) "active"}}" data-toggle="tooltip" title="{{request.operation.summary}}">
+    <li role="presentation" id="requestTab{{index}}" class={{if (eq selectedTabIndex index) "active"}} data-toggle="tooltip" title={{request.operation.summary}}>
 
-        <a href="#request{{index}}" aria-controls="request" role="tab" data-toggle="tab" {{action 'selectTab' index}}>{{request.operation.summary}}
-            <button type="button" class="close" aria-label="Close" {{action 'closeTab' index}}><span aria-hidden="true">&times;</span></button>
+        <a href="#request{{index}}" aria-controls="request" role="tab" data-toggle="tab" {{action "selectTab" index}}>
+            {{request.operation.summary}}
+            <button type="button" class="close" aria-label="Close" {{action "closeTab" index}}><span aria-hidden="true">&times;</span></button>
         </a>
 
     </li>
@@ -14,20 +15,20 @@
 
 </ul>
 {{#unless (eq requests.length 0)}}
-<a href="#" class='close-tabs-button' title='Close all tabs'>
-    <button type="button" class="close" aria-label="Close" {{action 'closeAllTabs' index}}><span aria-hidden="true">&times;</span></button>
+<a href="#" class="close-tabs-button" title="Close all tabs">
+    <button type="button" class="close" aria-label="Close" {{action "closeAllTabs" index}}><span aria-hidden="true">&times;</span></button>
 </a>
 {{/unless}}
 </div>
 
-<div class="tab-content" id='requestTabsContent'>
+<div class="tab-content" id="requestTabsContent">
     {{#each requests as |request index|}}
     <div role="tabpanel" class="tab-pane {{if (eq selectedTabIndex index) "active"}}" id="request{{index}}">{{api-request operation=request.operation uid=request.uid}}</div>
     {{/each}}
 </div>
 
 {{#if (eq requests.length 0)}}
-<div class='empty-state'>
+<div class="empty-state">
     <i class="fa fa-bolt" aria-hidden="true"></i>
     <label>No request selected</label>
     <p>Select a request from the list on the left</p>

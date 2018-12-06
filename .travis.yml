@@ -19,4 +19,9 @@ install:
   - bower install
 
 script:
+<<<<<<< HEAD
+=======
+  - npm run lint:hbs
+  - npm run lint:js
+>>>>>>> ab98e24... message
   - npm test

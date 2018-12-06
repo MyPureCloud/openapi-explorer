@@ -1,6 +1,6 @@
 
 
-<div class="modal modal-offset-sidebar modal-position-bottom" id='shareDialog' tabindex="-1" role="dialog">
+<div class="modal modal-offset-sidebar modal-position-bottom" id="shareDialog" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-flat modal-dialog-panel">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,7 +13,7 @@
 
                         <select class="form-control" onchange={{action "selectShareType" value="target.value"}}>
                             {{#each shareTypes as |shareType|}}
-                            <option value='{{shareType}}'>
+                            <option value={{shareType}}>
                                 {{shareType}}
                             </option>
                             {{/each}}
@@ -22,7 +22,7 @@
                         {{#if (eq selectedShareType "Link")}}
                         <div class="col-md-8">
                             <div class="input-group">
-                                {{input value=sharableLink class="form-control" id='sharableLink'}}
+                                {{input value=sharableLink class="form-control" id="sharableLink"}}
 
                                 <span class="input-group-btn" >
                                     <button class="btn btn-primary" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableLink">Copy</button>
@@ -35,7 +35,7 @@
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="col-md-9">
-                                    <span class="input-group-btn" id='copy-curl'>
+                                    <span class="input-group-btn" id="copy-curl">
                                         <button class="btn btn-primary btn-sm" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" title="Copy to Clipboard" data-clipboard-target="#sharableCurl">Copy</button>
                                     </span>
                                     <pre>
@@ -52,6 +52,6 @@
                         {{/if}}
                 </div>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>

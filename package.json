@@ -2,27 +2,32 @@
   "name": "openapi-explorer",
   "version": "0.0.0",
   "description": "Small description for openapi-explorer goes here",
-  "private": true,
+  "repository": "",
+  "license": "MIT",
+  "author": "",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
+  "private": true,
   "scripts": {
     "build": "ember build",
+    "lint:hbs": "ember-template-lint .",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember test",
+    "pretest": "npm run install-chromium",
+    "install-chromium": "node node_modules/ember-chromium/download-chrome.js"
   },
-  "repository": "",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
+    "@ember/jquery": "^0.5.2",
+    "@ember/optional-features": "^0.6.3",
     "broccoli-asset-rev": "^3.0.0",
     "ember-ajax": "^3.1.0",
     "ember-browserify": "^1.2.2",
-    "ember-cli": "^3.3.0",
+    "ember-cli": "~3.5.1",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-babel": "^6.16.0",
     "ember-cli-dependency-checker": "^3.0.0",
@@ -32,17 +37,22 @@
     "ember-cli-inject-live-reload": "^1.8.2",
     "ember-cli-jshint": "^2.0.1",
     "ember-cli-less": "^2.0.1",
-    "ember-cli-qunit": "^4.3.2",
     "ember-cli-release": "^1.0.0-beta.2",
     "ember-cli-sri": "^2.1.1",
+    "ember-cli-template-lint": "^1.0.0-beta.1",
     "ember-cli-uglify": "^2.1.0",
-    "ember-data": "^3.3.1",
+    "ember-data": "~3.5.0",
     "ember-export-application-global": "^2.0.0",
     "ember-font-awesome": "^3.1.0",
     "ember-inflector": "^2.2.0",
     "ember-load-initializers": "^1.1.0",
+    "ember-qunit": "^3.4.1",
     "ember-resolver": "^5.0.1",
     "loader.js": "^4.7.0",
     "openapi-model-example": "git://github.com/KevinGlinski/openapi-model-example.git"
+  },
+  "dependencies": {
+    "ember-chromium": "^3.0.1",
+    "ember-cli-update": "^0.27.3"
   }
 }
