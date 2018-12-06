@@ -44,5 +44,8 @@
     "ember-resolver": "^5.0.1",
     "loader.js": "^4.7.0",
     "openapi-model-example": "git://github.com/KevinGlinski/openapi-model-example.git"
+  },
+  "dependencies": {
+    "ember-cli-update": "^0.27.3"
   }
 }
