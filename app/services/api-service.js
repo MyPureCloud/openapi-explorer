@@ -111,7 +111,7 @@ export default Ember.Service.extend({
                     }
 
                     that.processSchema(schema, that);
-                }).error(function(err){
+                }).catch(function(err){
                     if(err.status === 202){
                         Ember.run.later((function() {
                           //server doesn't have swagger yet, retry in 2s
