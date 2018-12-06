@@ -1,25 +1,25 @@
 {{#if hasMethods}}
-<div class="panel panel-default" id='panel{{safeName}}'>
+<div class="panel panel-default" id="panel{{safeName}}">
     <div class="panel-heading" role="tab" id="heading{{safeName}}">
         <h4 class="panel-title">
             <a class="link-api" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{safeName}}" aria-expanded="true" aria-controls="collapse{{safeName}}">
             {{name}}
             <span class="desc">{{description}}</span>
             </a>
-            <a class="link-docs" href={{documentation}} target='_blank'>Docs</a>
+            <a class="link-docs" href={{documentation}} target="_blank" rel="noopener">Docs</a>
         </h4>
     </div>
     <div id="collapse{{safeName}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{safeName}}">
         <div class="panel-body">
             {{#if documentation}}
             {{/if}}
-            <ul class='method-list'>
+            <ul class="method-list">
                 {{#each methods.folders as |folder|}}
                     {{tag-subfolder folder=folder parentCategory=safeName}}
 
                 {{/each}}
                 {{#each methods.methods as |method|}}
-                <li class='http-operation' >
+                <li class="http-operation" >
                     {{method-description method=method}}
                 </li>
 

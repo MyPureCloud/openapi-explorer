@@ -1,9 +1,9 @@
-<div class='row parameter-row {{if parameter.required "required"}}'>
+<div class="row parameter-row {{if parameter.required "required"}}">
     <div class="form-horizontal">
         <div class="form-group">
             <label class="control-label col-sm-2">{{parameter.name}}</label>
             <div class="col-sm-2">
-                {{#if (eq inputType 'checkbox')}}
+                {{#if (eq inputType "checkbox")}}
                 {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
                 {{else}}
                 {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
@@ -13,7 +13,7 @@
                 {{/if}}
             </div>
             <div class="col-sm-2">
-                <input class="form-control read-only" value="{{parameter.in}}" readonly>
+                <input class="form-control read-only" value={{parameter.in}} readonly>
             </div>
             <div class="col-sm-5">
                 {{parameter.description}}

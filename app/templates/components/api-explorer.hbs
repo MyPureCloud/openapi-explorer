@@ -1,15 +1,15 @@
 {{#if isSchemaLoaded}}
 
-<div class='pull-left'>
+<div class="pull-left">
     {{#api-tree}}{{/api-tree}}
 </div>
-<div id='mainContent' class='pull-left'>
+<div id="mainContent" class="pull-left">
     {{#api-requests}}{{/api-requests}}
 </div>
 
 
 {{else}}
-<div class='api-loading'>
+<div class="api-loading">
     <div class="load-indicator load-indicator-flex load-indicator-lg">
         <i class="pc-moon pc-loading fa fa-spin"></i>
         <p>Loading API definition&hellip;</p>

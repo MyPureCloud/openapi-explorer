@@ -1,10 +1,10 @@
 <header>
     <h1 class="operation-uri">{{operation.uri}}</h1>
-    <p class='lead'>
+    <p class="lead">
         {{operation.description}}
     </p>
     {{#if permissions}}
-    <label>Permissions</label><br/>
+    <label>Permissions</label><br>
     
     {{permissions.type}} of
     <ul>
@@ -34,7 +34,7 @@
                     <div class="container-fluid">
 
                         {{#each operation.parameters as |parameter|}}
-                        {{#unless (eq parameter.in 'body')}}
+                        {{#unless (eq parameter.in "body")}}
                         {{parameter-input parameter=parameter}}
                         {{/unless}}
 
@@ -48,7 +48,7 @@
                 <h3>Body</h3>
                 <div class="properties-flex">
                     {{ace-editor value=operation.requestBody aceInit=aceInit class="editor"}}
-                    <div class='model-definition-container'>
+                    <div class="model-definition-container">
                         {{#each requestBodyDefinition as |model|}}
                         <h5>{{model.name}}</h5>
                         {{#each model.definitions as |definition|}}
@@ -63,11 +63,11 @@
 
 
                 {{/if}}
-                <div class='container-fluid'>
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2 col-button-offset">
-                            <button class='btn btn-primary' {{action 'sendRequest'}}>Send Request</button>
-                            <button class='btn btn-default' data-toggle="modal" data-target="#shareDialog" {{action 'share'}}>
+                            <button class="btn btn-primary" {{action "sendRequest"}}>Send Request</button>
+                            <button class="btn btn-default" data-toggle="modal" data-target="#shareDialog" {{action "share"}}>
                                 <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
                             </button>
                         </div>
@@ -92,9 +92,9 @@
                         <div class="col-md-2">
                             <h3 class="header-url">Url</h3>
                         </div>
-                        <div id='requestParamsHeader' class="col-md-10">
-                            <div class='http-method pull-left'>
-                                <label class='http-{{operation.httpMethod}}'>{{operation.httpMethod}}</label>
+                        <div id="requestParamsHeader" class="col-md-10">
+                            <div class="http-method pull-left">
+                                <label class="http-{{operation.httpMethod}}">{{operation.httpMethod}}</label>
                             </div>
                             <label class="pull-left">{{computedUrl}}</label>
                         </div>
@@ -104,7 +104,7 @@
                             <h3 class="header-headers">Headers</h3>
                         </div>
                         <div class="col-md-10">
-                            <div class='row'>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <label class="label-list">Key</label>
                                 </div>
@@ -142,7 +142,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class='response-status response-status-{{response.responseCodeClass}}00'>
+                            <div class="response-status response-status-{{response.responseCodeClass}}00">
                                 {{response.status}} {{response.statusText}}
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                             <h3 class="header-headers">Headers</h3>
                         </div>
                         <div class="col-md-10">
-                            <div class='row'>
+                            <div class="row">
                                 <div class="col-md-3">
                                     <label class="label-list">Key</label>
                                 </div>
