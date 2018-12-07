@@ -262,7 +262,7 @@ export default Ember.Component.extend({
                 return response;
             }
 
-            $.ajax(requestParams).success(function( data, textStatus, jqXHR  ) {
+            $.ajax(requestParams).then(function( data, textStatus, jqXHR  ) {
                 that.set("hasResponse", true);
                 that.set("hideRequest", true);
                 that.set("response", handleResponse(jqXHR));
