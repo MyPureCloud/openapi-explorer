@@ -105,13 +105,13 @@ export default Ember.Service.extend({
         function getSwagger(){
             try{
                 // "https://api.mypurecloud.com/api/v2/docs/swagger"
-                $.getJSON(openApiUrl).done(function(schema){
+                $.getJSON(openApiUrl).then(function(schema){
                     if ( (that.get('isDestroyed') || that.get('isDestroying')) ) {
                         return;
                     }
 
                     that.processSchema(schema, that);
-                }).error(function(err){
+                }).catch(function(err){
                     if(err.status === 202){
                         Ember.run.later((function() {
                           //server doesn't have swagger yet, retry in 2s
