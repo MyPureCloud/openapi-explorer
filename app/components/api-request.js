@@ -266,7 +266,7 @@ export default Ember.Component.extend({
                 that.set("hasResponse", true);
                 that.set("hideRequest", true);
                 that.set("response", handleResponse(jqXHR));
-            }).error(function(jqXHR){
+            }).catch(function(jqXHR){
                 that.set("hasResponse", true);
                 that.set("hideRequest", true);
                 that.set("response", handleResponse(jqXHR));
