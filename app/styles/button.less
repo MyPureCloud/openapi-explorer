@@ -107,30 +107,39 @@
     }
 }
 
-.pc-button(@color, @bg-top-color, @bg-bottom-color, @border-color) {
-    border-color: @border-color;
-    .box-shadow('inset 0 18px 10px rgba(255,255,255,.15), 0 1px 1px rgba(0,0,0,.075)');
+.pc-button(@color, @bg-color, @bg-hover-color, @border-color) {
+  text-shadow: none;
+  color: @color;
+  border-color: @border-color;
+  background-color: @bg-color;
+
+  &:focus {
+    outline: none;
     color: @color;
-    text-shadow:none;
+    background-color: @bg-color;
+    border-color: @border-color;
+  }
 
-    #gradient > .vertical(@start-color: @bg-top-color; @end-color: @bg-bottom-color);
+  &:hover {
+    color: @color;
+    border-color: @bg-hover-color;
+    background-color: @bg-hover-color;
+    transition: border @animation-speed-fast ease-in-out, background @animation-speed-fast ease-in-out;
+  }
 
-    &:focus,
-    &:hover {
-        color: @color;
-    }
-
-    .open .dropdown-toggle&,
-    &:active,
-    &.active {
-        background-color: darken(@bg-top-color, 10%);
-        border-color: darken(@bg-top-color, 12%);
-    }
+  .open .dropdown-toggle&,
+  &:active,
+  &.active,
+  &:active:focus {
+    color: @color;
+    border-color: @btn-active-color;
+    background-color: @btn-active-color;
+  }
 }
 
 .btn-primary {
     background-color: transparent;
-    .pc-button(@btn-primary-color, @btn-primary-bg-top, @btn-primary-bg-bottom, @btn-primary-border);
+    .pc-button(@btn-primary-color, @btn-primary-bg-top, @btn-primary-hover-color, @btn-primary-border);
 }
 
 
@@ -141,7 +150,13 @@
 .btn-warning,
 .btn-danger
 {
-    .pc-button(@btn-default-color, @btn-default-bg-top, @btn-default-bg-bottom, @btn-default-border);
+    .pc-button(@btn-default-color, @btn-default-bg-top, @btn-default-hover-color, @btn-default-border);
+    .open .dropdown-toggle&,
+    &:active,
+    &.active,
+    &:active:focus {
+      background: @btn-default-bg-bottom;
+    }
 }
 
 .btn-link {

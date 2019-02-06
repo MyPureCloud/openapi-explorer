@@ -17,6 +17,12 @@
 @pc-devil-grey: #666666;
 @pc-boulder: #777777;
 @pc-dusty-gray: #999999;
+@pc-anti-flash-white: #f2f0f2;
+@pc-nickel: #6b7178;
+@pc-lima: #77dd22;
+@pc-english-violet: #5D3E5D;
+@pc-atomic-tangerine: #ff8e6f;
+@pc-fire-opal: #e56643;
 
 @http-get-color:     #52CEF8;
 @http-post-color:    #7d2;
@@ -32,7 +38,7 @@
 @http-patch-text-color:   darken(@http-patch-color, 20%);
 @http-head-text-color:   darken(@http-head-color, 20%);
 
-@spinner-color: @pc-curious-blue;
+@spinner-color: @pc-fire-opal;
 
 // basic spacing
 @spacing-xl: 60px;
@@ -81,6 +87,7 @@
 // @gray-light:             lighten(@gray-base, 46.7%); // #777
 // @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 
+@brand-primary:            #ff4f1f;
 // @brand-primary:         darken(#428bca, 6.5%); // #337ab7
 // @brand-success:         #5cb85c;
 // @brand-info:            #5bc0de;
@@ -95,7 +102,8 @@
 //** Background color for `<body>`.
 // @body-bg:               #fff;
 //** Global text color on `<body>`.
-@text-color:               #4c4c4c;
+@text-color:               #444a52;
+@secondary-text-color:     #757575;
 
 //** Global textual link color.
 // @link-color:            @brand-primary;
@@ -215,13 +223,16 @@
 @btn-default-bg-top:               #f7f7f7;
 @btn-default-bg-bottom:            #e5e5e5;
 @btn-default-border:               #b8b8b8;
+@btn-default-hover-color:          @btn-default-bg-bottom;
 
 @btn-primary-color:              #fff;
-@btn-primary-bg-top:             #61b8d4;
-@btn-primary-bg-bottom:          #4a9cb6;
-@btn-primary-border:             #4b9eb9;
+@btn-primary-bg-top:             #ff724b;
+@btn-primary-bg-bottom:          @brand-primary;
+@btn-primary-border:             #f25328;
+@btn-primary-hover-color:        @pc-english-violet;
+@btn-active-color:               #0062cc;
 
-@btn-disabled-color:             #7d7d7d;
+@btn-disabled-color:              #7d7d7d;
 @btn-disabled-bg-top:             #d8d8d8;
 @btn-disabled-bg-bottom:          #c3c3c3;
 @btn-disabled-border:             @btn-default-border;
