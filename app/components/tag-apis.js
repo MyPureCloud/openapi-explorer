@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
     name:null,
     safeName: computed('name', function(){
-        return this.get('name').replace(/ /g,"");
+        return this.get('name').replace(/\W/g,"");
     }),
     description: null,
     filter: null,
