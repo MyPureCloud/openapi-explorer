@@ -21,6 +21,16 @@ export default Ember.Component.extend({
 
         return operation[keyName];
     }),
+    scopes: computed('operation', function(){
+        let scopesKeyName = config.scopesKeyName;
+        let operation = this.get("operation");
+        if (operation['security'] && 
+            operation['security'].length > 0 && 
+            operation['security'][0][scopesKeyName]){
+            return operation['security'][0][scopesKeyName];
+        }
+        return null;
+    }),
     aceInit: function(editor) {
         editor.setHighlightActiveLine(false);
         editor.setShowPrintMargin(false);

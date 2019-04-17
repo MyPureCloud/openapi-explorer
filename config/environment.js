@@ -15,6 +15,7 @@ module.exports = function(environment) {
     authHeader: process.env.AUTH_HEADER,
     defaultOpenApiUrl: process.env.DEFAULT_OPENAPI_URL || "/swagger.json",
     permissionsKeyName: process.env.PERMISSIONS_KEY_NAME || "x-inin-requires-permissions",
+    scopesKeyName: process.env.OAUTH_SCOPES_KEY || "PureCloud OAuth",
 
     APP: {
       // Here you can pass flags/options to your application instance
