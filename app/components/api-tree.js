@@ -4,20 +4,32 @@ var  computed = Ember.computed;
 
 export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
+
     filter:null,
+
+    _filter:null, // bound to text input
+    // debounce setting the filter binding to allow for smooth typing
+    debounceFilter: Ember.observer('_filter', function () {
+        Ember.run.debounce(this, this.setFilter, 150);
+    }),
+
+    setFilter() {
+        this.set('filter', this.get('_filter'));
+    },
+
     querystringService: Ember.inject.service(),
     init(){
         this._super(...arguments);
 
         let filter = this.get("querystringService").getParameter(window.location.search, "filter");
         if(filter){
-            this.set("filter", filter);
+            this.set("_filter", filter);
         }
 
     },
     didInsertElement(){
         this._super(...arguments);
-        if(this.get('filter')){
+        if(this.get('_filter')){
             $('.panel-title a').removeClass("collapsed");
             $(".panel-collapse").addClass("in");
         }
