@@ -31,6 +31,11 @@ export default Ember.Component.extend({
         }
         return null;
     }),
+    isPureCloudAuth: computed('operation', function(){
+        let operation = this.get("operation");
+        if (!operation.security || operation.security.length === 0) return false;
+        return operation.security.any((security) => security['PureCloud OAuth'] !== undefined);
+    }),
     aceInit: function(editor) {
         editor.setHighlightActiveLine(false);
         editor.setShowPrintMargin(false);

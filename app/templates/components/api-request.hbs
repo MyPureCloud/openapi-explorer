@@ -89,10 +89,16 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-10 col-md-offset-2 col-button-offset">
+                            {{#if isPureCloudAuth}}
                             <button class="btn btn-primary" {{action "sendRequest"}}>Send Request</button>
                             <button class="btn btn-default" data-toggle="modal" data-target="#shareDialog" {{action "share"}}>
                                 <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
                             </button>
+                            {{else}}
+                            <div class="alert alert-warning" role="alert">
+                                This resource uses an authentication method other than PureCloud OAuth and cannot be tested using the API Explorer.
+                            </div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
