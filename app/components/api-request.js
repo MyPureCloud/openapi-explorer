@@ -197,7 +197,7 @@ export default Ember.Component.extend({
             let requestParams = {
                 method: operation.httpMethod,
                 url: url,
-                 timeout: 5000,
+                 timeout: 16000,
                 headers:{
 
                 }
