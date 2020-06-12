@@ -23,7 +23,7 @@ export default Ember.Component.extend({
         if(["int32","int64","float","double"].indexOf(parameter.format) > -1 ){
             return "number";
         }else if (parameter.type === "boolean"){
-            return "checkbox";
+            return "select";
         }else if (parameter.type === "date"){
             return "date";
         }else if (parameter.type === "date-time"){
@@ -34,5 +34,11 @@ export default Ember.Component.extend({
             return "";
         }
 
-    })
+    }),
+
+    actions: {
+        selectBooleanParameter(value) {
+            this.set("parameter.value", value);
+        }
+    },
 });

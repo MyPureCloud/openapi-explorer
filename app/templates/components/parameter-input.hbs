@@ -3,8 +3,12 @@
         <div class="form-group">
             <label class="control-label col-sm-2">{{parameter.name}}</label>
             <div class="col-sm-2">
-                {{#if (eq inputType "checkbox")}}
-                {{input class="form-control" checked=parameter.value  required=parameter.required type=inputType }}
+                {{#if (eq inputType "select")}}
+                <select class="form-control" required={{parameter.required}} onchange={{action "selectBooleanParameter" value="target.value"}}>
+                    <option value="">Not specified</option>
+                    <option value="true">True</option>
+                    <option value="false">False</option>
+                </select>
                 {{else}}
                 {{input class="form-control" value=parameter.value  required=parameter.required type=inputType }}
                 {{/if}}
@@ -18,10 +22,10 @@
             <div class="col-sm-5">
                 {{parameter.description}}
                 {{#if parameter.items.enum}}
-                <b>Valid values: </b> {{join ', ' parameter.items.enum }}
+                <b>Valid values: </b> {{join ", " parameter.items.enum }}
                 {{/if}}
                 {{#if parameter.enum}}
-                <b>Valid values: </b> {{join ', ' parameter.enum }} 
+                <b>Valid values: </b> {{join ", " parameter.enum }} 
                 {{/if}}
             </div>
         </div>
