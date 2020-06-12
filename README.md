@@ -65,9 +65,9 @@ The Open API explorer accepts a couple URL parameters for configuration
 
 token_type and access_token are in the url hash to support oauth redirects.
 
-Assuming that the OpenAPI explorer is hosted at https://developer.mypurecloud.com/openapi-explorer/, an example would be:
+Assuming that the OpenAPI explorer is hosted at https://developer.mypurecloud.com/developer-tools/#/api-explorer, an example would be:
 
-https://developer.mypurecloud.com/openapi-explorer/?openApiUrl=https://api.mypurecloud.com/api/v2/docs/swagger#token_type=bearer&access_token=Uf7UTEjT9SknXhdUz
+https://developer.mypurecloud.com/developer-tools/#/api-explorer/?openApiUrl=https://api.mypurecloud.com/api/v2/docs/swagger#token_type=bearer&access_token=Uf7UTEjT9SknXhdUz
 
 ## Restrictions
 
