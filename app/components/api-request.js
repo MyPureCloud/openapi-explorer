@@ -250,9 +250,10 @@ export default Ember.Component.extend({
             function handleResponse(xhResponse){
 
                 let responseData = xhResponse.responseText;
+                const jsonContentTypes = ["application/json", "application/scim+json"];
 
                 try{
-                    if(xhResponse.getResponseHeader("Content-Type") === "application/json"){
+                    if(jsonContentTypes.includes(xhResponse.getResponseHeader("Content-Type"))){
                         responseData = JSON.stringify(JSON.parse(xhResponse.responseText), null, "  ");
                     }
                 }catch(err){}
