@@ -3,12 +3,11 @@
     <p class="lead">
         {{operation.description}}
     </p>
-    <div class='row'>
-        <div class='col-md-6'>
+    <div class="row">
+        <div class="col-md-4">
         <label>Permissions</label><br>
-          
+
         {{#if permissions}}
-            
             {{permissions.type}} of
             <ul>
             {{#each permissions.permissions as |permission|}}
@@ -18,12 +17,11 @@
             {{/each}}
             </ul>
         {{else}}
-        <div class='text-muted'>None</div>
+        <div class="text-muted">None</div>
         {{/if}}
         </div>
-        <div class='col-md-6'>
+        <div class="col-md-4">
             <label>Scopes</label><br>
-          
             {{#if scopes}}
                 ANY of
                 <ul>
@@ -34,11 +32,21 @@
                 {{/each}}
                 </ul>
             {{else}}
-            <div class='text-muted'>None</div>
+            <div class="text-muted">None</div>
+            {{/if}}
+        </div>
+
+        <div class="col-md-4">
+            <label>Notification Topic</label><br>
+            {{#if hasNotificationTopic}}
+                <ul>
+                    <li>{{getNotificationTopics}}</li>
+                </ul>
+            {{else}}
+              <div class="text-muted">None</div>
             {{/if}}
         </div>
     </div>
-    
 </header>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
     <div class="panel panel-default">

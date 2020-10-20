@@ -14,6 +14,7 @@ export default Ember.Service.extend(Ember.Evented,{
     requestBody: null,
     sharableLink: null,
     authService: Ember.inject.service(),
+    notificationService: Ember.inject.service('notificationService'),
     apiChanged: Ember.observer('apiService.api', function() {
         console.log("api changed do share");
         this.doShare();
@@ -126,6 +127,7 @@ export default Ember.Service.extend(Ember.Evented,{
         if(share){
             this.get("requestService").newRequest(this.parseShare(share));
         }
+        this.get('notificationService').loadNotifications();
     },
     init(){
         try{

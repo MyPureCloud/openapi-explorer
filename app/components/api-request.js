@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     apiService: Ember.inject.service('apiService'),
     authService: Ember.inject.service(),
     shareService: Ember.inject.service(),
+    notificationService: Ember.inject.service('notificationService'),
     requestHeaders: {},
     hasResponse: false,
     hideRequest: false,
@@ -24,8 +25,8 @@ export default Ember.Component.extend({
     scopes: computed('operation', function(){
         let scopesKeyName = config.scopesKeyName;
         let operation = this.get("operation");
-        if (operation['security'] && 
-            operation['security'].length > 0 && 
+        if (operation['security'] &&
+            operation['security'].length > 0 &&
             operation['security'][0][scopesKeyName]){
             return operation['security'][0][scopesKeyName];
         }
@@ -33,7 +34,9 @@ export default Ember.Component.extend({
     }),
     isPureCloudAuth: computed('operation', function(){
         let operation = this.get("operation");
-        if (!operation.security || operation.security.length === 0) return false;
+        if (!operation.security || operation.security.length === 0) {
+          return false;
+        }
         return operation.security.any((security) => security['PureCloud OAuth'] !== undefined);
     }),
     aceInit: function(editor) {
@@ -89,10 +92,8 @@ export default Ember.Component.extend({
           }
       }
 
-
       this.set("requestHeaders", requestHeaders);
       this.set('canSendData', operation.httpMethod === "post" || operation.httpMethod === "put" || operation.httpMethod === "patch" );
-
     },
 
     computedUrl: computed('operation.parameters.@each.value', function() {
@@ -122,8 +123,6 @@ export default Ember.Component.extend({
                 //result += parameter.name+ "= " + parameter.value + ", "
             }
         }
-
-
         return result;
     }),
 
@@ -301,5 +300,16 @@ export default Ember.Component.extend({
             let operation = this.get('operation');
             this.get("shareService").setSharableOperation(this.get("operation"), operation.requestBody, this.get("computedHeaders"), this.get("computedUrl"), this._getUrlBase());
         }
-    }
+    },
+    hasNotificationTopic: computed('notificationService.topics', function(){
+      if (!this.get('notificationService').get('topicsLoaded')) {
+         return false;
+      }
+      let operation = this.get('operation');
+      return this.get('notificationService').urlHasTopic(operation.uri);
+    }),
+    getNotificationTopics: computed('notificationService.getTopicForResource', function(){
+      let operation = this.get('operation');
+      return this.get('notificationService').getTopicForResource(operation.uri);
+    }),
 });
