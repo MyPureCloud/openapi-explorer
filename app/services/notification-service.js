@@ -87,7 +87,7 @@ export default Ember.Service.extend(Ember.Evented, {
 
       let host = searchSplit.split('/')[0];
       if (!host) {
-        console.log('Error getting host from openApiUrl query parameter')
+        console.log('Error getting host from openApiUrl query parameter');
       }
       let url = 'https://' + host + '/api/v2/notifications/availabletopics?expand=publicApiTemplateUriPaths';
       this.set("topicUrl", url);
