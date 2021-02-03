@@ -65,7 +65,6 @@ export default Ember.Component.extend({
                       }else if(parameter.schema["$ref"]){
                           operation.requestBody = OpenApiModelExample.getModelExample(parameter.schema["$ref"], this.get("apiService").api, false);
 
-
                       }else if(parameter.schema.type === "array"){
                         // Override when type is array of string
                         if (parameter.schema.items && parameter.schema.items.type === 'string') {
@@ -77,7 +76,24 @@ export default Ember.Component.extend({
                   }
 
                   if(parameter.schema["$ref"]){
-                      this.set("requestBodyDefinition", OpenApiModelExample.getModelDescription(parameter.schema["$ref"], this.get("apiService").api, false));
+                      var allPossibleDefinitions = [];
+                      let definition = OpenApiModelExample.getModelDescription(parameter.schema["$ref"], this.get("apiService").api, false);
+                      definition.forEach(element => {
+                          element.definitions.forEach(def => {
+                            var type = def.type;
+                            if(type.includes("definitions") && !allPossibleDefinitions.includes(type)) {
+                                allPossibleDefinitions.push(type.substring(type.lastIndexOf("/")+1));
+                            }
+                          });
+                      });
+
+                      allPossibleDefinitions.forEach(index => {
+                        if(!definition.some((element => index === element.name))) {
+                            definition = definition.concat(OpenApiModelExample.getModelDescription(`#/definitions/${index}`, this.get("apiService").api, false));
+                        }
+                      });
+
+                      this.set("requestBodyDefinition", definition);
                   }
               }else if(parameter.in === "header"){
                   requestHeaders[parameter.name] = parameter.value;
