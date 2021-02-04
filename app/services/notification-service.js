@@ -3,6 +3,7 @@ import Ember from 'ember';
 
 export default Ember.Service.extend(Ember.Evented, {
     authService: Ember.inject.service(),
+    querystringService: Ember.inject.service(),
     topics: {},
     topicsLoaded: false,
     hasResponse: false,
@@ -79,16 +80,12 @@ export default Ember.Service.extend(Ember.Evented, {
     init() {
       this._super(...arguments);
 
-      let searchSplit = window.location.search.split('//')[1];
-      if (!searchSplit) {
-        console.error("Error accessing openApiUrl query parameter");
-        return;
-      }
+      let host = this.get("querystringService").getParameter(window.location.search, "host");
 
-      let host = searchSplit.split('/')[0];
       if (!host) {
         console.log('Error getting host from openApiUrl query parameter');
       }
+
       let url = 'https://' + host + '/api/v2/notifications/availabletopics?expand=publicApiTemplateUriPaths';
       this.set("topicUrl", url);
     },
