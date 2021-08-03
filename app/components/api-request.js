@@ -250,7 +250,7 @@ export default Ember.Component.extend({
 
       if (operation.httpMethod !== "get" && selectedAccount.confirmChanges) {
         let confirm = window.confirm(
-          `Are you sure you want to send this request with account: \nName: ${acc.me.name} \nEmail: ${acc.me.email} \nOrganization: ${acc.me.organization.name} \nRegion: ${acc.environment}`
+          `Are you sure you want to send this request with account: \nName: ${selectedAccount.me.name} \nEmail: ${selectedAccount.me.email} \nOrganization: ${selectedAccount.me.organization.name} \nRegion: ${selectedAccount.environment}`
         );
         if (confirm) {
           this.set("hasResponse", false);
