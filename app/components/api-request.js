@@ -14,14 +14,48 @@ export default Ember.Component.extend({
   hasResponse: false,
   hideRequest: false,
   hasProperties: false,
+  requestConfirmation: false,
+  selectedAccount: null,
   response: {},
   operation: {},
+
   permissions: computed("operation", function () {
     let keyName = config.permissionsKeyName;
     let operation = this.get("operation");
 
     return operation[keyName];
   }),
+  displayWarning: computed("requestConfirmation", function () {
+    let operation = this.get("operation");
+    let requestConfirmation = this.get("requestConfirmation");
+    let account = this.get("authService").get("currentAccount");
+    if(!account.confirmChanges){
+        return true;
+    }
+    if (requestConfirmation) {
+      return true;
+    }
+    if (operation.httpMethod !== "get") {
+      return false;
+    } else {
+      return true;
+    }
+  }),
+
+  disableSend: computed("requestConfirmation", function () {
+    let requestConfirmation = this.get("requestConfirmation");
+    let operation = this.get("operation");
+    let account = this.get("authService").get("currentAccount");
+    if(!account.confirmChanges){
+        return false;
+    }
+    if (operation.httpMethod !== "get" && !requestConfirmation) {
+      return true;
+    } else {
+      return false;
+    }
+  }),
+
   scopes: computed("operation", function () {
     let scopesKeyName = config.scopesKeyName;
     let operation = this.get("operation");
@@ -43,6 +77,7 @@ export default Ember.Component.extend({
       (security) => security["PureCloud OAuth"] !== undefined
     );
   }),
+
   aceInit: function (editor) {
     editor.setHighlightActiveLine(false);
     editor.setShowPrintMargin(false);
@@ -55,8 +90,8 @@ export default Ember.Component.extend({
     let operation = this.get("operation");
     let requestHeaders = this.get("requestHeaders");
     let authService = this.get("authService");
-
-    requestHeaders["Content-Type"] = "application/json";
+    this.set("selectedAccount", this.get("authService").get("currentAccount")),
+      (requestHeaders["Content-Type"] = "application/json");
 
     if (authService.authHeader != null) {
       requestHeaders["Authorization"] = "<HIDDEN>";
@@ -245,263 +280,125 @@ export default Ember.Component.extend({
   _persistParams() {},
   actions: {
     sendRequest() {
+      this.set("hasResponse", false);
+      this.set("hideRequest", false);
+      let that = this;
+
       let operation = this.get("operation");
-      let selectedAccount = this.get("authService").get("currentAccount");
 
-      if (operation.httpMethod !== "get" && selectedAccount.confirmChanges) {
-        let confirm = window.confirm(
-          `Are you sure you want to send this request with account: \nName: ${selectedAccount.me.name} \nEmail: ${selectedAccount.me.email} \nOrganization: ${selectedAccount.me.organization.name} \nRegion: ${selectedAccount.environment}`
-        );
-        if (confirm) {
-          this.set("hasResponse", false);
-          this.set("hideRequest", false);
-          let that = this;
+      let url = this._getUrlBase() + this.get("computedUrl");
 
-          let operation = this.get("operation");
+      let requestParams = {
+        method: operation.httpMethod,
+        url: url,
+        timeout: 16000,
+        headers: {},
+      };
 
-          let url = this._getUrlBase() + this.get("computedUrl");
+      let computedHeaders = this.get("computedHeaders");
+      for (let x = 0; x < computedHeaders.length; x++) {
+        let header = computedHeaders[x];
 
-          let requestParams = {
-            method: operation.httpMethod,
-            url: url,
-            timeout: 16000,
-            headers: {},
-          };
+        requestParams.headers[header.key] = header.value;
 
-          let computedHeaders = this.get("computedHeaders");
-          for (let x = 0; x < computedHeaders.length; x++) {
-            let header = computedHeaders[x];
-
-            requestParams.headers[header.key] = header.value;
-
-            if (header.key === "Authorization") {
-              requestParams.headers[header.key] =
-                this.get("authService").authHeader;
-            }
-          }
-          /*
-                  let authHeader = this.get("authService").authHeader;
-                  if(authHeader){
-                      requestParams.headers['Authorization'] = authHeader;
-                  }
-      */
-          if (this.get("canSendData")) {
-            let operation = this.get("operation");
-            requestParams.data = operation.requestBody;
-          }
-
-          function parseHeaders(headerString) {
-            let headers = headerString.split("\n");
-            let headerMap = [];
-
-            for (var x = 0; x < headers.length; x++) {
-              let split = headers[x].split(":");
-              if (split[0] && split[1]) {
-                headerMap.push({
-                  key: split[0].trim(),
-                  value: split[1].trim(),
-                });
-              }
-            }
-
-            headerMap.sort(function compare(a, b) {
-              return a.key.localeCompare(b.key);
-            });
-
-            return headerMap;
-          }
-
-          function handleResponse(xhResponse) {
-            let responseData = xhResponse.responseText;
-            const jsonContentTypes = [
-              "application/json",
-              "application/scim+json",
-            ];
-
-            try {
-              if (
-                jsonContentTypes.includes(
-                  xhResponse.getResponseHeader("Content-Type")
-                )
-              ) {
-                responseData = JSON.stringify(
-                  JSON.parse(xhResponse.responseText),
-                  null,
-                  "  "
-                );
-              }
-            } catch (err) {}
-
-            let response = {
-              headers: parseHeaders(xhResponse.getAllResponseHeaders()),
-              data: responseData,
-              status: xhResponse.status,
-              statusText: xhResponse.statusText,
-              responseCodeClass: xhResponse.status.toString()[0],
-            };
-
-            console.log(
-              "correlationId " +
-                xhResponse.getResponseHeader("ININ-Correlation-Id")
-            );
-
-            if (xhResponse.status === 0) {
-              response.statusText =
-                "HTTP request was blocked by CORS.  Inspect the browser network tab for more information.";
-              response.data = "{}";
-            }
-
-            return response;
-          }
-
-          $.ajax(requestParams)
-            .then(function (data, textStatus, jqXHR) {
-              that.set("hasResponse", true);
-              that.set("hideRequest", true);
-              that.set("response", handleResponse(jqXHR));
-            })
-            .catch(function (jqXHR) {
-              that.set("hasResponse", true);
-              that.set("hideRequest", true);
-              that.set("response", handleResponse(jqXHR));
-            });
-
-          window.parent.postMessage(
-            JSON.stringify({
-              action: "anaytics",
-              httpMethod: this.get("operation").httpMethod,
-              url: this.get("operation").uri,
-            }),
-            "*"
-          );
-
-          this.get("parentView").send("saveRequests", this.origContext);
+        if (header.key === "Authorization") {
+          requestParams.headers[header.key] =
+            this.get("authService").authHeader;
         }
-      } else {
-        this.set("hasResponse", false);
-        this.set("hideRequest", false);
-        let that = this;
-
-        let operation = this.get("operation");
-
-        let url = this._getUrlBase() + this.get("computedUrl");
-
-        let requestParams = {
-          method: operation.httpMethod,
-          url: url,
-          timeout: 16000,
-          headers: {},
-        };
-
-        let computedHeaders = this.get("computedHeaders");
-        for (let x = 0; x < computedHeaders.length; x++) {
-          let header = computedHeaders[x];
-
-          requestParams.headers[header.key] = header.value;
-
-          if (header.key === "Authorization") {
-            requestParams.headers[header.key] =
-              this.get("authService").authHeader;
-          }
-        }
-        /*
+      }
+      /*
             let authHeader = this.get("authService").authHeader;
             if(authHeader){
                 requestParams.headers['Authorization'] = authHeader;
             }
 */
-        if (this.get("canSendData")) {
-          let operation = this.get("operation");
-          requestParams.data = operation.requestBody;
-        }
+      if (this.get("canSendData")) {
+        let operation = this.get("operation");
+        requestParams.data = operation.requestBody;
+      }
 
-        function parseHeaders(headerString) {
-          let headers = headerString.split("\n");
-          let headerMap = [];
+      function parseHeaders(headerString) {
+        let headers = headerString.split("\n");
+        let headerMap = [];
 
-          for (var x = 0; x < headers.length; x++) {
-            let split = headers[x].split(":");
-            if (split[0] && split[1]) {
-              headerMap.push({
-                key: split[0].trim(),
-                value: split[1].trim(),
-              });
-            }
+        for (var x = 0; x < headers.length; x++) {
+          let split = headers[x].split(":");
+          if (split[0] && split[1]) {
+            headerMap.push({
+              key: split[0].trim(),
+              value: split[1].trim(),
+            });
           }
-
-          headerMap.sort(function compare(a, b) {
-            return a.key.localeCompare(b.key);
-          });
-
-          return headerMap;
         }
 
-        function handleResponse(xhResponse) {
-          let responseData = xhResponse.responseText;
-          const jsonContentTypes = [
-            "application/json",
-            "application/scim+json",
-          ];
+        headerMap.sort(function compare(a, b) {
+          return a.key.localeCompare(b.key);
+        });
 
-          try {
-            if (
-              jsonContentTypes.includes(
-                xhResponse.getResponseHeader("Content-Type")
-              )
-            ) {
-              responseData = JSON.stringify(
-                JSON.parse(xhResponse.responseText),
-                null,
-                "  "
-              );
-            }
-          } catch (err) {}
+        return headerMap;
+      }
 
-          let response = {
-            headers: parseHeaders(xhResponse.getAllResponseHeaders()),
-            data: responseData,
-            status: xhResponse.status,
-            statusText: xhResponse.statusText,
-            responseCodeClass: xhResponse.status.toString()[0],
-          };
+      function handleResponse(xhResponse) {
+        let responseData = xhResponse.responseText;
+        const jsonContentTypes = ["application/json", "application/scim+json"];
 
-          console.log(
-            "correlationId " +
-              xhResponse.getResponseHeader("ININ-Correlation-Id")
-          );
-
-          if (xhResponse.status === 0) {
-            response.statusText =
-              "HTTP request was blocked by CORS.  Inspect the browser network tab for more information.";
-            response.data = "{}";
+        try {
+          if (
+            jsonContentTypes.includes(
+              xhResponse.getResponseHeader("Content-Type")
+            )
+          ) {
+            responseData = JSON.stringify(
+              JSON.parse(xhResponse.responseText),
+              null,
+              "  "
+            );
           }
+        } catch (err) {}
 
-          return response;
-        }
+        let response = {
+          headers: parseHeaders(xhResponse.getAllResponseHeaders()),
+          data: responseData,
+          status: xhResponse.status,
+          statusText: xhResponse.statusText,
+          responseCodeClass: xhResponse.status.toString()[0],
+        };
 
-        $.ajax(requestParams)
-          .then(function (data, textStatus, jqXHR) {
-            that.set("hasResponse", true);
-            that.set("hideRequest", true);
-            that.set("response", handleResponse(jqXHR));
-          })
-          .catch(function (jqXHR) {
-            that.set("hasResponse", true);
-            that.set("hideRequest", true);
-            that.set("response", handleResponse(jqXHR));
-          });
-
-        window.parent.postMessage(
-          JSON.stringify({
-            action: "anaytics",
-            httpMethod: this.get("operation").httpMethod,
-            url: this.get("operation").uri,
-          }),
-          "*"
+        console.log(
+          "correlationId " + xhResponse.getResponseHeader("ININ-Correlation-Id")
         );
 
-        this.get("parentView").send("saveRequests", this.origContext);
+        if (xhResponse.status === 0) {
+          response.statusText =
+            "HTTP request was blocked by CORS.  Inspect the browser network tab for more information.";
+          response.data = "{}";
+        }
+
+        return response;
       }
+
+      $.ajax(requestParams)
+        .then(function (data, textStatus, jqXHR) {
+          that.set("hasResponse", true);
+          that.set("hideRequest", true);
+          that.set("response", handleResponse(jqXHR));
+        })
+        .catch(function (jqXHR) {
+          that.set("hasResponse", true);
+          that.set("hideRequest", true);
+          that.set("response", handleResponse(jqXHR));
+        });
+
+      window.parent.postMessage(
+        JSON.stringify({
+          action: "anaytics",
+          httpMethod: this.get("operation").httpMethod,
+          url: this.get("operation").uri,
+        }),
+        "*"
+      );
+
+      this.get("parentView").send("saveRequests", this.origContext);
     },
     share() {
       let operation = this.get("operation");
@@ -512,6 +409,9 @@ export default Ember.Component.extend({
         this.get("computedUrl"),
         this._getUrlBase()
       );
+    },
+    confirm() {
+      this.set("requestConfirmation", true);
     },
   },
   hasNotificationTopic: computed("notificationService.topics", function () {

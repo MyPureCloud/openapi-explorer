@@ -1,119 +1,134 @@
 .operation-uri {
-    font-family: @font-family-secondary;
-    font-size: 30px;
-    font-weight: 300;
-    margin-bottom: 20px;
-    line-height: 1.25;
+  font-family: @font-family-secondary;
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  line-height: 1.25;
 
-    .text-overflow;
-    text-align: left;
+  .text-overflow;
+  text-align: left;
 }
 
 #requestParamsHeader {
-    label {
-        font-size: 22px;
-        font-family: @font-family-secondary;
-        font-weight: 300;
-    }
+  label {
+    font-size: 22px;
+    font-family: @font-family-secondary;
+    font-weight: 300;
+  }
 
-    .http-method{
-        text-transform: uppercase;
-        margin-right: 10px;
-    }
+  .http-method {
+    text-transform: uppercase;
+    margin-right: 10px;
+  }
 
-    input {
-        width: 450px;
-    }
+  input {
+    width: 450px;
+  }
 }
 
-.ace_editor{
-    height: 400px;
-    border: 1px solid #ddd;
+.ace_editor {
+  height: 400px;
+  border: 1px solid #ddd;
 }
 
 .response-status {
-    font-weight: 300;
-    font-size: 20px;
-    margin-bottom: 8px;
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 
 .response-status-200 {
-    color: green;
+  color: green;
 }
 
 .response-status-300 {
-    color: purple;
+  color: purple;
 }
 
 .response-status-400 {
-    color: #FB6100;
+  color: #fb6100;
 }
 
 .response-status-500 {
-    color: red;
+  color: red;
 }
 
 .response-status-000 {
-    color: orange;
+  color: orange;
+}
+
+.hide-message {
+  display: none;
+}
+
+.confirmation-modal {
+  white-space: pre-line;
+  width: 400px;
+}
+
+.confirm-btn{
+    margin-top: 5px;
+    cursor: pointer;
 }
 
 .model-definition-container {
-    overflow-y: scroll;
-    height: 400px;
-    border: 1px solid lightgrey;
-    padding: 10px;
+  overflow-y: scroll;
+  height: 400px;
+  border: 1px solid lightgrey;
+  padding: 10px;
 
-    dl {
-        font-size: 13px;
-    }
+  dl {
+    font-size: 13px;
+  }
 
-    dt {
-        font-weight: normal;
-        color: #9f9f9f;
-    }
+  dt {
+    font-weight: normal;
+    color: #9f9f9f;
+  }
 
-    dd {
-        color: @pc-boulder;
-    }
+  dd {
+    color: @pc-boulder;
+  }
 }
 
-.model-definition{
-    margin-bottom:3px;
+.model-definition {
+  margin-bottom: 3px;
 }
 
-.body-row{
-    max-height: 400px;
+.body-row {
+  max-height: 400px;
 }
 
-pre,code {
-   white-space: pre-line;
+pre,
+code {
+  white-space: pre-line;
 }
 
 .panel-body .row {
-    h3,
-    h3:first-child {
-        .text-right;
+  h3,
+  h3:first-child {
+    .text-right;
 
-        &.header-url {
-            margin-top: 9px;
-        }
-
-        &.header-headers {
-            margin-top: 2px;
-        }
+    &.header-url {
+      margin-top: 9px;
     }
 
-    .label-list {
-        color: @pc-boulder;
-        font-weight: 500;
+    &.header-headers {
+      margin-top: 2px;
     }
+  }
+
+  .label-list {
+    color: @pc-boulder;
+    font-weight: 500;
+  }
 }
 
-#copy-curl{
-    position: absolute;
-    right: 58px;
+#copy-curl {
+  position: absolute;
+  right: 58px;
 
-    button{
-        border-top-left-radius: 0;
-    }
+  button {
+    border-top-left-radius: 0;
+  }
 }
