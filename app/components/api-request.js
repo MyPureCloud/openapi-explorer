@@ -25,11 +25,12 @@ export default Ember.Component.extend({
 
     return operation[keyName];
   }),
+
   displayWarning: computed("requestConfirmation", function () {
     let operation = this.get("operation");
     let requestConfirmation = this.get("requestConfirmation");
     let account = this.get("authService").get("currentAccount");
-    if(!account.confirmChanges){
+    if(account === null || !account.confirmChanges){
         return true;
     }
     if (requestConfirmation) {
@@ -46,7 +47,7 @@ export default Ember.Component.extend({
     let requestConfirmation = this.get("requestConfirmation");
     let operation = this.get("operation");
     let account = this.get("authService").get("currentAccount");
-    if(!account.confirmChanges){
+    if(account === null || !account.confirmChanges){
         return false;
     }
     if (operation.httpMethod !== "get" && !requestConfirmation) {
@@ -90,8 +91,9 @@ export default Ember.Component.extend({
     let operation = this.get("operation");
     let requestHeaders = this.get("requestHeaders");
     let authService = this.get("authService");
-    this.set("selectedAccount", this.get("authService").get("currentAccount")),
-      (requestHeaders["Content-Type"] = "application/json");
+    this.set("selectedAccount", this.get("authService").get("currentAccount"));
+
+    requestHeaders["Content-Type"] = "application/json";
 
     if (authService.authHeader != null) {
       requestHeaders["Authorization"] = "<HIDDEN>";
