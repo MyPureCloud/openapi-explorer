@@ -1,221 +1,293 @@
 <header>
-    <h1 class="operation-uri">{{operation.uri}}</h1>
-    <p class="lead">
-        {{operation.description}}
-    </p>
-    <div class="row">
-        <div class="col-md-4">
-        <label>Permissions</label><br>
-
-        {{#if permissions}}
-            {{permissions.type}} of
-            <ul>
-            {{#each permissions.permissions as |permission|}}
+  <h1 class="operation-uri">{{operation.uri}}</h1>
+  <p class="lead">
+    {{operation.description}}
+  </p>
+  <div class="row">
+    <div class="col-md-4">
+      <label>Permissions</label><br />
+      {{#if permissions}}
+        {{permissions.type}}
+        of
+        <ul>
+          {{#each permissions.permissions as |permission|}}
             <li>
-                {{permission}}
+              {{permission}}
             </li>
-            {{/each}}
-            </ul>
-        {{else}}
+          {{/each}}
+        </ul>
+      {{else}}
         <div class="text-muted">None</div>
-        {{/if}}
-        </div>
-        <div class="col-md-4">
-            <label>Scopes</label><br>
-            {{#if scopes}}
-                ANY of
-                <ul>
-                {{#each scopes as |scope|}}
-                <li>
-                    {{scope}}
-                </li>
-                {{/each}}
-                </ul>
-            {{else}}
-            <div class="text-muted">None</div>
-            {{/if}}
-        </div>
-
-        <div class="col-md-4">
-            <label>Notification Topic</label><br>
-            {{#if hasNotificationTopic}}
-                <ul>
-                    <li>{{getNotificationTopics}}</li>
-                </ul>
-            {{else}}
-              <div class="text-muted">None</div>
-            {{/if}}
-        </div>
+      {{/if}}
     </div>
+    <div class="col-md-4">
+      <label>Scopes</label><br />
+      {{#if scopes}}
+        ANY of
+        <ul>
+          {{#each scopes as |scope|}}
+            <li>
+              {{scope}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <div class="text-muted">None</div>
+      {{/if}}
+    </div>
+
+    <div class="col-md-4">
+      <label>Notification Topic</label><br />
+      {{#if hasNotificationTopic}}
+        <ul>
+          <li>{{getNotificationTopics}}</li>
+        </ul>
+      {{else}}
+        <div class="text-muted">None</div>
+      {{/if}}
+    </div>
+  </div>
 </header>
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" s>
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingRequest">
-            <h4 class="panel-title panel-title-condensed">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequestHeading" aria-expanded="true" aria-controls="collapseRequestHeading">
-                    Properties
-                </a>
-            </h4>
+<div
+  class="panel-group"
+  id="accordion"
+  role="tablist"
+  aria-multiselectable="true"
+  s
+>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingRequest">
+      <h4 class="panel-title panel-title-condensed">
+        <a
+          role="button"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          href="#collapseRequestHeading"
+          aria-expanded="true"
+          aria-controls="collapseRequestHeading"
+        >
+          Properties
+        </a>
+      </h4>
 
-        </div>
-        <div id="collapseRequestHeading" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
-            <div class="panel-body">
-                {{#if hasProperties}}
-                <div>
-                    <div class="container-fluid">
-
-                        {{#each operation.parameters as |parameter|}}
-                        {{#unless (eq parameter.in "body")}}
-                        {{parameter-input parameter=parameter}}
-                        {{/unless}}
-
-                        {{/each}}
-                    </div>
-                </div>
-
-                {{/if}}
-
-                {{#if canSendData}}
-                <h3>Body</h3>
-                <div class="properties-flex">
-                    {{ace-editor value=operation.requestBody aceInit=aceInit class="editor"}}
-                    <div class="model-definition-container">
-                        {{#each requestBodyDefinition as |model|}}
-                        <h5>{{model.name}}</h5>
-                        {{#each model.definitions as |definition|}}
-                        <dl class="dl-horizontal model-definition">
-                            <dt>{{definition.name}}</dt>
-                            <dd>(<em>{{definition.type}}{{definition.required}}{{definition.readonlyString}}</em>): {{definition.description}}</dd>
-                        </dl>
-                        {{/each}}
-                        {{/each}}
-                    </div>
-                </div>
-
-
-                {{/if}}
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-2 col-button-offset">
-                            {{#if isPureCloudAuth}}
-                            <button class="btn btn-primary" {{action "sendRequest"}}>Send Request</button>
-                            <button class="btn btn-default" data-toggle="modal" data-target="#shareDialog" {{action "share"}}>
-                                <i class="fa fa-share-alt" aria-hidden="true"></i> Share Request
-                            </button>
-                            {{else}}
-                            <div class="alert alert-warning" role="alert">
-                                This resource uses an authentication method other than PureCloud OAuth and cannot be tested using the API Explorer.
-                            </div>
-                            {{/if}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+    <div
+      id="collapseRequestHeading"
+      class="panel-collapse collapse in"
+      role="tabpanel"
+      aria-labelledby="headingRequest"
+    >
+      <div class="panel-body">
+        {{#if hasProperties}}
+          <div>
+            <div class="container-fluid">
 
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingRequest">
-            <h4 class="panel-title panel-title-condensed">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseRequest" aria-expanded="true" aria-controls="collapseRequest">
-                    Request Data
-                </a>
-            </h4>
-        </div>
-        <div id="collapseRequest" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRequest">
-            <div class="panel-body">
-                <div class="container-fluid">
-                    <div class="row row-request-data">
-                        <div class="col-md-2">
-                            <h3 class="header-url">Url</h3>
-                        </div>
-                        <div id="requestParamsHeader" class="col-md-10">
-                            <div class="http-method pull-left">
-                                <label class="http-{{operation.httpMethod}}">{{operation.httpMethod}}</label>
-                            </div>
-                            <label class="pull-left">{{computedUrl}}</label>
-                        </div>
-                    </div>
-                    <div class="row row-request-data">
-                        <div class="col-md-2">
-                            <h3 class="header-headers">Headers</h3>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="label-list">Key</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <label class="label-list">Value</label>
-                                </div>
-                            </div>
-                            {{#each computedHeaders as |header|}}
-                            <div class="row">
-                                <div class="col-md-3">
-                                    {{header.key}}
-                                </div>
-                                <div class="col-md-9">
-                                    {{header.value}}
-                                </div>
-                            </div>
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
+              {{#each operation.parameters as |parameter|}}
+                {{#unless (eq parameter.in "body")}}
+                  {{parameter-input parameter=parameter}}
+                {{/unless}}
+
+              {{/each}}
             </div>
-        </div>
-    </div>
-    {{#if hasResponse}}
-    <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingResponse">
-            <h4 class="panel-title panel-title-condensed">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseResponse" aria-expanded="true" aria-controls="collapseResponse">
-                    Response
-                </a>
-            </h4>
-        </div>
-        <div id="collapseResponse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingResponse">
-            <div class="panel-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="response-status response-status-{{response.responseCodeClass}}00">
-                                {{response.status}} {{response.statusText}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h3 class="header-headers">Headers</h3>
-                        </div>
-                        <div class="col-md-10">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label class="label-list">Key</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <label class="label-list">Value</label>
-                                </div>
-                            </div>
-                            {{#each response.headers as |header|}}
-                            <div class="row">
-                                <div class="col-md-3">
-                                    {{header.key}}
-                                </div>
-                                <div class="col-md-9">
-                                    {{header.value}}
-                                </div>
-                            </div>
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
-                <h3>Body</h3>
-                <div>
-                    {{ace-editor value=response.data aceInit=aceInit class="editor"}}
-                </div>
+          </div>
+
+        {{/if}}
+
+        {{#if canSendData}}
+          <h3>Body</h3>
+          <div class="properties-flex">
+            {{ace-editor
+              value=operation.requestBody
+              aceInit=aceInit
+              class="editor"
+            }}
+            <div class="model-definition-container">
+              {{#each requestBodyDefinition as |model|}}
+                <h5>{{model.name}}</h5>
+                {{#each model.definitions as |definition|}}
+                  <dl class="dl-horizontal model-definition">
+                    <dt>{{definition.name}}</dt>
+                    <dd>(<em
+                      >{{definition.type}}{{definition.required}}{{definition.readonlyString}}</em>):
+                      {{definition.description}}</dd>
+                  </dl>
+                {{/each}}
+              {{/each}}
             </div>
+          </div>
+
+        {{/if}}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-2 col-button-offset">
+              {{#if isPureCloudAuth}}
+                <div
+                  class="alert alert-warning 
+                    {{if displayWarning "hide-message" "confirmation-modal"}}">Are you sure you want to send this request with account:
+                    Name: {{selectedAccount.me.name}}
+                    Email: {{selectedAccount.me.email}}
+                    Organization: {{selectedAccount.me.organization.name}}
+                    Region: {{selectedAccount.environment}}
+                  <button class= "btn btn-default confirm-btn" title="Confirm Request" {{action "confirm"}}>Yes</button>
+                </div>
+                <button
+                  class="btn btn-primary"
+                  {{action "sendRequest"}}
+                  disabled={{disableSend}}
+                >Send Request</button>
+                <button
+                  class="btn btn-default"
+                  data-toggle="modal"
+                  data-target="#shareDialog"
+                  {{action "share"}}
+                >
+                  <i class="fa fa-share-alt" aria-hidden="true"></i>
+                  Share Request
+                </button>
+              {{else}}
+                <div class="alert alert-warning" role="alert">
+                  This resource uses an authentication method other than
+                  PureCloud OAuth and cannot be tested using the API Explorer.
+                </div>
+              {{/if}}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-    {{/if}}
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingRequest">
+      <h4 class="panel-title panel-title-condensed">
+        <a
+          role="button"
+          data-toggle="collapse"
+          data-parent="#accordion"
+          href="#collapseRequest"
+          aria-expanded="true"
+          aria-controls="collapseRequest"
+        >
+          Request Data
+        </a>
+      </h4>
+    </div>
+    <div
+      id="collapseRequest"
+      class="panel-collapse collapse in"
+      role="tabpanel"
+      aria-labelledby="headingRequest"
+    >
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row row-request-data">
+            <div class="col-md-2">
+              <h3 class="header-url">Url</h3>
+            </div>
+            <div id="requestParamsHeader" class="col-md-10">
+              <div class="http-method pull-left">
+                <label
+                  class="http-{{operation.httpMethod}}"
+                >{{operation.httpMethod}}</label>
+              </div>
+              <label class="pull-left">{{computedUrl}}</label>
+            </div>
+          </div>
+          <div class="row row-request-data">
+            <div class="col-md-2">
+              <h3 class="header-headers">Headers</h3>
+            </div>
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-3">
+                  <label class="label-list">Key</label>
+                </div>
+                <div class="col-md-9">
+                  <label class="label-list">Value</label>
+                </div>
+              </div>
+              {{#each computedHeaders as |header|}}
+                <div class="row">
+                  <div class="col-md-3">
+                    {{header.key}}
+                  </div>
+                  <div class="col-md-9">
+                    {{header.value}}
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{#if hasResponse}}
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingResponse">
+        <h4 class="panel-title panel-title-condensed">
+          <a
+            role="button"
+            data-toggle="collapse"
+            data-parent="#accordion"
+            href="#collapseResponse"
+            aria-expanded="true"
+            aria-controls="collapseResponse"
+          >
+            Response
+          </a>
+        </h4>
+      </div>
+      <div
+        id="collapseResponse"
+        class="panel-collapse collapse in"
+        role="tabpanel"
+        aria-labelledby="headingResponse"
+      >
+        <div class="panel-body">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-12">
+                <div
+                  class="response-status response-status-{{response.responseCodeClass}}00"
+                >
+                  {{response.status}}
+                  {{response.statusText}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-2">
+                <h3 class="header-headers">Headers</h3>
+              </div>
+              <div class="col-md-10">
+                <div class="row">
+                  <div class="col-md-3">
+                    <label class="label-list">Key</label>
+                  </div>
+                  <div class="col-md-9">
+                    <label class="label-list">Value</label>
+                  </div>
+                </div>
+                {{#each response.headers as |header|}}
+                  <div class="row">
+                    <div class="col-md-3">
+                      {{header.key}}
+                    </div>
+                    <div class="col-md-9">
+                      {{header.value}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+          <h3>Body</h3>
+          <div>
+            {{ace-editor value=response.data aceInit=aceInit class="editor"}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
 </div>
