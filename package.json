@@ -54,6 +54,6 @@
   },
   "dependencies": {
     "ember-chromium": "^4.0.3",
-    "ember-cli-update": "^0.43.3"
+    "ember-cli-update": "^1.0.1"
   }
 }
